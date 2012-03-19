@@ -87,7 +87,7 @@ function addSub(Sub) //Just include sub name, i.e. /r/MLPlounge = MLPlounge
 		style =	document.createElement('link');
 		style.type = 'text/css'
 		style.rel = 'stylesheet';
-		style.href = link;
+		style.href = SubCss;
 	}
 	else
 	{
