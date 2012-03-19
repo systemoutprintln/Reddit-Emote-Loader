@@ -90,6 +90,7 @@ function waitForLoad(style)
 				var sheet = getStyle(style);
 				if(sheet != -1)
 				{
+					style.disabled = true;
 					remRules(style);
 					
 					clearInterval(ch);
