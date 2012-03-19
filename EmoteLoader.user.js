@@ -55,7 +55,7 @@ function addSub(Sub) //Just include sub name, i.e. /r/MLPlounge = MLPlounge
 		style.type = 'text/css'
 		style.rel = 'stylesheet';
 		style.href = SubCss;
-		style.disbled = true;	
+		style.disabled = true;	
 	}
 	else
 	{
