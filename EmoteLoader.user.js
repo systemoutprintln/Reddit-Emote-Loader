@@ -79,8 +79,8 @@ function waitForLoad(style)
 	{
 		var cssnum = document.styleSheets.length;
 		var ch = setInterval(function() {
-			if(document.styleSheets.length > cssnum)
-			{
+			//if(document.styleSheets.length > cssnum)
+			//{
 				var sheet = getStyle(style);
 				if(sheet != -1)
 				{
@@ -88,7 +88,7 @@ function waitForLoad(style)
 					
 					clearInterval(ch);
 				}
-			}
+			//}
 		}, 10);
 	
 	}else{
