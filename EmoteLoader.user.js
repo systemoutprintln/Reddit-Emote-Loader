@@ -14,6 +14,7 @@ var chrome = true; //Is the browser Chrome
 
 //Do not change below this line
 
+chrome = navigator.userAgent.toLowerCase().indexOf('chrome') > -1;
 var timer;
 var count=0;
 useSubs(subs);
@@ -36,8 +37,50 @@ function useSubs(Subs) //Just include sub name, i.e. /r/MLPlounge = MLPlounge
 
 }
 
+function addSub(Sub) //Just include sub name, i.e. /r/MLPlounge = MLPlounge
+{
+	var head = document.getElementsByTagName("head")[0];
+	var SubCss = 'http://www.reddit.com/r/' + Sub + '/stylesheet.css';
+	
+	var style;
+	
+	if(chrome)
+	{
+		style =	document.createElement('link');
+		style.type = 'text/css'
+		style.rel = 'stylesheet';
+		style.href = SubCss;
+	}
+	else
+	{
+		document.createElement('style');
+		style.textContent = '@import "' + SubCss + '"';
+	}
+	
+	head.appendChild(style);
+	
+	return style;
 
 
+}
+
+function disableStyle(style)
+{
+	var ssheet 
+	
+	if(chrome)
+	{
+		//Do nothing
+	}
+	else
+	{
+		ssheet = sub.sheet.cssRules[0].styleSheet;
+		ssheet.diabled = true;
+	}
+	
+	
+
+}
 
 function waitForLoad(style)
 {
@@ -73,35 +116,6 @@ function waitForLoad(style)
 	}
 }
 
-
-
-function addSub(Sub) //Just include sub name, i.e. /r/MLPlounge = MLPlounge
-{
-	var head = document.getElementsByTagName("head")[0];
-	var SubCss = 'http://www.reddit.com/r/' + Sub + '/stylesheet.css';
-	
-	var style;
-	
-	if(chrome)
-	{
-		style =	document.createElement('link');
-		style.type = 'text/css'
-		style.rel = 'stylesheet';
-		style.href = SubCss;
-	}
-	else
-	{
-		document.createElement('style');
-		style.textContent = '@import "' + SubCss + '"';
-	}
-	
-	head.appendChild(style);
-	
-	return style;
-
-
-}
-
 function getStyle(sub)
 {
 	for(i=0; i < document.styleSheets.length; i++)
@@ -111,8 +125,6 @@ function getStyle(sub)
 	return -1;
 
 }
-
-
 
 function remRules(sub)
 {
@@ -151,8 +163,15 @@ function remRules(sub)
 		
 	
 	}
+	
+	if(!chrome)
+	{
+		ssheet.disabled = false;	
+	}
 }
 
 
-/////////////////////////////// 
+//// Special CSS flags ////
+
+//TODO
 
