@@ -34,14 +34,7 @@ function useSubs(Subs) //Just include sub name, i.e. /r/MLPlounge = MLPlounge
 	while(i < Subs.length)
 	{
 		sID [i] = addSub(Subs[i]);
-		if(chrome)
-		{
-			sID[i].disbled = true;		
-		}
-		else
-		{
-			sID[i].sheet.disabled = true;		
-		}
+
 		waitForLoad(sID[i]);
 		i++;
 	}
@@ -62,11 +55,13 @@ function addSub(Sub) //Just include sub name, i.e. /r/MLPlounge = MLPlounge
 		style.type = 'text/css'
 		style.rel = 'stylesheet';
 		style.href = SubCss;
+		style.disbled = true;	
 	}
 	else
 	{
 		style = document.createElement('style');
 		style.textContent = '@import "' + SubCss + '"';
+		style.sheet.disabled = true;	
 	}
 	
 	head.appendChild(style);
