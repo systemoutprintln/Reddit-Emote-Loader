@@ -1,13 +1,16 @@
 // ==UserScript==
 // @name           Reddit Emote Loader
 // @namespace      http://userscripts.org/users/systemoutprintln
+// @version        0.1
 // @include        http://www.reddit.com/*
+// @include        http://reddit.com/*
+// @include        http://*.reddit.com/*
 // ==/UserScript==
 
 // To add a sub add a comma then the sub name in quotes after the last entry
 // For example with MLPLounge it should look like the following:
 // var subs=["mylittlepony","MLPlounge"];
-var subs=["mylittlepony"];
+var subs=["mylittlepony","mylittlewtf"];
 
 //Environ variables - only change if something goes wrong.
 var chrome = false; //Is the browser Chrome
