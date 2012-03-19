@@ -10,7 +10,7 @@
 var subs=["mylittlepony"];
 
 //Environ variables - only change if something goes wrong.
-var chrome = true; //Is the browser Chrome
+var chrome = false; //Is the browser Chrome
 
 //Do not change below this line
 
@@ -24,12 +24,17 @@ useSubs(subs);
 
 function useSubs(Subs) //Just include sub name, i.e. /r/MLPlounge = MLPlounge
 {
+	//alert(chrome);
 	var sID = new Array();
 	
 	var i = 0;
 	while(i < Subs.length)
 	{
 		sID [i] = addSub(Subs[i]);
+		if(!chrome)
+		{
+			sID[i].sheet.disabled = true;		
+		}
 		waitForLoad(sID[i]);
 		i++;
 	}
@@ -53,7 +58,7 @@ function addSub(Sub) //Just include sub name, i.e. /r/MLPlounge = MLPlounge
 	}
 	else
 	{
-		document.createElement('style');
+		style = document.createElement('style');
 		style.textContent = '@import "' + SubCss + '"';
 	}
 	
@@ -64,23 +69,7 @@ function addSub(Sub) //Just include sub name, i.e. /r/MLPlounge = MLPlounge
 
 }
 
-function disableStyle(style)
-{
-	var ssheet 
-	
-	if(chrome)
-	{
-		//Do nothing
-	}
-	else
-	{
-		ssheet = sub.sheet.cssRules[0].styleSheet;
-		ssheet.diabled = true;
-	}
-	
-	
 
-}
 
 function waitForLoad(style)
 {
@@ -166,8 +155,9 @@ function remRules(sub)
 	
 	if(!chrome)
 	{
-		ssheet.disabled = false;	
+		sub.sheet.disabled = false;	
 	}
+
 }
 
 
