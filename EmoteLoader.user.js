@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name           Reddit Emote Loader
 // @namespace      http://userscripts.org/users/systemoutprintln
-// @version        0.1.4
+// @version        0.1.5
 // @include        http://www.reddit.com/*
 // @include        http://reddit.com/*
 // @include        http://*.reddit.com/*
@@ -10,7 +10,7 @@
 // To add a sub add a comma then the sub name in quotes after the last entry
 // For example with MLPLounge it should look like the following:
 // var subs=["mylittlepony","MLPlounge"];
-var subs=["mylittlepony","mylittlewtf"];
+var subs=["mylittlepony","mylittlewtf","mylittlelistentothis","mylittlenanners","mylittleandysonic1"];
 
 //Environ variables - only change if something goes wrong.
 var chrome = false; //Is the browser Chrome
@@ -92,7 +92,7 @@ function waitForLoad(style)
 				var sheet = getStyle(style);
 				if(sheet != -1)
 				{
-					//style.disabled = true;
+					sheet.disabled = true;
 					remRules(style);
 					
 					clearInterval(ch);
