@@ -1,22 +1,18 @@
 // ==UserScript==
-// @name           Test
-// @namespace      http://notawebsite.com
+// @name           Reddit Emote Loader
+// @namespace      http://userscripts.org/users/systemoutprintln
 // @include        http://www.reddit.com/*
 // ==/UserScript==
 
-var subs=["MLPlounge","mylittlelistentothis"];
-/*
-var sheet = document.createElement('style')
-sheet.innerHTML = 
-"div.titlebox \
-{								\
-        background-color: purple;\
-}								\
-";			
-document.body.appendChild(sheet);
-*/
+// To add a sub add a comma then the sub name in quotes after the last entry
+// For example with MLPLounge it should look like the following:
+// var subs=["mylittlepony","MLPlounge"];
+var subs=["mylittlepony"];
 
-GM_log("purple");
+
+//Do not change below this line
+
+GM_log("Init");
 var timer;
 var count=0;
 useSubs(subs);
