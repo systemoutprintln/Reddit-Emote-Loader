@@ -85,6 +85,7 @@ function waitForLoad(style)
 	{
 		var cssnum = document.styleSheets.length;
 		var ch = setInterval(function() {
+		//Try enable to test, then disable
 			if(document.styleSheets.length > cssnum)
 			{
 				var sheet = getStyle(style);
@@ -132,6 +133,7 @@ function remRules(sub)
 	{
 		ssheet = getStyle(sub);
 		if(ssheet == -1) return;
+		ssheet.disabled = true;
 	}
 	else
 	{
