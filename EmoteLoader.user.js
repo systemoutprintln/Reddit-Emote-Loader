@@ -9,10 +9,11 @@
 // var subs=["mylittlepony","MLPlounge"];
 var subs=["mylittlepony"];
 
+//Environ variables - only change if something goes wrong.
+var chrome = true; //Is the browser Chrome
 
 //Do not change below this line
 
-GM_log("Init");
 var timer;
 var count=0;
 useSubs(subs);
@@ -28,12 +29,8 @@ function useSubs(Subs) //Just include sub name, i.e. /r/MLPlounge = MLPlounge
 	while(i < Subs.length)
 	{
 		sID [i] = addSub(Subs[i]);
-		
+		waitForLoad(sID[i]);
 		i++;
-	}
-	for(j = 0; j < i; j++)
-	{
-		waitForLoad(sID[j]);
 	}
 
 
@@ -44,18 +41,36 @@ function useSubs(Subs) //Just include sub name, i.e. /r/MLPlounge = MLPlounge
 
 function waitForLoad(style)
 {
-	var fi = setInterval(function() {
-	try {
-		count++;
-		GM_log(count);
+	if(chrome)
+	{
+		var cssnum = document.styleSheets.length;
+		var ch = setInterval(function() {
+			if(document.styleSheets.length > cssnum)
+			{
+				var sheet = getSub(sub);
+				if(sheet != -1)
+				{
+					remRules(sheet);
+					
+					clearInterval(ch);
+				}
+			}
+		}, 10);
+	
+	}else{
+		var ff = setInterval(function() {
+			try {
+			count++;
+			//GM_log(count);
 		
 		
-		style.sheet.cssRules;
-		remRules(style);
+			style.sheet.cssRules;
+			remRules(style);
 		
-		clearInterval(fi);
-  } catch (e){GM_log(e);}
-}, 10);  
+			clearInterval(ff);
+			} catch (e){}
+		}, 10); 
+	}
 }
 
 
@@ -63,10 +78,22 @@ function waitForLoad(style)
 function addSub(Sub) //Just include sub name, i.e. /r/MLPlounge = MLPlounge
 {
 	var head = document.getElementsByTagName("head")[0];
-	var style = document.createElement('style');
 	var SubCss = 'http://www.reddit.com/r/' + Sub + '/stylesheet.css';
-	//style.id = Sub;
-	style.textContent = '@import "' + SubCss + '"';
+	
+	var style;
+	
+	if(chrome)
+	{
+		style =	document.createElement('link');
+		style.type = 'text/css'
+		style.rel = 'stylesheet';
+		style.href = link;
+	}
+	else
+	{
+		document.createElement('style');
+		style.textContent = '@import "' + SubCss + '"';
+	}
 	
 	head.appendChild(style);
 	
@@ -74,26 +101,32 @@ function addSub(Sub) //Just include sub name, i.e. /r/MLPlounge = MLPlounge
 
 
 }
-/*
+
 function getStyle(sub)
 {
 	for(i=0; i < document.styleSheets.length; i++)
 	{
-		if(document.styleSheets[i].ownerNode.id == sub) return document.styleSheets[i];	
+		if(document.styleSheets[i].href == sub.href) return document.styleSheets[i];	
 	}
 	return -1;
 
 }
-*/
+
 
 
 function remRules(sub)
 {
-	var ssheet = sub.sheet.cssRules[0].styleSheet;
+	var ssheet 
 	
-	if(ssheet == -1){
-		GM_log("No such sub:"+sub);
+	if(chrome)
+	{
+		ssheet = sub;
 	}
+	else
+	{
+		ssheet = sub.sheet.cssRules[0].styleSheet;
+	}
+	
 	
 	var srule;
 	
