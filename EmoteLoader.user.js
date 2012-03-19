@@ -35,10 +35,10 @@ function useSubs(Subs) //Just include sub name, i.e. /r/MLPlounge = MLPlounge
 	{
 		sID [i] = addSub(Subs[i]);
 		if(chrome){
-			sID[i].disabled = true;
+			//sID[i].disabled = true;
 		}
 		else{
-			sID[i].sheet.disabled = true;
+			//sID[i].sheet.disabled = true;
 		}
 
 		waitForLoad(sID[i]);
@@ -85,8 +85,8 @@ function waitForLoad(style)
 	{
 		var cssnum = document.styleSheets.length;
 		var ch = setInterval(function() {
-			//if(document.styleSheets.length > cssnum)
-			//{
+			if(document.styleSheets.length > cssnum)
+			{
 				var sheet = getStyle(style);
 				if(sheet != -1)
 				{
@@ -94,7 +94,7 @@ function waitForLoad(style)
 					
 					clearInterval(ch);
 				}
-			//}
+			}
 		}, 10);
 	
 	}else{
