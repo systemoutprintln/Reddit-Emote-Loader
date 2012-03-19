@@ -90,7 +90,7 @@ function waitForLoad(style)
 			var sheet = getStyle(style);
 			if(sheet != -1)
 			{
-				sheet.disabled = true;
+				//sheet.disabled = true;
 			}
 			if(document.styleSheets.length > cssnum)
 			{
@@ -101,7 +101,7 @@ function waitForLoad(style)
 					clearInterval(ch);
 				}
 			}
-		}, 1);
+		}, 5);
 	
 	}else{
 		var ff = setInterval(function() {
