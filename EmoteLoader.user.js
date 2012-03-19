@@ -34,7 +34,11 @@ function useSubs(Subs) //Just include sub name, i.e. /r/MLPlounge = MLPlounge
 	while(i < Subs.length)
 	{
 		sID [i] = addSub(Subs[i]);
-		if(!chrome)
+		if(chrome)
+		{
+			sID[i].disbled = true;		
+		}
+		else
 		{
 			sID[i].sheet.disabled = true;		
 		}
@@ -85,7 +89,7 @@ function waitForLoad(style)
 				var sheet = getStyle(style);
 				if(sheet != -1)
 				{
-					remRules(sheet);
+					remRules(style);
 					
 					clearInterval(ch);
 				}
@@ -124,7 +128,8 @@ function remRules(sub)
 	
 	if(chrome)
 	{
-		ssheet = sub;
+		ssheet = getStyle(sub);
+		if(ssheet == -1) return;
 	}
 	else
 	{
@@ -156,7 +161,11 @@ function remRules(sub)
 	
 	}
 	
-	if(!chrome)
+	if(chrome)
+	{
+		sub.disabled = false;
+	}
+	else
 	{
 		sub.sheet.disabled = false;	
 	}
