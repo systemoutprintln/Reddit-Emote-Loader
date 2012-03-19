@@ -82,7 +82,7 @@ function waitForLoad(style)
 		var ch = setInterval(function() {
 			if(document.styleSheets.length > cssnum)
 			{
-				var sheet = getSub(style);
+				var sheet = getStyle(style);
 				if(sheet != -1)
 				{
 					remRules(sheet);
