@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name           Reddit Emote Loader
 // @namespace      http://userscripts.org/users/systemoutprintln
-// @version        0.1
+// @version        0.1.1
 // @include        http://www.reddit.com/*
 // @include        http://reddit.com/*
 // @include        http://*.reddit.com/*
@@ -34,6 +34,12 @@ function useSubs(Subs) //Just include sub name, i.e. /r/MLPlounge = MLPlounge
 	while(i < Subs.length)
 	{
 		sID [i] = addSub(Subs[i]);
+		if(chrome){
+			sID[i].disabled = true;
+		}
+		else{
+			sID[i].sheet.disabled = true;
+		}
 
 		waitForLoad(sID[i]);
 		i++;
@@ -55,13 +61,13 @@ function addSub(Sub) //Just include sub name, i.e. /r/MLPlounge = MLPlounge
 		style.type = 'text/css'
 		style.rel = 'stylesheet';
 		style.href = SubCss;
-		style.disabled = true;	
+		//style.disabled = true;	
 	}
 	else
 	{
 		style = document.createElement('style');
 		style.textContent = '@import "' + SubCss + '"';
-		style.sheet.disabled = true;	
+		//style.sheet.disabled = true;	
 	}
 	
 	head.appendChild(style);
