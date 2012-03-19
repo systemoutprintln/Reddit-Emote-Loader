@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name           Reddit Emote Loader
 // @namespace      http://userscripts.org/users/systemoutprintln
-// @version        0.1.1
+// @version        0.1.2
 // @include        http://www.reddit.com/*
 // @include        http://reddit.com/*
 // @include        http://*.reddit.com/*
@@ -35,7 +35,7 @@ function useSubs(Subs) //Just include sub name, i.e. /r/MLPlounge = MLPlounge
 	{
 		sID [i] = addSub(Subs[i]);
 		if(chrome){
-			sID[i].disabled = true;
+			//sID[i].disabled = true;
 		}
 		else{
 			sID[i].sheet.disabled = true;
