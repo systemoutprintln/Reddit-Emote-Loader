@@ -35,10 +35,10 @@ function useSubs(Subs) //Just include sub name, i.e. /r/MLPlounge = MLPlounge
 	{
 		sID [i] = addSub(Subs[i]);
 		if(chrome){
-			//sID[i].disabled = true;
+			sID[i].disabled = true;
 		}
 		else{
-			//sID[i].sheet.disabled = true;
+			sID[i].sheet.disabled = true;
 		}
 
 		waitForLoad(sID[i]);
