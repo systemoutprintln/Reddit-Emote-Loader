@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name           Reddit Emote Loader
 // @namespace      http://userscripts.org/users/systemoutprintln
-// @version        0.1.3
+// @version        0.1.4
 // @include        http://www.reddit.com/*
 // @include        http://reddit.com/*
 // @include        http://*.reddit.com/*
@@ -86,6 +86,7 @@ function waitForLoad(style)
 		var cssnum = document.styleSheets.length;
 		var ch = setInterval(function() {
 		//Try enable to test, then disable
+			count++;
 			if(document.styleSheets.length > cssnum)
 			{
 				var sheet = getStyle(style);
@@ -97,7 +98,7 @@ function waitForLoad(style)
 					clearInterval(ch);
 				}
 			}
-		}, 5);
+		}, 1);
 	
 	}else{
 		var ff = setInterval(function() {
