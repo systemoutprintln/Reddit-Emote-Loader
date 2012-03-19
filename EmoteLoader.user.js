@@ -158,7 +158,7 @@ function remRules(sub)
 	
 	if(chrome)
 	{
-		//sub.disabled = false;
+		sub.disabled = false;
 	}
 	else
 	{
