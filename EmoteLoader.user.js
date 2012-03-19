@@ -94,6 +94,7 @@ function waitForLoad(style)
 			}
 			if(document.styleSheets.length > cssnum)
 			{
+				sheet = getStyle(style);
 				if(sheet != -1)
 				{
 					remRules(style);
@@ -137,7 +138,7 @@ function remRules(sub)
 	{
 		ssheet = getStyle(sub);
 		if(ssheet == -1) return;
-		ssheet.disabled = true;
+		//ssheet.disabled = true;
 	}
 	else
 	{
