@@ -70,9 +70,9 @@ function useSubs(Subs) //Just include sub name, i.e. /r/MLPlounge = MLPlounge
 		}
 		sReg = /extracss/
 		
-		if(!sReg.test(Subs[i]))
+		if(!sReg.test(Subs[i].toLowerCase()))
 		{		
-			waitForLoad(sID[i].toLowerCase());	
+			waitForLoad(sID[i]);	
 		}
 		i++;
 	}
