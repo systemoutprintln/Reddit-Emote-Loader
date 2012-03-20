@@ -225,9 +225,9 @@ function CSSFlags()
 			transform: scaleX(-1);\
 			}";
 	var sheet = document.styleSheet[0];
-	for(i 0; i < css.length; i++)
+	for(i = 0; i < css.length; i++)
 	{
-		sheet.insertRule(css[i]);
+		sheet.insertRule(css[i], 0);
 	}
 	
 }
