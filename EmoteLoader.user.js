@@ -224,7 +224,7 @@ function CSSFlags()
 			-webkit-transform: scaleX(-1);\
 			transform: scaleX(-1);\
 			}";
-	var sheet = document.styleSheet[0];
+	var sheet = document.styleSheets[0];
 	for(i = 0; i < css.length; i++)
 	{
 		sheet.insertRule(css[i], 0);
