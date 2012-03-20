@@ -40,7 +40,11 @@ function useSubs(Subs) //Just include sub name, i.e. /r/MLPlounge = MLPlounge
 	while(i < Subs.length)
 	{
 		var sReg = new RegExp(Subs[i].toLowerCase());
-		if(sReg.test(document.URL.toLowerCase())) continue; //Don't load this site's stylesheet
+		if(sReg.test(document.URL.toLowerCase()))
+		{		
+			i++;
+			continue; //Don't load this site's stylesheet
+		}
 		
 		if(PLounge)
 		{
@@ -50,6 +54,7 @@ function useSubs(Subs) //Just include sub name, i.e. /r/MLPlounge = MLPlounge
 				sReg = /mylittlepony/
 				if(sReg.test(Subs[i]))
 				{
+					i++;
 					continue;
 				}
 			
