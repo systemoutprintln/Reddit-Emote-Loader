@@ -1,16 +1,22 @@
 // ==UserScript==
 // @name           Reddit Emote Loader
 // @namespace      http://userscripts.org/users/systemoutprintln
-// @version        0.1.10
+// @version        0.2.0
 // @include        http://www.reddit.com/*
 // @include        http://reddit.com/*
 // @include        http://*.reddit.com/*
 // ==/UserScript==
 
+//Options
+
 // To add a sub add a comma then the sub name in quotes after the last entry
 // For example with MLPLounge it should look like the following:
 // var subs=["mylittlepony","MLPlounge"];
-var subs=["mylittlepony","mylittlewtf","mylittlelistentothis","mylittlenanners","mylittleandysonic1"];
+var subs=["mlplounge","mylittlepony","mylittlewtf","mylittlelistentothis","mylittlenanners","mylittleandysonic1"];
+
+// Plounge specific emotes on the PLounge?
+// Disables mylittlepony emotes on the MLPLounge 
+var PLounge = true;
 
 //Environ variables - only change if something goes wrong.
 var chrome = false; //Is the browser Chrome
@@ -33,6 +39,23 @@ function useSubs(Subs) //Just include sub name, i.e. /r/MLPlounge = MLPlounge
 	var i = 0;
 	while(i < Subs.length)
 	{
+		var sReg = new RegExp(Subs[i].toLowerCase());
+		if(sReg.test(document.URL.toLowerCase())) continue; //Don't load this site's stylesheet
+		
+		if(PLounge)
+		{
+			sReg = /mlplounge/
+			if(sReg.test(document.URL.toLowerCase()))
+			{
+				sReg = /mylittlepony/
+				if(sReg.test(Subs[i]))
+				{
+					continue;
+				}
+			
+			}
+		}
+				
 		sID [i] = addSub(Subs[i]);
 		if(chrome){
 			//sID[i].disabled = true;
