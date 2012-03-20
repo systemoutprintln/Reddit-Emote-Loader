@@ -173,7 +173,7 @@ function remRules(sub)
 	
 	if(chrome)
 	{
-		//sub.media = "screen";
+		sub.media = "all";
 	}
 	else
 	{
