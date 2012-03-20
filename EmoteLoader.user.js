@@ -61,6 +61,7 @@ function addSub(Sub) //Just include sub name, i.e. /r/MLPlounge = MLPlounge
 		style.type = 'text/css'
 		style.rel = 'stylesheet';
 		style.href = SubCss;
+		style.media = "all";
 		//style.disabled = true;	
 	}
 	else
@@ -172,7 +173,7 @@ function remRules(sub)
 	
 	if(chrome)
 	{
-		sub.disabled = false;
+		sub.media = "screen";
 	}
 	else
 	{
