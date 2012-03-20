@@ -73,9 +73,10 @@ function useSubs(Subs) //Just include sub name, i.e. /r/MLPlounge = MLPlounge
 		else{
 			sID[i].sheet.disabled = true;
 		}
-	
-			waitForLoad(sID[i]);	
 		}
+	
+		waitForLoad(sID[i]);	
+		
 		i++;
 	}
 	
@@ -168,17 +169,21 @@ function getStyle(sub)
 function remRules(sub)
 {
 	var ssheet 
+	var exCss = /extracss/
+	var isCss;
 	
 	if(chrome)
 	{
 		sub.media = "all";
 		ssheet = getStyle(sub);
 		if(ssheet == -1) return;
+		isCss = exCss.test(sub.href);
 		
 	}
 	else
 	{
 		ssheet = sub.sheet.cssRules[0].styleSheet;
+		isCss = exCss.test(sub.textContent);
 	}
 	
 	
@@ -189,6 +194,13 @@ function remRules(sub)
     var srules = ssheet.cssRules;
 	
 	//GM_log(srules.length);
+	
+	if(isCss)
+	{
+		
+	
+	
+	}
 	
 	for(i = 0; i < srules.length; i++)
 	{
