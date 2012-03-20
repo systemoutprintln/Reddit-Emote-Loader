@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name           Reddit Emote Loader
 // @namespace      http://userscripts.org/users/systemoutprintln
-// @version        0.2.0
+// @version        0.3
 // @include        http://www.reddit.com/*
 // @include        http://reddit.com/*
 // @include        http://*.reddit.com/*
@@ -14,7 +14,6 @@
 // var subs=["mylittlepony","MLPlounge"];
 var subs=["mylittlepony","mylittlewtf","mylittlelistentothis","mylittlenanners","mylittleandysonic1"];
 
-// Plounge specific emotes on the PLounge?
 // Disables mylittlepony emotes on the MLPLounge 
 var PLounge = true;
 
