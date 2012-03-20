@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name           Reddit Emote Loader
 // @namespace      http://userscripts.org/users/systemoutprintln
-// @version        0.1.6
+// @version        0.1.7
 // @include        http://www.reddit.com/*
 // @include        http://reddit.com/*
 // @include        http://*.reddit.com/*
@@ -173,7 +173,7 @@ function remRules(sub)
 	
 	if(chrome)
 	{
-		sub.media = "screen";
+		//sub.media = "screen";
 	}
 	else
 	{
