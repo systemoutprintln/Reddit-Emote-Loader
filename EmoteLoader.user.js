@@ -26,8 +26,9 @@ chrome = navigator.userAgent.toLowerCase().indexOf('chrome') > -1;
 var timer;
 var count=0;
 var unique;
+CSSFlags();
 useSubs(subs);
-//CSSFlags();
+
 
 
 
