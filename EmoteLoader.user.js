@@ -135,7 +135,6 @@ function remRules(sub)
 	{
 		ssheet = getStyle(sub);
 		if(ssheet == -1) return;
-		ssheet.disabled = true;
 		//sub.media = "all";
 	}
 	else
