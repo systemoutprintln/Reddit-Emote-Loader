@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name           Reddit Emote Loader
 // @namespace      http://userscripts.org/users/systemoutprintln
-// @version        0.3.2
+// @version        0.4
 // @include        http://www.reddit.com/*
 // @include        http://reddit.com/*
 // @include        http://*.reddit.com/*
@@ -12,7 +12,7 @@
 // To add a sub add a comma then the sub name in quotes after the last entry
 // For example with MLPLounge it should look like the following:
 // var subs=["mylittlepony","MLPlounge"];
-var subs=["mylittlepony","mylittlewtf","mylittlelistentothis","mylittlenanners","mylittleandysonic1"];
+var subs=["extraCSS","mylittlepony","mylittlewtf","mylittlelistentothis","mylittlenanners","mylittleandysonic1"];
 
 // Disables mylittlepony emotes on the MLPLounge 
 var PLounge = true;
@@ -23,10 +23,9 @@ var chrome = false; //Is the browser Chrome
 //Do not change below this line
 
 chrome = navigator.userAgent.toLowerCase().indexOf('chrome') > -1;
-var timer;
 var count=0;
 var unique;
-CSSFlags();
+//CSSFlags();
 useSubs(subs);
 
 
@@ -69,8 +68,12 @@ function useSubs(Subs) //Just include sub name, i.e. /r/MLPlounge = MLPlounge
 		else{
 			sID[i].sheet.disabled = true;
 		}
-
-		waitForLoad(sID[i]);
+		sReg = /extracss/
+		
+		if(!sReg.test(Subs[i]))
+		{		
+			waitForLoad(sID[i].toLowerCase());	
+		}
 		i++;
 	}
 	
@@ -93,7 +96,7 @@ function addSub(Sub) //Just include sub name, i.e. /r/MLPlounge = MLPlounge
 		style.type = 'text/css'
 		style.rel = 'stylesheet';
 		
-		style.href = SubCss; //+ "?" + unique;
+		style.href = SubCss + "?" + unique;
 		style.media = "print";
 		//style.disabled = true;	
 	}
@@ -218,6 +221,7 @@ function remRules(sub)
 
 
 //// Special CSS flags ////
+/*
 function CSSFlags()
 {
 	var css = new Array();
@@ -235,5 +239,6 @@ function CSSFlags()
 	}
 	
 }
+*/
 
 
