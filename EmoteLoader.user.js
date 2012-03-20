@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name           Reddit Emote Loader
 // @namespace      http://userscripts.org/users/systemoutprintln
-// @version        0.4.1
+// @version        0.4.3
 // @include        http://www.reddit.com/*
 // @include        http://reddit.com/*
 // @include        http://*.reddit.com/*
@@ -12,17 +12,19 @@
 // To add a sub add a comma then the sub name in quotes after the last entry
 // For example with MLPLounge it should look like the following:
 // var subs=["mylittlepony","MLPlounge"];
-var subs=["extraCSS","mylittlepony","mylittlewtf","mylittlelistentothis","mylittlenanners","mylittleandysonic1"];
+var subs=["mylittlepony","mylittlewtf","mylittlelistentothis","mylittlenanners","mylittleandysonic1"];
 
 // Disables mylittlepony emotes on the MLPLounge 
 var PLounge = true;
 
+//Use Extra CSS from /r/extraCSS
+var useExtraCSS = true;
+
 //Environ variables - only change if something goes wrong.
-var chrome = false; //Is the browser Chrome
+var chrome = navigator.userAgent.toLowerCase().indexOf('chrome') > -1;
 
 //Do not change below this line
-
-chrome = navigator.userAgent.toLowerCase().indexOf('chrome') > -1;
+var Ecss = "https://raw.github.com/systemoutprintln/Reddit-Emote-Loader/master/extraCSS.css"
 var count=0;
 var unique;
 //CSSFlags();
@@ -35,6 +37,13 @@ function useSubs(Subs) //Just include sub name, i.e. /r/MLPlounge = MLPlounge
 {
 	//alert(chrome);
 	var sID = new Array();
+	
+	if(useExtraCSS)
+	{
+		var estyle = addSub(Ecss);
+		estyle.media = "all";
+	
+	}
 	
 	var i = 0;
 	while(i < Subs.length)
@@ -60,20 +69,18 @@ function useSubs(Subs) //Just include sub name, i.e. /r/MLPlounge = MLPlounge
 			
 			}
 		}
+		var SubCss = 'http://www.reddit.com/r/' + Subs[i] + '/stylesheet.css';
 				
-		sID [i] = addSub(Subs[i]);
+		sID [i] = addSub(SubCss);
 		
-		sReg = /extracss/
-		
-		if(!sReg.test(Subs[i].toLowerCase()))
-		{	
+
 		if(chrome){
 			//sID[i].disabled = true;
 		}
 		else{
 			sID[i].sheet.disabled = true;
 		}
-		}
+
 	
 		waitForLoad(sID[i]);	
 		
@@ -84,10 +91,10 @@ function useSubs(Subs) //Just include sub name, i.e. /r/MLPlounge = MLPlounge
 	
 }
 
-function addSub(Sub) //Just include sub name, i.e. /r/MLPlounge = MLPlounge
+function addSub(Sub)
 {
 	var head = document.getElementsByTagName("head")[0];
-	var SubCss = 'http://www.reddit.com/r/' + Sub + '/stylesheet.css';
+	
 	var d = new Date();
 	unique = d.getTime();
 	
@@ -99,14 +106,14 @@ function addSub(Sub) //Just include sub name, i.e. /r/MLPlounge = MLPlounge
 		style.type = 'text/css'
 		style.rel = 'stylesheet';
 		
-		style.href = SubCss; //+ "?" + unique;
+		style.href = Sub; //+ "?" + unique;
 		style.media = "print";
 		//style.disabled = true;	
 	}
 	else
 	{
 		style = document.createElement('style');
-		style.textContent = '@import "' + SubCss + '"';
+		style.textContent = '@import "' + Sub + '"';
 		//style.sheet.disabled = true;	
 	}
 	
