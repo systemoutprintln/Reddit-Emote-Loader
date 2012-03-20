@@ -25,6 +25,7 @@ var chrome = false; //Is the browser Chrome
 chrome = navigator.userAgent.toLowerCase().indexOf('chrome') > -1;
 var timer;
 var count=0;
+var unique;
 useSubs(subs);
 
 
@@ -81,6 +82,7 @@ function addSub(Sub) //Just include sub name, i.e. /r/MLPlounge = MLPlounge
 	var head = document.getElementsByTagName("head")[0];
 	var SubCss = 'http://www.reddit.com/r/' + Sub + '/stylesheet.css';
 	var d = new Date();
+	unique = d.getTime();
 	
 	var style;
 	
@@ -89,7 +91,8 @@ function addSub(Sub) //Just include sub name, i.e. /r/MLPlounge = MLPlounge
 		style =	document.createElement('link');
 		style.type = 'text/css'
 		style.rel = 'stylesheet';
-		style.href = SubCss + "?" + d.getTime();
+		
+		style.href = SubCss; //+ "?" + unique;
 		style.media = "print";
 		//style.disabled = true;	
 	}
