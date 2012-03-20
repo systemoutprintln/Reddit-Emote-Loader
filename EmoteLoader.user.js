@@ -62,16 +62,18 @@ function useSubs(Subs) //Just include sub name, i.e. /r/MLPlounge = MLPlounge
 		}
 				
 		sID [i] = addSub(Subs[i]);
+		
+		sReg = /extracss/
+		
+		if(!sReg.test(Subs[i].toLowerCase()))
+		{	
 		if(chrome){
 			//sID[i].disabled = true;
 		}
 		else{
 			sID[i].sheet.disabled = true;
 		}
-		sReg = /extracss/
-		
-		if(!sReg.test(Subs[i].toLowerCase()))
-		{		
+	
 			waitForLoad(sID[i]);	
 		}
 		i++;
