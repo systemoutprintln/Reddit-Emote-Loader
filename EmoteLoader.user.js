@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name           Reddit Emote Loader
 // @namespace      http://userscripts.org/users/systemoutprintln
-// @version        0.1.9
+// @version        0.1.10
 // @include        http://www.reddit.com/*
 // @include        http://reddit.com/*
 // @include        http://*.reddit.com/*
@@ -133,9 +133,10 @@ function remRules(sub)
 	
 	if(chrome)
 	{
+		sub.media = "all";
 		ssheet = getStyle(sub);
 		if(ssheet == -1) return;
-		//sub.media = "all";
+		
 	}
 	else
 	{
@@ -172,7 +173,7 @@ function remRules(sub)
 	
 	if(chrome)
 	{
-		sub.media = "all";
+		//sub.media = "all";
 		GM_log("Done");
 	}
 	else
