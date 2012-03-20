@@ -172,7 +172,8 @@ function remRules(sub)
 	
 	if(chrome)
 	{
-		
+		sub.media = "all";
+		GM_log("Done");
 	}
 	else
 	{
