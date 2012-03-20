@@ -27,7 +27,7 @@ var timer;
 var count=0;
 var unique;
 useSubs(subs);
-
+//CSSFlags();
 
 
 
@@ -74,7 +74,7 @@ function useSubs(Subs) //Just include sub name, i.e. /r/MLPlounge = MLPlounge
 	}
 	
 
-	CSSFlags();
+	
 }
 
 function addSub(Sub) //Just include sub name, i.e. /r/MLPlounge = MLPlounge
