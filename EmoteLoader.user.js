@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name           Reddit Emote Loader
 // @namespace      http://userscripts.org/users/systemoutprintln
-// @version        0.3
+// @version        0.3.1
 // @include        http://www.reddit.com/*
 // @include        http://reddit.com/*
 // @include        http://*.reddit.com/*
@@ -71,14 +71,16 @@ function useSubs(Subs) //Just include sub name, i.e. /r/MLPlounge = MLPlounge
 		waitForLoad(sID[i]);
 		i++;
 	}
+	
 
-
+	CSSFlags();
 }
 
 function addSub(Sub) //Just include sub name, i.e. /r/MLPlounge = MLPlounge
 {
 	var head = document.getElementsByTagName("head")[0];
 	var SubCss = 'http://www.reddit.com/r/' + Sub + '/stylesheet.css';
+	var d = new Date();
 	
 	var style;
 	
@@ -87,7 +89,7 @@ function addSub(Sub) //Just include sub name, i.e. /r/MLPlounge = MLPlounge
 		style =	document.createElement('link');
 		style.type = 'text/css'
 		style.rel = 'stylesheet';
-		style.href = SubCss;
+		style.href = SubCss + "?" + d.getTime();
 		style.media = "print";
 		//style.disabled = true;	
 	}
@@ -212,6 +214,22 @@ function remRules(sub)
 
 
 //// Special CSS flags ////
+function CSSFlags()
+{
+	var css = new Array();
+	//Dance (-d)
+	css[0] = "a[href*=\'-d\']:hover {\
+			-moz-transform: scaleX(-1);\
+			-o-transform: scaleX(-1);\
+			-webkit-transform: scaleX(-1);\
+			transform: scaleX(-1);\
+			}";
+	var sheet = document.styleSheet[0];
+	for(i 0; i < css.length; i++)
+	{
+		sheet.insertRule(css[i],-1);
+	}
+	
+}
 
-//TODO
 
