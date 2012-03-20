@@ -227,7 +227,7 @@ function CSSFlags()
 	var sheet = document.styleSheet[0];
 	for(i 0; i < css.length; i++)
 	{
-		sheet.insertRule(css[i],-1);
+		sheet.insertRule(css[i],0);
 	}
 	
 }
