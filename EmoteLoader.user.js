@@ -149,7 +149,7 @@ function remRules(sub)
 
     var srules = ssheet.cssRules;
 	
-	GM_log(srules.length);
+	//GM_log(srules.length);
 	
 	for(i = 0; i < srules.length; i++)
 	{
@@ -158,7 +158,10 @@ function remRules(sub)
 		srule = srules[i];
 		//GM_log(srule.selectorText);
 		if(emote.test(srule.selectorText))
-		{} else
+		{
+			GM_log(srule.selectorText);
+		
+		} else
 		{
 			ssheet.deleteRule(i);
 			i--;			
