@@ -70,7 +70,11 @@ function useSubs(Subs) //Just include sub name, i.e. /r/MLPlounge = MLPlounge
 			
 			}
 		}
-		var SubCss = 'http://www.reddit.com/r/' + Subs[i] + '/stylesheet.css';
+		var SubCss = document.location.protocol; + "//" + document.domain + "/r/" + Subs[i] + '/stylesheet.css';
+		
+		GM_log(SubCss);
+		
+	
 				
 		sID [i] = addSub(SubCss);
 		
@@ -226,6 +230,7 @@ function remRules(sub)
 		
 	
 	}
+	ruleWalker(ssheet);
 	}
 	catch(e)
 	{
@@ -242,7 +247,7 @@ function remRules(sub)
 	{
 		sub.sheet.disabled = false;	
 	}
-	ruleWalker(ssheet);
+	
 
 }
 
@@ -308,6 +313,15 @@ function addExtraCSS()
 	var css = new Array();
 	//Dance (-d)
 	css[0] = "a[href*=\'-d\']:hover {\
+			-moz-transform: scaleX(-1);\
+			-o-transform: scaleX(-1);\
+			-webkit-transform: scaleX(-1);\
+			transform: scaleX(-1);\
+			}";
+	
+	//Reverse (-r)
+	
+	css[1] = "a[href*=\'-r\'] {\
 			-moz-transform: scaleX(-1);\
 			-o-transform: scaleX(-1);\
 			-webkit-transform: scaleX(-1);\
