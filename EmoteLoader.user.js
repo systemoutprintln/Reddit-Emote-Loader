@@ -1,6 +1,6 @@
 // ==UserScript==
 // @name           Reddit Emote Loader
-// @namespace      http://userscripts.org/users/systemoutprintln
+// @namespace      http://www.reddit.com/r/RedditEmoteLoader
 // @version        0.5.6
 // @include        http://www.reddit.com/*
 // @include        http://reddit.com/*
@@ -230,13 +230,15 @@ function remRules(sub)
 		
 	
 	}
-	ruleWalker(ssheet);
+	
 	}
 	catch(e)
 	{
 		GM_log(e)
 		disable(sub);
 	}
+	
+	styleWalker();
 	
 	if(chrome)
 	{
@@ -267,13 +269,12 @@ function disable(style)
 
 }
 
-function ruleWalker(stylesheet)
+function styleWalker()
 {
-	GM_log(stylesheet.href);
-	srules = stylesheet.cssRules;
-	for(i = 0; i < srules.length; i++)
+	ssheets = document.styleSheets;
+	for(i = 0; i < ssheets.length; i++)
 	{
-		//GM_log(srules[i].selectorText);
+		GM_log("Style " + i + ": " + ssheets[i]);
 	}
 	
 
