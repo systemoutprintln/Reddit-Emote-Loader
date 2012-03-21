@@ -125,7 +125,7 @@ function addSub(Sub)
 
 
 
-function waitForLoad(style, indx)
+function waitForLoad(style, i)
 {
 	if(chrome)
 	{
