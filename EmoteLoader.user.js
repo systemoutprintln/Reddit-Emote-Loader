@@ -107,7 +107,7 @@ function addSub(Sub)
 		style.type = 'text/css'
 		style.rel = 'stylesheet';
 		
-		style.href = Sub + "?v=" + unique;
+		style.href = Sub; //+ "?v=" + unique;
 		style.media = "print";
 		//style.disabled = true;	
 	}
