@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name           Reddit Emote Loader
 // @namespace      http://userscripts.org/users/systemoutprintln
-// @version        0.5.5
+// @version        0.5.6
 // @include        http://www.reddit.com/*
 // @include        http://reddit.com/*
 // @include        http://*.reddit.com/*
@@ -72,7 +72,7 @@ function useSubs(Subs) //Just include sub name, i.e. /r/MLPlounge = MLPlounge
 		}
 		var SubCss = document.location.protocol; + "//" + document.domain + "/r/" + Subs[i] + '/stylesheet.css';
 		
-		GM_log(SubCss);
+		GM_log("Added: " + SubCss);
 		
 	
 				
