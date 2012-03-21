@@ -185,6 +185,12 @@ function remRules(sub)
 	{
 		sub.media = "all";
 		ssheet = getStyle(sub);
+		if(ssheet == -1)
+		{
+			disable(sub)
+			return;
+		
+		}
 		
 	}
 	else
