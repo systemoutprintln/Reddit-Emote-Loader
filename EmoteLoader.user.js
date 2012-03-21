@@ -43,14 +43,7 @@ function useSubs(Subs) //Just include sub name, i.e. /r/MLPlounge = MLPlounge
 {
 	//alert(chrome);
 	var sID = new Array();
-	
-	if(useExtraCSS)
-	{
-		var estyle = addSub(Ecss);
-		estyle.media = "all";
-	
-	}
-	
+		
 	var i = 0;
 	while(i < Subs.length)
 	{
