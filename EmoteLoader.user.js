@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name           Reddit Emote Loader
 // @namespace      http://userscripts.org/users/systemoutprintln
-// @version        0.4.3
+// @version        0.5.0
 // @include        http://www.reddit.com/*
 // @include        http://reddit.com/*
 // @include        http://*.reddit.com/*
@@ -24,10 +24,16 @@ var useExtraCSS = true;
 var chrome = navigator.userAgent.toLowerCase().indexOf('chrome') > -1;
 
 //Do not change below this line
-var Ecss = "https://raw.github.com/systemoutprintln/Reddit-Emote-Loader/master/extraCSS.css"
 var count=0;
 var unique;
-//CSSFlags();
+
+var ch = new Array();
+var ff = new Array();
+
+if(useExtraCSS)
+{
+	CSSFlags();
+}
 useSubs(subs);
 
 
@@ -82,7 +88,7 @@ function useSubs(Subs) //Just include sub name, i.e. /r/MLPlounge = MLPlounge
 		}
 
 	
-		waitForLoad(sID[i]);	
+		waitForLoad(sID[i], i);	
 		
 		i++;
 	}
@@ -126,12 +132,12 @@ function addSub(Sub)
 
 
 
-function waitForLoad(style)
+function waitForLoad(style, indx)
 {
 	if(chrome)
 	{
 		var cssnum = document.styleSheets.length;
-		var ch = setInterval(function() {
+		ch[i] = setInterval(function() {
 		//Try enable to test, then disable
 			count++;
 			var sheet;
@@ -142,22 +148,20 @@ function waitForLoad(style)
 				{
 					remRules(style);
 					
-					clearInterval(ch);
+					clearInterval(ch[i]);
 				}
 			}
-		}, 5);
+		}, 10);
 	
 	}else{
-		var ff = setInterval(function() {
+		ff[i] = setInterval(function() {
 			try {
-			count++;
-			//GM_log(count);
 		
 		
 			style.sheet.cssRules;
 			remRules(style);
 		
-			clearInterval(ff);
+			clearInterval(ff[i]);
 			} catch (e){}
 		}, 10); 
 	}
@@ -242,8 +246,34 @@ function remRules(sub)
 
 
 //// Special CSS flags ////
-/*
+
 function CSSFlags()
+{	
+	if(chrome)
+		{
+		var chm = setInterval(function() {
+		//Try enable to test, then disable
+			if(document.styleSheets.length > 0)
+			{
+				addExtraCSS();
+				clearInterval(chm);
+			}
+		}, 10);
+	
+	}else{
+		var ffm = setInterval(function() {
+			try 
+			{
+				document.styleSheets[0].cssRules;
+				clearInterval(ffm);
+
+			} catch (e){}
+		}, 10); 
+	}
+	
+}
+
+function addExtraCSS()
 {
 	var css = new Array();
 	//Dance (-d)
@@ -253,13 +283,14 @@ function CSSFlags()
 			-webkit-transform: scaleX(-1);\
 			transform: scaleX(-1);\
 			}";
+		
 	var sheet = document.styleSheets[0];
 	for(i = 0; i < css.length; i++)
 	{
 		sheet.insertRule(css[i], 0);
 	}
-	
+
 }
-*/
+
 
 
