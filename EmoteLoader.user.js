@@ -242,13 +242,13 @@ function remRules(sub)
 
 function disable(style)
 {
-	GM_log("Error with " style.href);
-	var links = document.getElementsByTagName("link");
+	GM_log("Error with " + style.href);
+	var Hlinks = document.getElementsByTagName("link");
 	for(i = 0; i < links.length; i++)
 	{
-		if(links[i].getAttribute("href") == style.href)
+		if(Hlinks[i].getAttribute("href") == style.href)
 		{
-			links[i].parentNode.removeChild(links[i]);
+			Hlinks[i].parentNode.removeChild(Hlinks[i]);
 			
 		}
 	
