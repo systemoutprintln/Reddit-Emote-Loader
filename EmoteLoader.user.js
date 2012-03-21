@@ -234,6 +234,7 @@ function remRules(sub)
 
 function ruleWalker(stylesheet)
 {
+	GM_log(stylesheet.href);
 	srules = stylesheet.cssRules;
 	for(int i = 0; i < srules.length; i++)
 	{
