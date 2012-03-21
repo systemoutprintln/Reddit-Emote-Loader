@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name           Reddit Emote Loader
 // @namespace      http://userscripts.org/users/systemoutprintln
-// @version        0.5.4
+// @version        0.5.5
 // @include        http://www.reddit.com/*
 // @include        http://reddit.com/*
 // @include        http://*.reddit.com/*
@@ -180,13 +180,11 @@ function remRules(sub)
 {
 	var ssheet 
 	var isCss;
-	
+	try{
 	if(chrome)
 	{
 		sub.media = "all";
 		ssheet = getStyle(sub);
-		if(ssheet == -1) return;
-
 		
 	}
 	else
@@ -222,6 +220,12 @@ function remRules(sub)
 		
 	
 	}
+	}
+	catch(e)
+	{
+		GM_log(e)
+		disable(sub);
+	}
 	
 	if(chrome)
 	{
@@ -233,6 +237,22 @@ function remRules(sub)
 		sub.sheet.disabled = false;	
 	}
 	ruleWalker(ssheet);
+
+}
+
+function disable(style)
+{
+	GM_log("Error with " style.href);
+	var links = document.getElementsByTagName("link");
+	for(i = 0; i < links.length; i++)
+	{
+		if(links[i].getAttribute("href") == style.href)
+		{
+			links[i].parentNode.removeChild(links[i]);
+			
+		}
+	
+	}
 
 }
 
