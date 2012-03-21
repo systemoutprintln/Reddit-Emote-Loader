@@ -70,7 +70,7 @@ function useSubs(Subs) //Just include sub name, i.e. /r/MLPlounge = MLPlounge
 			
 			}
 		}
-		var SubCss = document.location.protocol; + "//" + document.domain + "/r/" + Subs[i] + '/stylesheet.css';
+		var SubCss = document.location.protocol + "//" + document.domain + "/r/" + Subs[i] + '/stylesheet.css';
 		
 		GM_log("Added: " + SubCss);
 		
