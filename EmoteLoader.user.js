@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name           Reddit Emote Loader
 // @namespace      http://userscripts.org/users/systemoutprintln
-// @version        0.5.2
+// @version        0.5.4
 // @include        http://www.reddit.com/*
 // @include        http://reddit.com/*
 // @include        http://*.reddit.com/*
@@ -166,7 +166,11 @@ function getStyle(sub)
 {
 	for(i=0; i < document.styleSheets.length; i++)
 	{
-		if(document.styleSheets[i].href == sub.href) return document.styleSheets[i];	
+		if(document.styleSheets[i].href == sub.href)
+		{
+			GM_log("Stylesheet " + sub.href + " = " + i);
+			return document.styleSheets[i];	
+		}
 	}
 	return -1;
 
