@@ -236,7 +236,7 @@ function ruleWalker(stylesheet)
 {
 	GM_log(stylesheet.href);
 	srules = stylesheet.cssRules;
-	for(int i = 0; i < srules.length; i++)
+	for(i = 0; i < srules.length; i++)
 	{
 		GM_log(srules[i].selectorText);
 	}
