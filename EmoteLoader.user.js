@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name           Reddit Emote Loader
 // @namespace      http://userscripts.org/users/systemoutprintln
-// @version        0.5.1
+// @version        0.5.2
 // @include        http://www.reddit.com/*
 // @include        http://reddit.com/*
 // @include        http://*.reddit.com/*
@@ -30,11 +30,13 @@ var unique;
 var ch = new Array();
 var ff = new Array();
 
+useSubs(subs);
+
 if(useExtraCSS)
 {
 	CSSFlags();
 }
-useSubs(subs);
+
 
 
 
@@ -173,7 +175,6 @@ function getStyle(sub)
 function remRules(sub)
 {
 	var ssheet 
-	var exCss = /extracss/
 	var isCss;
 	
 	if(chrome)
@@ -181,13 +182,12 @@ function remRules(sub)
 		sub.media = "all";
 		ssheet = getStyle(sub);
 		if(ssheet == -1) return;
-		isCss = exCss.test(sub.href);
+
 		
 	}
 	else
 	{
 		ssheet = sub.sheet.cssRules[0].styleSheet;
-		isCss = exCss.test(sub.textContent);
 	}
 	
 	
@@ -199,12 +199,6 @@ function remRules(sub)
 	
 	//GM_log(srules.length);
 	
-	if(isCss)
-	{
-		
-	
-	
-	}
 	
 	for(i = 0; i < srules.length; i++)
 	{
@@ -214,7 +208,7 @@ function remRules(sub)
 		//GM_log(srule.selectorText);
 		if(emote.test(srule.selectorText))
 		{
-			GM_log(srule.selectorText);
+			//GM_log(srule.selectorText);
 		
 		} else
 		{
@@ -234,6 +228,18 @@ function remRules(sub)
 	{
 		sub.sheet.disabled = false;	
 	}
+	ruleWalker(ssheet);
+
+}
+
+function ruleWalker(stylesheet)
+{
+	srules = stylesheet.cssRules;
+	for(int i = 0; i < srules.length; i++)
+	{
+		GM_log(srules[i].selectorText);
+	}
+	
 
 }
 
