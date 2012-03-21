@@ -244,7 +244,7 @@ function disable(style)
 {
 	GM_log("Error with " + style.href);
 	var Hlinks = document.getElementsByTagName("link");
-	for(i = 0; i < links.length; i++)
+	for(i = 0; i < Hlinks.length; i++)
 	{
 		if(Hlinks[i].getAttribute("href") == style.href)
 		{
