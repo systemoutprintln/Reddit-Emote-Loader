@@ -12,9 +12,7 @@
 // To add a sub add a comma then the sub name in quotes after the last entry
 // For example with MLPLounge it should look like the following:
 // var subs=["mylittlepony","MLPlounge"];
-var subs=["mylittlepony","mylittlewtf","mylittlelistentothis","mylittlenanners","mylittleandysonic1","idliketobeatree","mylittleonions","vinylscratch","applejack"
- "MYLITTLESQUIDWARD", "MYLITTLEFORTRESS" , "MYLITTLENOPENOPENOPE" , "DAYLIGHTEMOTES" , "MYLITTLEDAWW" , "MYLITTLENOSLEEP" , "MYLITTLEDAMON" , "ROSELUCK" ,
- "MYLITTLEMUSICIAN" , "MYLITTLECHAOS" , "MYLITTLEALCOHOLIC" , "SURPRISE" , "PINKIEPIE" , "TWILIGHTSPARKLE" , "MINUETTE"];
+var subs=["mylittlepony","mylittlewtf","mylittlelistentothis","mylittlenanners","mylittleandysonic1","idliketobeatree","mylittleonions","vinylscratch","applejack" , "MYLITTLESQUIDWARD", "MYLITTLEFORTRESS" , "MYLITTLENOPENOPENOPE" , "DAYLIGHTEMOTES" , "MYLITTLEDAWW" , "MYLITTLENOSLEEP" , "MYLITTLEDAMON" , "ROSELUCK" , "MYLITTLEMUSICIAN" , "MYLITTLECHAOS" , "MYLITTLEALCOHOLIC" , "SURPRISE" , "PINKIEPIE" , "TWILIGHTSPARKLE" , "MINUETTE"];
 
 // Disables mylittlepony emotes on the MLPLounge 
 var PLounge = true;
