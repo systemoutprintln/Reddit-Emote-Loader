@@ -427,7 +427,7 @@ function addEmotes(n, over)
 		start += n;
 		
 		
-	},100);
+	},1000);
 	
 	
 
