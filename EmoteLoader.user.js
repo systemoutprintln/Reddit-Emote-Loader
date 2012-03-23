@@ -358,10 +358,10 @@ function CSSFlags()
 		
 	//Right (-ar)
 	
-		css[3] = ".md a[href*=\'-ar\'] {float:right !important;display:inline-block !important}";
+		css[4] = ".md a[href*=\'-ar\'] {float:right !important;display:inline-block !important}";
 		
 	//Rotates (-45/90...)
-	var j = 4;
+	var j = 5;
 	for(i = 45; i < 360; i+= 45)
 	{
 		css[j] = ".md a[href*=\'-" + i + "\']{-moz-transform:rotate(" + i + "deg)scaleX(1);-o-transform:rotate(" + i + "deg)scaleX(1);-webkit-transform:rotate(" + i + "deg)scaleX(1);image-rendering:-moz-crisp-edges}"			
