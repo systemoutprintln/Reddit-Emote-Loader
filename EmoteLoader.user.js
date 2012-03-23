@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name           Reddit Emote Loader
 // @namespace      http://www.reddit.com/r/RedditEmoteLoader
-// @version        0.8.3
+// @version        0.8.4.1
 // @include        http://www.reddit.com/*
 // @include        http://reddit.com/*
 // @include        http://*.reddit.com/*
@@ -12,7 +12,9 @@
 // To add a sub add a comma then the sub name in quotes after the last entry
 // For example with MLPLounge it should look like the following:
 // var subs=["mylittlepony","MLPlounge"];
-var subs=["mylittlepony","mylittlewtf","mylittlelistentothis","mylittlenanners","mylittleandysonic1"];
+var subs=["mylittlepony","mylittlewtf","mylittlelistentothis","mylittlenanners","mylittleandysonic1","idliketobeatree","mylittleonions","vinylscratch","applejack"
+ "MYLITTLESQUIDWARD", "MYLITTLEFORTRESS" , "MYLITTLENOPENOPENOPE" , "DAYLIGHTEMOTES" , "MYLITTLEDAWW" , "MYLITTLENOSLEEP" , "MYLITTLEDAMON" , "ROSELUCK" ,
+ "MYLITTLEMUSICIAN" , "MYLITTLECHAOS" , "MYLITTLEALCOHOLIC" , "SURPRISE" , "PINKIEPIE" , "TWILIGHTSPARKLE" , "MINUETTE"];
 
 // Disables mylittlepony emotes on the MLPLounge 
 var PLounge = true;
@@ -380,7 +382,7 @@ function createLink()
 {
 	var css = new Array();
 	//Emote link
-	css[0] = ".emotelink { color:blue; text-align:right; font-size:12px; position: fixed; top:15%; right: 10px; z-index: 1000; width:100px height:80px}";
+	css[0] = ".emotelink { color:blue; text-align:right; font-size:12px; position: fixed; top:50%; right: 10px; z-index: 1000; width:100px height:80px}";
 	
 	//Emote page
 	css[1] = ".emoteoverlay {background-color:white; opacity: 1; position: fixed; top: 0; left: 0; height:100%;  width:100%; z-index: 1001;overflow : auto; }";
