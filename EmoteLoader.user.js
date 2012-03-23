@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name           Reddit Emote Loader
 // @namespace      http://www.reddit.com/r/RedditEmoteLoader
-// @version        0.6.1
+// @version        0.6.2
 // @include        http://www.reddit.com/*
 // @include        http://reddit.com/*
 // @include        http://*.reddit.com/*
@@ -318,11 +318,15 @@ function CSSFlags()
 function addExtraCSS()
 {
 	var css = new Array();
-	//Emote window
-	css[0] = ".emotelink { color:green; text-align:right; background-color:cyan; font-size:30px; position: fixed; top:30px; right: 10px; z-index: 1000; width:100px height:80px}"
+	//Emote link
+	css[0] = ".emotelink { color:green; text-align:right; background-color:cyan; font-size:30px; position: fixed; top:30px; right: 10px; z-index: 1000; width:100px height:80px}";
+	
+	//Emote page
+	css[1] = ".emoteoverlay {background-color:white; opacity: .8; position: absolute; top: 0; left: 0;  width: 100%; height: 100%; z-index: 1001; }";
+	
 	
 	//Dance (-d)
-	css[1] = "a[href*=\'-d\']:hover {\
+	css[2] = "a[href*=\'-d\']:hover {\
 			-moz-transform: scaleX(-1);\
 			-o-transform: scaleX(-1);\
 			-webkit-transform: scaleX(-1);\
@@ -331,7 +335,7 @@ function addExtraCSS()
 	
 	//Reverse (-r)
 	
-	css[2] = "a[href*=\'-r\'] {\
+	css[3] = "a[href*=\'-r\'] {\
 			-moz-transform: scaleX(-1);\
 			-o-transform: scaleX(-1);\
 			-webkit-transform: scaleX(-1);\
@@ -353,9 +357,9 @@ function createLink()
 {
 	var link_e = document.createElement("div");
 	link_e.id = "emoteLink";
-	link_e.innerText = "Test";
+	link_e.innerText = "Emotes";
 	link_e.className = "emotelink";
-	link_e.style = "cursor: pointer;";
+	link_e.style = "cursor:hand";
 	link_e.onclick = openEmotePage;
 	document.body.appendChild(link_e);
 					
@@ -365,8 +369,18 @@ function createLink()
 
 function openEmotePage()
 {
-	alert("success!");
+	var over = document.createElement("div");
+	over.id = "EmoteOverlay";
+	over.className = "emoteoverlay";
+	over.onclick = exitEmotePage;
+	document.body.appendChild(over);
+	
 
+}
+
+function exitEmotePage()
+{
+	document.body.removeChild(document.getElementById("EmoteOverlay"));
 }
 
 
