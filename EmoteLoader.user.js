@@ -351,7 +351,7 @@ function CSSFlags()
 			
 	//Flip (-f)
 	
-		css[4] = "a[href*=\'-r\'] {\
+		css[4] = "a[href*=\'-f\'] {\
 			-moz-transform: scaleY(-1);\
 			-o-transform: scaleY(-1);\
 			-webkit-transform: scaleY(-1);\
