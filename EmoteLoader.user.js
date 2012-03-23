@@ -31,7 +31,7 @@ var walked = false;
 var ch = new Array();
 var ff = new Array();
 
-var emotesCodes = new Array();
+var emoteCodes = new Array();
 
 useSubs(subs);
 
