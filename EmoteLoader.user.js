@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name           Reddit Emote Loader
 // @namespace      http://www.reddit.com/r/RedditEmoteLoader
-// @version        0.6.3
+// @version        0.6.4
 // @include        http://www.reddit.com/*
 // @include        http://reddit.com/*
 // @include        http://*.reddit.com/*
@@ -380,7 +380,7 @@ function openEmotePage()
 	var over = document.createElement("div");
 	over.id = "EmoteOverlay";
 	over.className = "emoteoverlay";
-	over.onclick = exitEmotePage();
+	over.onclick = exitEmotePage;
 	document.body.appendChild(over);
 	
 	
@@ -389,7 +389,7 @@ function openEmotePage()
 		var emote_lnk = document.createElement("a");
 		emote_lnk.href = emoteCodes[i];
 		emote_lnk.title = 	emoteCodes[i];
-		//emote_lnk.onclick = exitEmotePage();		
+		emote_lnk.onclick = exitEmotePage;		
 		over.appendChild(emote_lnk);
 	}
 	
