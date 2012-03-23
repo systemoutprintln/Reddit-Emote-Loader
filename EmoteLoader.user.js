@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name           Reddit Emote Loader
 // @namespace      http://www.reddit.com/r/RedditEmoteLoader
-// @version        0.6.5
+// @version        0.7
 // @include        http://www.reddit.com/*
 // @include        http://reddit.com/*
 // @include        http://*.reddit.com/*
@@ -27,6 +27,11 @@ var chrome = navigator.userAgent.toLowerCase().indexOf('chrome') > -1;
 var count=0;
 var unique;
 var walked = false;
+
+var emoteStyle = document.createElement('style');
+document.getElementsByTagName('head')[0].appendChild(ns);
+
+var emoteSheet = document.styleSheets[document.styleSheets.length - 1];
 
 var ch = new Array();
 var ff = new Array();
@@ -219,6 +224,7 @@ function remRules(sub)
 		//GM_log(srule.selectorText);
 		if(emote.test(srule.selectorText))
 		{
+			emoteSheet.insertRule(srule.cssText,0); //Insert rule into our sheet
 			var stext = srule.selectorText;
 			
 			if(srule.cssText.indexOf("background-image") != -1) //Images
@@ -229,7 +235,7 @@ function remRules(sub)
 					stext = stext.substring(stext.indexOf("a[href") + 5);
 					ecode = stext.substring(stext.indexOf("/"));
 					ecode = ecode.substring(0, ecode.indexOf("\"]")); 
-					GM_log(ecode);
+					//GM_log(ecode);
 					emoteCodes[emoteCodes.length] = ecode;
 				}
 			}
@@ -237,7 +243,7 @@ function remRules(sub)
 			{
 				ecode = stext.substring(stext.indexOf("/"));
 				ecode = ecode.substring(0, ecode.indexOf("\"]")); 
-				GM_log(ecode);
+				//GM_log(ecode);
 				textCodes[textCodes.length] = ecode;	
 			}
 			
@@ -253,14 +259,14 @@ function remRules(sub)
 
 	GM_log(ssheet);
 	styleWalker();
-
+	disable(sub);
 	
 	
 	}
 	catch(e)
 	{
 		GM_log(e)
-		disable(sub);
+		
 	}
 	
 	
@@ -280,7 +286,7 @@ function remRules(sub)
 
 function disable(style)
 {
-	GM_log("Error with " + style.href);
+	//GM_log("Error with " + style.href);
 	var Hlinks = document.getElementsByTagName("link");
 	for(i = 0; i < Hlinks.length; i++)
 	{
@@ -312,37 +318,13 @@ function styleWalker()
 
 //// Special CSS flags ////
 
+
+
 function CSSFlags()
-{	
-	if(chrome)
-		{
-		var chm = setInterval(function() {
-		//Try enable to test, then disable
-			if(document.styleSheets.length > 0)
-			{
-				addExtraCSS();
-				clearInterval(chm);
-			}
-		}, 10);
-	
-	}else{
-		var ffm = setInterval(function() {
-			try 
-			{
-				document.styleSheets[0].cssRules;
-				clearInterval(ffm);
-
-			} catch (e){}
-		}, 10); 
-	}
-	
-}
-
-function addExtraCSS()
 {
 	var css = new Array();
 	//Emote link
-	css[0] = ".emotelink { color:green; text-align:right; background-color:cyan; font-size:30px; position: fixed; top:30px; right: 10px; z-index: 1000; width:100px height:80px}";
+	css[0] = ".emotelink { color:green; text-align:right; background-color:cyan; font-size:30px; position: fixed; top:50px; right: 10px; z-index: 1000; width:100px height:80px}";
 	
 	//Emote page
 	css[1] = ".emoteoverlay {background-color:white; opacity: 1; position: fixed; top: 0; left: 0; height:100%;  width:100%; z-index: 1001;overflow : auto; }";
@@ -367,10 +349,10 @@ function addExtraCSS()
 			
 			
 		
-	var sheet = document.styleSheets[0];
+
 	for(i = 0; i < css.length; i++)
 	{
-		sheet.insertRule(css[i], 0);
+		emoteSheet.insertRule(css[i], 0);
 	}
 
 }
