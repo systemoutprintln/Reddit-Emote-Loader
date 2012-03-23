@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name           Reddit Emote Loader
 // @namespace      http://www.reddit.com/r/RedditEmoteLoader
-// @version        0.7.2
+// @version        0.7.3
 // @include        http://www.reddit.com/*
 // @include        http://reddit.com/*
 // @include        http://*.reddit.com/*
@@ -79,7 +79,7 @@ function useSubs(Subs) //Just include sub name, i.e. /r/MLPlounge = MLPlounge
 		}
 		var SubCss = document.location.protocol + "//" + document.domain + "/r/" + Subs[i] + '/stylesheet.css';
 		
-		GM_log("Added: " + SubCss);
+		
 		
 	
 				
@@ -128,6 +128,8 @@ function addSub(Sub)
 	
 	head.appendChild(style);
 	
+	GM_log("Added: " + style.href);
+	
 	return style;
 
 
@@ -137,15 +139,15 @@ function addSub(Sub)
 
 function waitForLoad(style, i)
 {
+	GM_log("Loading: " + style.href);
 	if(chrome)
 	{
 		var cssnum = document.styleSheets.length;
 		ch[i] = setInterval(function() {
-		//Try enable to test, then disable
-			count++;
+			//count++;
 			var sheet;
-			if(document.styleSheets.length > cssnum)
-			{
+			//if(document.styleSheets.length > cssnum)
+			//{
 				sheet = getStyle(style);
 				if(sheet != -1)
 				{
@@ -153,7 +155,7 @@ function waitForLoad(style, i)
 					
 					clearInterval(ch[i]);
 				}
-			}
+			//}
 		}, 10);
 	
 	}else{
@@ -195,7 +197,7 @@ function remRules(sub)
 		ssheet = getStyle(sub);
 		if(ssheet == -1)
 		{
-			GM_log(sub.href);
+			GM_log("Error: " +sub.href);
 			return;
 		
 		}
@@ -390,6 +392,11 @@ function openEmotePage()
 		emote_lnk.onclick = exitEmotePage;		
 		over.appendChild(emote_lnk);
 	}
+	
+	var emote_lnk = document.createElement("a");
+		emote_lnk.href = "/sp";
+		emote_lnk.onclick = exitEmotePage;		
+		over.appendChild(emote_lnk);
 	
 	addEmotes(100, over);
 	
