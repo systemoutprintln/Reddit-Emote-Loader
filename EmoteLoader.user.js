@@ -146,6 +146,7 @@ function waitForLoad(style, i)
 		ch[i] = setInterval(function() {
 			//count++;
 			var sheet;
+			GM_log("Loading... " + style.href);
 			//if(document.styleSheets.length > cssnum)
 			//{
 				sheet = getStyle(style);
