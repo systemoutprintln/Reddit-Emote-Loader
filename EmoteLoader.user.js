@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name           Reddit Emote Loader
 // @namespace      http://www.reddit.com/r/RedditEmoteLoader
-// @version        0.7
+// @version        0.7.1
 // @include        http://www.reddit.com/*
 // @include        http://reddit.com/*
 // @include        http://*.reddit.com/*
@@ -272,6 +272,7 @@ function remRules(sub)
 	if(chrome)
 	{
 		sub.media = "print";
+		sub.disabled = true;
 		GM_log("Done: " + sub.href);
 	}
 	else
@@ -322,7 +323,7 @@ function CSSFlags()
 {
 	var css = new Array();
 	//Emote link
-	css[0] = ".emotelink { color:green; text-align:right; background-color:cyan; font-size:30px; position: fixed; top:50px; right: 10px; z-index: 1000; width:100px height:80px}";
+	css[0] = ".emotelink { color:blue; text-align:right; font-size:12px; position: fixed; top:50px; right: 10px; z-index: 1000; width:100px height:80px}";
 	
 	//Emote page
 	css[1] = ".emoteoverlay {background-color:white; opacity: 1; position: fixed; top: 0; left: 0; height:100%;  width:100%; z-index: 1001;overflow : auto; }";
