@@ -323,7 +323,7 @@ function CSSFlags()
 {
 	var css = new Array();
 	//Emote link
-	css[0] = ".emotelink { color:blue; text-align:right; font-size:12px; position: fixed; top:50px; right: 10px; z-index: 1000; width:100px height:80px}";
+	css[0] = ".emotelink { color:blue; text-align:right; font-size:12px; position: fixed; top:70px; right: 10px; z-index: 1000; width:100px height:80px}";
 	
 	//Emote page
 	css[1] = ".emoteoverlay {background-color:white; opacity: 1; position: fixed; top: 0; left: 0; height:100%;  width:100%; z-index: 1001;overflow : auto; }";
