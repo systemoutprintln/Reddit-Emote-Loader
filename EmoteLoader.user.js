@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name           Reddit Emote Loader
 // @namespace      http://www.reddit.com/r/RedditEmoteLoader
-// @version        0.8.2
+// @version        0.8.3
 // @include        http://www.reddit.com/*
 // @include        http://reddit.com/*
 // @include        http://*.reddit.com/*
@@ -360,6 +360,13 @@ function CSSFlags()
 	
 		css[3] = ".md a[href*=\'-ar\'] {float:right !important;display:inline-block !important}";
 		
+	//Rotates (-45/90...)
+	var j = 4;
+	for(i = 45; i < 360; i+= 45)
+	{
+		css[j] = ".md a[href*=\'-" + i + "\']{-moz-transform:rotate(" + i + "deg)scaleX(1);-o-transform:rotate(" + i + "deg)scaleX(1);-webkit-transform:rotate(" + i + "deg)scaleX(1);image-rendering:-moz-crisp-edges}"			
+		j++;
+	}		
 
 	for(i = 0; i < css.length; i++)
 	{
