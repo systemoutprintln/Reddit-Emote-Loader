@@ -388,7 +388,7 @@ function openEmotePage()
 	{
 		var emote_lnk = document.createElement("a");
 		emote_lnk.href = emoteCodes[i];
-		emoteCode.title = 	emoteCodes[i];
+		emote_lnk.title = 	emoteCodes[i];
 		
 		over.appendChild(emote_lnk);
 	}
