@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name           Reddit Emote Loader
 // @namespace      http://www.reddit.com/r/RedditEmoteLoader
-// @version        0.7.1
+// @version        0.7.2
 // @include        http://www.reddit.com/*
 // @include        http://reddit.com/*
 // @include        http://*.reddit.com/*
@@ -195,7 +195,7 @@ function remRules(sub)
 		ssheet = getStyle(sub);
 		if(ssheet == -1)
 		{
-			disable(sub)
+			GM_log(sub.href);
 			return;
 		
 		}
@@ -323,7 +323,7 @@ function CSSFlags()
 {
 	var css = new Array();
 	//Emote link
-	css[0] = ".emotelink { color:blue; text-align:right; font-size:12px; position: fixed; top:70px; right: 10px; z-index: 1000; width:100px height:80px}";
+	css[0] = ".emotelink { color:blue; text-align:right; font-size:12px; position: fixed; top:15%; right: 10px; z-index: 1000; width:100px height:80px}";
 	
 	//Emote page
 	css[1] = ".emoteoverlay {background-color:white; opacity: 1; position: fixed; top: 0; left: 0; height:100%;  width:100%; z-index: 1001;overflow : auto; }";
@@ -361,7 +361,7 @@ function createLink()
 {
 	var link_e = document.createElement("div");
 	link_e.id = "emoteLink";
-	link_e.innerText = "Emotes";
+	link_e.innerHTML = "Emotes";
 	link_e.className = "emotelink";
 	link_e.style = "cursor:hand";
 	link_e.onclick = openEmotePage;
@@ -380,14 +380,8 @@ function openEmotePage()
 	document.body.appendChild(over);
 	
 	
-	for(i = 0; i < emoteCodes.length; i++)
-	{
-		var emote_lnk = document.createElement("a");
-		emote_lnk.href = emoteCodes[i];
-		emote_lnk.title = 	emoteCodes[i];
-		emote_lnk.onclick = exitEmotePage;		
-		over.appendChild(emote_lnk);
-	}
+	
+	
 		for(i = 0; i < textCodes.length; i++)
 	{
 		var emote_lnk = document.createElement("a");
@@ -396,6 +390,37 @@ function openEmotePage()
 		emote_lnk.onclick = exitEmotePage;		
 		over.appendChild(emote_lnk);
 	}
+	
+	addEmotes(100, over);
+	
+
+}
+
+function addEmotes(n, over)
+{
+	var start = 0;
+	
+	var el = setInterval(function()
+	{
+		for(i = start; i < start+n; i++)
+		{
+			if(i >= emoteCodes.length)
+			{
+				clearInterval(el);
+				break;
+			}			
+			var emote_lnk = document.createElement("a");
+			emote_lnk.href = emoteCodes[i];
+			emote_lnk.title = 	emoteCodes[i];
+			emote_lnk.onclick = exitEmotePage;		
+			over.appendChild(emote_lnk);
+		}
+		
+		start += n;
+		
+		
+	},100);
+	
 	
 
 }
