@@ -399,7 +399,7 @@ function openEmotePage()
 function exitEmotePage(ecode)
 {
 	document.body.removeChild(document.getElementById("EmoteOverlay"));
-	alert(ecode);
+	//alert(ecode);
 }
 
 
