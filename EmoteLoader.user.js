@@ -218,7 +218,7 @@ function remRules(sub)
 		//GM_log(srule.selectorText);
 		if(emote.test(srule.selectorText))
 		{
-			if(srule.indexOf("," == -1)
+			if(srule.indexOf(",") == -1)
 			{	
 				var ecode = srule.substring(srule.indexOf("/"));
 				ecode = srule.substring(0, ecode.indexOf("\"]") -1); 
