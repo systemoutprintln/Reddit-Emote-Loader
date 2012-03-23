@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name           Reddit Emote Loader
 // @namespace      http://www.reddit.com/r/RedditEmoteLoader
-// @version        0.5.8
+// @version        0.6.0
 // @include        http://www.reddit.com/*
 // @include        http://reddit.com/*
 // @include        http://*.reddit.com/*
@@ -37,6 +37,7 @@ if(useExtraCSS)
 {
 	CSSFlags();
 }
+createLink();
 
 
 
@@ -216,6 +217,7 @@ function remRules(sub)
 		if(emote.test(srule.selectorText))
 		{
 			//GM_log(srule.selectorText);
+			
 		
 		} else
 		{
@@ -338,6 +340,19 @@ function addExtraCSS()
 	{
 		sheet.insertRule(css[i], 0);
 	}
+
+}
+
+//// Emote page ////
+function createLink()
+{
+	var link_css = ".emotelink { color:green; text-align:right; background-color:cyan; font-size:30px; position: fixed; top:30px; right: -100px; z-index: 1000;}"
+	var link_e = document.createElement("div");
+	link_e.innerText = "Test";
+	link_e.className = "emotelink";
+	document.body.appendChild(link_e);
+					
+	
 
 }
 
