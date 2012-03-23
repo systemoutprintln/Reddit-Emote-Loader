@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name           Reddit Emote Loader
 // @namespace      http://www.reddit.com/r/RedditEmoteLoader
-// @version        0.6.0
+// @version        0.6.1
 // @include        http://www.reddit.com/*
 // @include        http://reddit.com/*
 // @include        http://*.reddit.com/*
@@ -355,9 +355,17 @@ function createLink()
 	link_e.id = "emoteLink";
 	link_e.innerText = "Test";
 	link_e.className = "emotelink";
+	link_e.style = "cursor: pointer;";
+	link_e.onclick = openEmotePage;
 	document.body.appendChild(link_e);
 					
 	
+
+}
+
+function openEmotePage()
+{
+	alert("success!");
 
 }
 
