@@ -225,7 +225,7 @@ function remRules(sub)
 				var ecode 
 				while(stext.indexOf("a[href") > -1)
 				{
-					stext = stext.substring(stext.indexOf("a[href"), stext.indexOf("a[href") + 5);
+					stext = stext.substring(stext.indexOf("a[href") + 5);
 					ecode = stext.substring(stext.indexOf("/"));
 					ecode = ecode.substring(0, ecode.indexOf("\"]")); 
 					GM_log(ecode);
