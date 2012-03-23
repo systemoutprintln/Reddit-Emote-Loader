@@ -330,7 +330,7 @@ function addExtraCSS()
 	css[0] = ".emotelink { color:green; text-align:right; background-color:cyan; font-size:30px; position: fixed; top:30px; right: 10px; z-index: 1000; width:100px height:80px}";
 	
 	//Emote page
-	css[1] = ".emoteoverlay {background-color:white; opacity: .95; position: fixed; top: 0; left: 0; height:100%;  width:100%; z-index: 1001;overflow : auto; }";
+	css[1] = ".emoteoverlay {background-color:white; opacity: 1; position: fixed; top: 0; left: 0; height:100%;  width:100%; z-index: 1001;overflow : auto; }";
 	
 	
 	//Dance (-d)
@@ -380,7 +380,7 @@ function openEmotePage()
 	var over = document.createElement("div");
 	over.id = "EmoteOverlay";
 	over.className = "emoteoverlay";
-	over.onclick = exitEmotePage;
+	over.onclick = exitEmotePage("none");
 	document.body.appendChild(over);
 	
 	
@@ -389,16 +389,17 @@ function openEmotePage()
 		var emote_lnk = document.createElement("a");
 		emote_lnk.href = emoteCodes[i];
 		emote_lnk.title = 	emoteCodes[i];
-		
+		emote_lnk.onclick = exitEmotePage(emoteCodes[i]);		
 		over.appendChild(emote_lnk);
 	}
 	
 
 }
 
-function exitEmotePage()
+function exitEmotePage(ecode)
 {
 	document.body.removeChild(document.getElementById("EmoteOverlay"));
+	alert(ecode);
 }
 
 
