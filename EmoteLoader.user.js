@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name           Reddit Emote Loader
 // @namespace      http://www.reddit.com/r/RedditEmoteLoader
-// @version        0.6.4
+// @version        0.6.5
 // @include        http://www.reddit.com/*
 // @include        http://reddit.com/*
 // @include        http://*.reddit.com/*
@@ -32,6 +32,7 @@ var ch = new Array();
 var ff = new Array();
 
 var emoteCodes = new Array();
+var textCodes = new Array();
 
 useSubs(subs);
 
@@ -218,12 +219,25 @@ function remRules(sub)
 		//GM_log(srule.selectorText);
 		if(emote.test(srule.selectorText))
 		{
-			if(srule.selectorText.indexOf(",") == -1)
+			if(srule.cssText.indexOf("background-image") != -1) //Images
 			{	
-				var ecode = srule.selectorText.substring(srule.selectorText.indexOf("/"));
+				var stext = srule.selectorText;
+				var ecode 
+				while(stext.indexOf("a[href") > -1)
+				{
+					stext = stext.substring(stext.indexOf("a[href"), stext.indexOf("a[href") + 5);
+					ecode = stext.substring(stext.indexOf("/"));
+					ecode = ecode.substring(0, ecode.indexOf("\"]")); 
+					GM_log(ecode);
+					emoteCodes[emoteCodes.length] = ecode;
+				}
+			}
+			if(srule.cssText.indexOf("cursor: text") != -1) //Text
+			{
+				ecode = stext.substring(stext.indexOf("/"));
 				ecode = ecode.substring(0, ecode.indexOf("\"]")); 
 				GM_log(ecode);
-				emoteCodes[emoteCodes.length] = ecode;
+				textCodes[textCodes.length] = ecode;	
 			}
 			
 		
@@ -389,6 +403,14 @@ function openEmotePage()
 		var emote_lnk = document.createElement("a");
 		emote_lnk.href = emoteCodes[i];
 		emote_lnk.title = 	emoteCodes[i];
+		emote_lnk.onclick = exitEmotePage;		
+		over.appendChild(emote_lnk);
+	}
+		for(i = 0; i < textCodes.length; i++)
+	{
+		var emote_lnk = document.createElement("a");
+		emote_lnk.href = textCodes[i];
+		emote_lnk.innerText = 	textCodes[i];
 		emote_lnk.onclick = exitEmotePage;		
 		over.appendChild(emote_lnk);
 	}
