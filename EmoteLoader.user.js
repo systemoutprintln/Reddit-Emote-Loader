@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name           Reddit Emote Loader
 // @namespace      http://www.reddit.com/r/RedditEmoteLoader
-// @version        0.8.1
+// @version        0.8.2
 // @include        http://www.reddit.com/*
 // @include        http://reddit.com/*
 // @include        http://*.reddit.com/*
@@ -325,15 +325,9 @@ function styleWalker()
 function CSSFlags()
 {
 	var css = new Array();
-	//Emote link
-	css[0] = ".emotelink { color:blue; text-align:right; font-size:12px; position: fixed; top:15%; right: 10px; z-index: 1000; width:100px height:80px}";
-	
-	//Emote page
-	css[1] = ".emoteoverlay {background-color:white; opacity: 1; position: fixed; top: 0; left: 0; height:100%;  width:100%; z-index: 1001;overflow : auto; }";
-	
 	
 	//Dance (-d)
-	css[2] = ".md a[href*=\'-d\']:hover {\
+	css[0] = ".md a[href*=\'-d\']:hover {\
 			-moz-transform: scaleX(-1);\
 			-o-transform: scaleX(-1);\
 			-webkit-transform: scaleX(-1);\
@@ -342,7 +336,7 @@ function CSSFlags()
 	
 	//Reverse (-r)
 	
-	css[3] = ".md a[href*=\'-r\'] {\
+	css[1] = ".md a[href*=\'-r\'] {\
 			-moz-transform: scaleX(-1);\
 			-o-transform: scaleX(-1);\
 			-webkit-transform: scaleX(-1);\
@@ -351,7 +345,7 @@ function CSSFlags()
 			
 	//Flip (-f)
 	
-		css[4] = ".md a[href*=\'-f\'] {\
+		css[2] = ".md a[href*=\'-f\'] {\
 			-moz-transform: scaleY(-1);\
 			-o-transform: scaleY(-1);\
 			-webkit-transform: scaleY(-1);\
@@ -360,7 +354,11 @@ function CSSFlags()
 	
 	//Inline (-inp)
 	
-		css[5] = ".md a[href*=\'-inp\'] {float:none !important;display:inline-block !important}";
+		css[3] = ".md a[href*=\'-inp\'] {float:none !important;display:inline-block !important}";
+		
+	//Right (-ar)
+	
+		css[3] = ".md a[href*=\'-ar\'] {float:right !important;display:inline-block !important}";
 		
 
 	for(i = 0; i < css.length; i++)
@@ -373,6 +371,18 @@ function CSSFlags()
 //// Emote page ////
 function createLink()
 {
+	var css = new Array();
+	//Emote link
+	css[0] = ".emotelink { color:blue; text-align:right; font-size:12px; position: fixed; top:15%; right: 10px; z-index: 1000; width:100px height:80px}";
+	
+	//Emote page
+	css[1] = ".emoteoverlay {background-color:white; opacity: 1; position: fixed; top: 0; left: 0; height:100%;  width:100%; z-index: 1001;overflow : auto; }";
+	
+	for(i = 0; i < css.length; i++)
+	{
+		emoteSheet.insertRule(css[i], 0);
+	}
+	
 	var link_e = document.createElement("div");
 	link_e.id = "emoteLink";
 	link_e.innerHTML = "Emotes";
