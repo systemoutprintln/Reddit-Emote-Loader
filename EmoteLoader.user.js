@@ -322,7 +322,7 @@ function addExtraCSS()
 	css[0] = ".emotelink { color:green; text-align:right; background-color:cyan; font-size:30px; position: fixed; top:30px; right: 10px; z-index: 1000; width:100px height:80px}";
 	
 	//Emote page
-	css[1] = ".emoteoverlay {background-color:white; opacity: .8; position: absolute; top: 0; left: 0;  bottom: 0; riight: 0; z-index: 1001; }";
+	css[1] = ".emoteoverlay {background-color:white; opacity: .8; position: fixed; top: 0; left: 0; height:100%;  width:100%; z-index: 1001; }";
 	
 	
 	//Dance (-d)
