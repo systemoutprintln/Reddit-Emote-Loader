@@ -318,8 +318,11 @@ function CSSFlags()
 function addExtraCSS()
 {
 	var css = new Array();
+	//Emote window
+	css[0] = ".emotelink { color:green; text-align:right; background-color:cyan; font-size:30px; position: fixed; top:30px; right: -100px; z-index: 1000;}";
+	
 	//Dance (-d)
-	css[0] = "a[href*=\'-d\']:hover {\
+	css[1] = "a[href*=\'-d\']:hover {\
 			-moz-transform: scaleX(-1);\
 			-o-transform: scaleX(-1);\
 			-webkit-transform: scaleX(-1);\
@@ -328,12 +331,14 @@ function addExtraCSS()
 	
 	//Reverse (-r)
 	
-	css[1] = "a[href*=\'-r\'] {\
+	css[2] = "a[href*=\'-r\'] {\
 			-moz-transform: scaleX(-1);\
 			-o-transform: scaleX(-1);\
 			-webkit-transform: scaleX(-1);\
 			transform: scaleX(-1);\
 			}";
+			
+			
 		
 	var sheet = document.styleSheets[0];
 	for(i = 0; i < css.length; i++)
@@ -346,7 +351,6 @@ function addExtraCSS()
 //// Emote page ////
 function createLink()
 {
-	var link_css = ".emotelink { color:green; text-align:right; background-color:cyan; font-size:30px; position: fixed; top:30px; right: -100px; z-index: 1000;}"
 	var link_e = document.createElement("div");
 	link_e.innerText = "Test";
 	link_e.className = "emotelink";
