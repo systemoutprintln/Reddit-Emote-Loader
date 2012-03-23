@@ -250,16 +250,14 @@ function remRules(sub)
 		
 		} else
 		{
-			ssheet.deleteRule(i);
-			i--;			
+			//ssheet.deleteRule(i);
+			//i--;			
 		}
 		
 	
 	}
 
 	GM_log(ssheet);
-	styleWalker();
-	disable(sub);
 	
 	
 	}
@@ -273,12 +271,12 @@ function remRules(sub)
 	
 	if(chrome)
 	{
-		//sub.media = "all";
-		GM_log("Done");
+		sub.media = "print";
+		GM_log("Done: " + sub.href);
 	}
 	else
 	{
-		sub.sheet.disabled = false;	
+		sub.sheet.disabled = true;	
 	}
 	
 
