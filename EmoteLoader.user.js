@@ -218,7 +218,12 @@ function remRules(sub)
 		//GM_log(srule.selectorText);
 		if(emote.test(srule.selectorText))
 		{
-			GM_log(srule.selectorText);
+			if(srule.indexOf("," == -1)
+			{	
+				var ecode = srule.substring(srule.indexOf("/"));
+				ecode = srule.substring(0, ecode.indexOf("\"]") -1); 
+				GM_log(ecode);
+			}
 			
 		
 		} else
