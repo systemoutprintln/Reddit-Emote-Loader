@@ -221,7 +221,7 @@ function remRules(sub)
 			if(srule.selectorText.indexOf(",") == -1)
 			{	
 				var ecode = srule.selectorText.substring(srule.selectorText.indexOf("/"));
-				ecode = ecode.substring(0, ecode.indexOf("\"]") -1); 
+				ecode = ecode.substring(0, ecode.indexOf("\"]")); 
 				GM_log(ecode);
 			}
 			
