@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name           Reddit Emote Loader
 // @namespace      http://www.reddit.com/r/RedditEmoteLoader
-// @version        0.7.3
+// @version        0.8.0
 // @include        http://www.reddit.com/*
 // @include        http://reddit.com/*
 // @include        http://*.reddit.com/*
@@ -349,7 +349,14 @@ function CSSFlags()
 			transform: scaleX(-1);\
 			}";
 			
-			
+	//Flip (-f)
+	
+		css[4] = "a[href*=\'-r\'] {\
+			-moz-transform: scaleY(-1);\
+			-o-transform: scaleY(-1);\
+			-webkit-transform: scaleY(-1);\
+			transform: scaleY(-1);\
+			}";
 		
 
 	for(i = 0; i < css.length; i++)
