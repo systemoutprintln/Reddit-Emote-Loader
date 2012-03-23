@@ -319,7 +319,7 @@ function addExtraCSS()
 {
 	var css = new Array();
 	//Emote window
-	css[0] = ".emotelink { color:green; text-align:right; background-color:cyan; font-size:30px; position: fixed; top:30px; right: -100px; z-index: 1000;}";
+	css[0] = ".emotelink { color:green; text-align:right; background-color:cyan; font-size:30px; position: fixed; top:30px; right: 10px; z-index: 1000; width:100px height:80px}"
 	
 	//Dance (-d)
 	css[1] = "a[href*=\'-d\']:hover {\
@@ -352,6 +352,7 @@ function addExtraCSS()
 function createLink()
 {
 	var link_e = document.createElement("div");
+	link_e.id = "emoteLink";
 	link_e.innerText = "Test";
 	link_e.className = "emotelink";
 	document.body.appendChild(link_e);
