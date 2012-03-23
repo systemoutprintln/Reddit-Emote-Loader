@@ -380,7 +380,7 @@ function openEmotePage()
 	var over = document.createElement("div");
 	over.id = "EmoteOverlay";
 	over.className = "emoteoverlay";
-	over.onclick = exitEmotePage("none");
+	over.onclick = exitEmotePage();
 	document.body.appendChild(over);
 	
 	
@@ -389,14 +389,14 @@ function openEmotePage()
 		var emote_lnk = document.createElement("a");
 		emote_lnk.href = emoteCodes[i];
 		emote_lnk.title = 	emoteCodes[i];
-		emote_lnk.onclick = exitEmotePage(emoteCodes[i]);		
+		emote_lnk.onclick = exitEmotePage();		
 		over.appendChild(emote_lnk);
 	}
 	
 
 }
 
-function exitEmotePage(ecode)
+function exitEmotePage()
 {
 	document.body.removeChild(document.getElementById("EmoteOverlay"));
 	//alert(ecode);
