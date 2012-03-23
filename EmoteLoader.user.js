@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name           Reddit Emote Loader
 // @namespace      http://www.reddit.com/r/RedditEmoteLoader
-// @version        0.6.2
+// @version        0.6.3
 // @include        http://www.reddit.com/*
 // @include        http://reddit.com/*
 // @include        http://*.reddit.com/*
@@ -223,6 +223,7 @@ function remRules(sub)
 				var ecode = srule.selectorText.substring(srule.selectorText.indexOf("/"));
 				ecode = ecode.substring(0, ecode.indexOf("\"]")); 
 				GM_log(ecode);
+				emoteCodes[emoteCodes.length] = ecode;
 			}
 			
 		
@@ -381,6 +382,16 @@ function openEmotePage()
 	over.className = "emoteoverlay";
 	over.onclick = exitEmotePage;
 	document.body.appendChild(over);
+	
+	
+	for(i = 0; i < emoteCodes.length; i++)
+	{
+		var emote_lnk = document.createElement("a");
+		emote_lnk.href = emoteCodes[i];
+		emoteCode.title = 	emoteCodes[i];
+		
+		over.appendChild(emote_lnk);
+	}
 	
 
 }
