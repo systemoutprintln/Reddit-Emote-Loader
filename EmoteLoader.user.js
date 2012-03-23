@@ -29,7 +29,7 @@ var unique;
 var walked = false;
 
 var emoteStyle = document.createElement('style');
-document.getElementsByTagName('head')[0].appendChild(ns);
+document.getElementsByTagName('head')[0].appendChild(emoteStyle);
 
 var emoteSheet = document.styleSheets[document.styleSheets.length - 1];
 
