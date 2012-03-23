@@ -333,7 +333,7 @@ function CSSFlags()
 	
 	
 	//Dance (-d)
-	css[2] = "a[href*=\'-d\']:hover {\
+	css[2] = ".md a[href*=\'-d\']:hover {\
 			-moz-transform: scaleX(-1);\
 			-o-transform: scaleX(-1);\
 			-webkit-transform: scaleX(-1);\
@@ -342,7 +342,7 @@ function CSSFlags()
 	
 	//Reverse (-r)
 	
-	css[3] = "a[href*=\'-r\'] {\
+	css[3] = ".md a[href*=\'-r\'] {\
 			-moz-transform: scaleX(-1);\
 			-o-transform: scaleX(-1);\
 			-webkit-transform: scaleX(-1);\
@@ -351,7 +351,7 @@ function CSSFlags()
 			
 	//Flip (-f)
 	
-		css[4] = "a[href*=\'-f\'] {\
+		css[4] = ".md a[href*=\'-f\'] {\
 			-moz-transform: scaleY(-1);\
 			-o-transform: scaleY(-1);\
 			-webkit-transform: scaleY(-1);\
