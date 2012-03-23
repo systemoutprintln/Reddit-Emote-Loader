@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name           Reddit Emote Loader
 // @namespace      http://www.reddit.com/r/RedditEmoteLoader
-// @version        0.5.7
+// @version        0.5.8
 // @include        http://www.reddit.com/*
 // @include        http://reddit.com/*
 // @include        http://*.reddit.com/*
@@ -26,6 +26,7 @@ var chrome = navigator.userAgent.toLowerCase().indexOf('chrome') > -1;
 //Do not change below this line
 var count=0;
 var unique;
+var walked = false;
 
 var ch = new Array();
 var ff = new Array();
@@ -46,13 +47,11 @@ function useSubs(Subs) //Just include sub name, i.e. /r/MLPlounge = MLPlounge
 	//alert(chrome);
 	var sID = new Array();
 		
-	var i = 0;
-	while(i < Subs.length)
+	for(i = 0; i < Subs.length; i++)
 	{
 		var sReg = new RegExp(Subs[i].toLowerCase());
 		if(sReg.test(document.URL.toLowerCase()))
 		{		
-			i++;
 			continue; //Don't load this site's stylesheet
 		}
 		
@@ -64,7 +63,6 @@ function useSubs(Subs) //Just include sub name, i.e. /r/MLPlounge = MLPlounge
 				sReg = /mylittlepony/
 				if(sReg.test(Subs[i]))
 				{
-					i++;
 					continue;
 				}
 			
@@ -86,10 +84,7 @@ function useSubs(Subs) //Just include sub name, i.e. /r/MLPlounge = MLPlounge
 			sID[i].sheet.disabled = true;
 		}
 
-	
 		waitForLoad(sID[i], i);	
-		
-		i++;
 	}
 	
 
@@ -276,12 +271,15 @@ function disable(style)
 
 function styleWalker()
 {
+	if(!walked){
 	ssheets = document.styleSheets;
 	for(i = 0; i < ssheets.length; i++)
 	{
 		GM_log(i + " = " + ssheets[i].href);
 		GM_log(ssheets[i]);
 	}
+	}
+	walked = true;
 	
 
 }
