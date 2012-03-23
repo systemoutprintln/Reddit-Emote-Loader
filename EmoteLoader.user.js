@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name           Reddit Emote Loader
 // @namespace      http://www.reddit.com/r/RedditEmoteLoader
-// @version        0.8.0
+// @version        0.8.1
 // @include        http://www.reddit.com/*
 // @include        http://reddit.com/*
 // @include        http://*.reddit.com/*
@@ -357,6 +357,10 @@ function CSSFlags()
 			-webkit-transform: scaleY(-1);\
 			transform: scaleY(-1);\
 			}";
+	
+	//Inline (-inp)
+	
+		css[5] = ".md a[href*=\'-inp\'] {float:none !important;display:inline-block !important}";
 		
 
 	for(i = 0; i < css.length; i++)
