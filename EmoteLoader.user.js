@@ -31,6 +31,8 @@ var walked = false;
 var ch = new Array();
 var ff = new Array();
 
+var emotesCodes = new Array();
+
 useSubs(subs);
 
 if(useExtraCSS)
@@ -216,7 +218,7 @@ function remRules(sub)
 		//GM_log(srule.selectorText);
 		if(emote.test(srule.selectorText))
 		{
-			//GM_log(srule.selectorText);
+			GM_log(srule.selectorText);
 			
 		
 		} else
