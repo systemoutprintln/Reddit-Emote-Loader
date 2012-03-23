@@ -219,9 +219,10 @@ function remRules(sub)
 		//GM_log(srule.selectorText);
 		if(emote.test(srule.selectorText))
 		{
+			var stext = srule.selectorText;
+			
 			if(srule.cssText.indexOf("background-image") != -1) //Images
 			{	
-				var stext = srule.selectorText;
 				var ecode 
 				while(stext.indexOf("a[href") > -1)
 				{
