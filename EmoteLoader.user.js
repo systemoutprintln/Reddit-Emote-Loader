@@ -230,7 +230,7 @@ function remRules(sub)
 		ssheet = sub.sheet.cssRules[0].styleSheet;
 	}
 	
-	var subI = getSub(sstyle);
+	var subI = getSub(ssheet);
 	
 	emoteSubs[subI] = new Array();
 	textSubs[subI] = new Array();
