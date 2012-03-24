@@ -423,10 +423,13 @@ function createLink()
 	//Sub display
 	css[3] = ".subdisp {background-color:white; overflow : auto; position: fixed; top: 0; left: 20%; height:100%;  width:80%;}"
 	
+	//Sub holder
+	css[4] = ".subhld {background-color:lightgrey; opacity: 1; position: fixed; top: 0; left: 0; height:100%;  width:20%; z-index: 1001; overflow : auto;}";
+
 	//Sub links
-	css[4] = ".sublnk {background-color:lightblue; width:20%; left: 0px; font-size:15px; text-align:center;}"
+	css[5] = ".sublnk {background-color:lightblue; width:20%; left: 0px; font-size:15px; text-align:center;}"
 	
-	css[5] = ".sublnk:hover {background-color:yellow; cursor:pointer;}"
+	css[6] = ".sublnk:hover {background-color:yellow; cursor:pointer;}"
 	
 	for(i = 0; i < css.length; i++)
 	{
@@ -458,6 +461,10 @@ function openEmotePage()
 	sub_disp.onclick = exitEmotePage;
 	over.appendChild(sub_disp);
 	
+	var sub_hold = document.createElement("div");
+	sub_hold.className = "subhld";
+	over.appendChild(sub_hold);
+	
 	clickEn = false;
 	
 	var i = 0;
@@ -472,7 +479,7 @@ function openEmotePage()
 		sub_lnk.setAttribute('onclick',"test();");
 		sub_lnk.onclick = addEmotes(j,"SubDisplay");
 		
-		over.appendChild(sub_lnk);
+		sub_hold.appendChild(sub_lnk);
 		i++;
 	}
 	clickEn = true;
