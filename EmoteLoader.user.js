@@ -39,8 +39,10 @@ var ff = new Array();
 var emoteSubs = new Array(subs.length);
 var textSubs = new Array(subs.length);
 
-var emoteCodes = new Array();
-var textCodes = new Array();
+//var emoteCodes = new Array();
+//var textCodes = new Array();
+
+var clickEn=false;
 
 useSubs(subs);
 
@@ -456,6 +458,8 @@ function openEmotePage()
 	sub_disp.onclick = exitEmotePage;
 	over.appendChild(sub_disp);
 	
+	clickEn = false;
+	
 	var i = 0;
 	var j;
 	while(i < subs.length)
@@ -471,19 +475,20 @@ function openEmotePage()
 		over.appendChild(sub_lnk);
 		i++;
 	}
-
+	clickEn = true;
 	addEmotes(0, "SubDisplay");
+	
 	
 
 }
 function test()
 {
-	alert("Good");
+	GM_log("Good");
 }
 
 function addEmotes(sub, parID)
 {
-
+	if(!clickEn) return;
 	//alert(sub + ", " + parID);
 	var par = document.getElementById(parID);
 	if(par.hasChildNodes())
