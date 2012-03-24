@@ -461,12 +461,13 @@ function openEmotePage()
 	while(i < subs.length)
 	{
 		j = i;
-		var sub_lnk = document.createElement("div");
+		var sub_lnk = document.createElement("button");
 		sub_lnk.innerHTML = subs[j].toLowerCase() ;
 		sub_lnk.className = "sublnk";
 		
-		//sub_lnk.setAttribute('onclick',"test();");
-		sub_lnk.addEventListener("click",addEmotes(j,"SubDisplay"));
+		sub_lnk.setAttribute('onclick',"test();");
+		sub_lnk.onclick = addEmotes(j,"SubDisplay");
+		
 		over.appendChild(sub_lnk);
 		i++;
 	}
