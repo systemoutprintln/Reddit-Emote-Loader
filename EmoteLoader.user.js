@@ -419,7 +419,7 @@ function createLink()
 	css[2] = ".subHeader{font-size:30px; text-align:center; color:black;}"
 	
 	//Sub display
-	css[3] = ".subdisp {background-color:white; overflow : auto; }"
+	css[3] = ".subdisp {background-color:white; overflow : auto; position: fixed; top: 0; left: 20%; height:100%;  width:100%;}"
 	
 	for(i = 0; i < css.length; i++)
 	{
@@ -456,7 +456,7 @@ function openEmotePage()
 		var sub_lnk = document.createElement("div");
 		sub_lnk.innerHTML = subs[i].toLowerCase() ;
 		var j = i;
-		sub_lnk.setAttribute("onclick","addEmotes(" + j + ",SubDisplay);"); 
+		sub_lnk.onclick = addEmotes(j,"SubDisplay");
 		over.appendChild(sub_lnk);
 	}
 	
@@ -469,6 +469,8 @@ function openEmotePage()
 
 function addEmotes(sub, parID)
 {
+
+	alert(sub + ", " + parID);
 	var par = document.getElementById(parID);
 	if(par.hasChildNodes())
 	{
