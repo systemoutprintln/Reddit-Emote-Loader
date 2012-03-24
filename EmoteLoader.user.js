@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name           Reddit Emote Loader
 // @namespace      http://www.reddit.com/r/RedditEmoteLoader
-// @version        0.8.7
+// @version        0.8.8
 // @include        http://www.reddit.com/*
 // @include        http://reddit.com/*
 // @include        http://*.reddit.com/*
@@ -452,13 +452,17 @@ function openEmotePage()
 	sub_disp.onclick = exitEmotePage;
 	over.appendChild(sub_disp);
 	
-	for(i = 0; i < subs.length; i++)
+	var i = 0;
+	var j;
+	while(i < subs.length)
 	{
+		j = i;
 		var sub_lnk = document.createElement("div");
-		sub_lnk.innerHTML = subs[i].toLowerCase() ;
-		var j = i;
+		sub_lnk.innerHTML = subs[j].toLowerCase() ;
+
 		sub_lnk.onclick = addEmotes(j,"SubDisplay");
 		over.appendChild(sub_lnk);
+		i++;
 	}
 	
 
