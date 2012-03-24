@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name           Reddit Emote Loader
 // @namespace      http://www.reddit.com/r/RedditEmoteLoader
-// @version        0.8.4.1
+// @version        0.8.5
 // @include        http://www.reddit.com/*
 // @include        http://reddit.com/*
 // @include        http://*.reddit.com/*
@@ -35,6 +35,9 @@ var emoteSheet = document.styleSheets[document.styleSheets.length - 1];
 
 var ch = new Array();
 var ff = new Array();
+
+var emoteSubs = new Array(subs.length);
+var textSubs = new Array(subs.length);
 
 var emoteCodes = new Array();
 var textCodes = new Array();
@@ -187,6 +190,24 @@ function getStyle(sub)
 
 }
 
+function getSub(style)
+{
+	var subMatch;
+	for(i = 0; i < subs.length; i++)
+	{
+		subMatch = new RegExp(subs[i])
+		if(subMatch.test(style.href)
+		{
+			return i;
+		}
+		
+	
+	}
+	
+	return 0;
+
+}
+
 function remRules(sub)
 {
 	var ssheet 
@@ -208,6 +229,12 @@ function remRules(sub)
 	{
 		ssheet = sub.sheet.cssRules[0].styleSheet;
 	}
+	
+	var subI = getSub(sstyle);
+	
+	emoteSubs[subI] = new Array();
+	textSubs[subI] = new Array();
+	
 	
 	
 	var srule;
@@ -240,6 +267,7 @@ function remRules(sub)
 					ecode = ecode.substring(0, ecode.indexOf("\"]")); 
 					//GM_log(ecode);
 					emoteCodes[emoteCodes.length] = ecode;
+					emoteSub[subI][emoteSub[subI].length] = ecode;
 				}
 			}
 			if(srule.cssText.indexOf("cursor: text") != -1) //Text
@@ -247,7 +275,8 @@ function remRules(sub)
 				ecode = stext.substring(stext.indexOf("/"));
 				ecode = ecode.substring(0, ecode.indexOf("\"]")); 
 				//GM_log(ecode);
-				textCodes[textCodes.length] = ecode;	
+				textCodes[textCodes.length] = ecode;
+				textSub[subI][textSub[subI].length] = ecode;
 			}
 			
 		
@@ -285,7 +314,7 @@ function remRules(sub)
 	
 
 }
-
+/*
 function disable(style)
 {
 	//GM_log("Error with " + style.href);
@@ -301,6 +330,7 @@ function disable(style)
 	}
 
 }
+*/
 
 function styleWalker()
 {
@@ -385,6 +415,9 @@ function createLink()
 	//Emote page
 	css[1] = ".emoteoverlay {background-color:white; opacity: 1; position: fixed; top: 0; left: 0; height:100%;  width:100%; z-index: 1001;overflow : auto; }";
 	
+	//Sub header text
+	css[2] = ".subHeader{font-size:30px; text-align:center; color:black;}"
+	
 	for(i = 0; i < css.length; i++)
 	{
 		emoteSheet.insertRule(css[i], 0);
@@ -413,51 +446,44 @@ function openEmotePage()
 	
 	
 	
-		for(i = 0; i < textCodes.length; i++)
-	{
-		var emote_lnk = document.createElement("a");
-		emote_lnk.href = textCodes[i];
-		emote_lnk.innerText = 	textCodes[i];
-		emote_lnk.onclick = exitEmotePage;		
-		over.appendChild(emote_lnk);
-	}
+
 	
 	var emote_lnk = document.createElement("a");
 		emote_lnk.href = "/sp";
 		emote_lnk.onclick = exitEmotePage;		
 		over.appendChild(emote_lnk);
 	
-	addEmotes(100, over);
+	addEmotes(0, over);
 	
 
 }
 
-function addEmotes(n, over)
+function addEmotes(sub, par)
 {
-	var start = 0;
+	var s_title = document.createElement("div");
+	s_title.className = ".subHeader";
+	s_title.onclick = exitEmotePage;
+	s_title.innerHTML = "/r/" + subs[sub]toLowerCase();
+	par.appendChild(s_title);
 	
-	var el = setInterval(function()
+	for(i = 0; i < emoteSubs[sub].length; i++)
 	{
-		for(i = start; i < start+n; i++)
-		{
-			if(i >= emoteCodes.length)
-			{
-				clearInterval(el);
-				break;
-			}			
-			var emote_lnk = document.createElement("a");
-			emote_lnk.href = emoteCodes[i];
-			emote_lnk.title = 	emoteCodes[i];
-			emote_lnk.onclick = exitEmotePage;		
-			over.appendChild(emote_lnk);
-		}
-		
-		start += n;
-		
-		
-	},10);
+		var emote_lnk = document.createElement("a");
+		emote_lnk.href = emoteSubs[sub][i];
+		emote_lnk.title = 	emoteSubs[sub][i];
+		emote_lnk.onclick = exitEmotePage;		
+		par.appendChild(emote_lnk);
+	}
 	
-	
+	for(i = 0; i < textSubs[sub].length; i++)
+	{
+		var emote_lnk = document.createElement("a");
+		emote_lnk.href = textSubs[sub][i];
+		emote_lnk.innerText = 	textSubs[sub][i];
+		emote_lnk.onclick = exitEmotePage;		
+		par.appendChild(emote_lnk);
+	}
+
 
 }
 
