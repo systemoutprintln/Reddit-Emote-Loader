@@ -477,7 +477,7 @@ function openEmotePage()
 		sub_lnk.className = "sublnk";
 		
 		//sub_lnk.setAttribute('onclick',"test();");
-		sub_lnk.onclick = function(p){addEmotes(p,"SubDisplay");}(j);
+		sub_lnk.onclick = function(){function(p){addEmotes(p,"SubDisplay");}(j)};  //Yo dawg I heard you liked functions
 		
 		sub_hold.appendChild(sub_lnk);
 		i++;
