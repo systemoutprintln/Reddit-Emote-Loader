@@ -475,7 +475,7 @@ function openEmotePage()
 	
 
 
-	addEmotes(0, sub_disp);
+	addEmotes(0, "SubDisplay");
 	
 
 }
