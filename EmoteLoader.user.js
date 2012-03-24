@@ -499,7 +499,8 @@ function addEmotes(sub, parID)
 	s_title.onclick = exitEmotePage;
 	s_title.innerHTML = "/r/" + subs[sub].toLowerCase();
 	par.appendChild(s_title);
-	
+	try
+	{
 	for(i = 0; i < emoteSubs[sub].length; i++)
 	{
 		var emote_lnk = document.createElement("a");
@@ -522,6 +523,7 @@ function addEmotes(sub, parID)
 		emote_lnk.onclick = exitEmotePage;		
 		par.appendChild(emote_lnk);
 	}
+	}catch(e){}
 
 
 }
