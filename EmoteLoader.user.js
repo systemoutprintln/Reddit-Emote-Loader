@@ -443,7 +443,7 @@ function openEmotePage()
 	var over = document.createElement("div");
 	over.id = "EmoteOverlay";
 	over.className = "emoteoverlay";
-	over.onclick = exitEmotePage;
+	//over.onclick = exitEmotePage;
 	document.body.appendChild(over);
 	
 	var sub_disp = document.createElement("div");
@@ -454,8 +454,8 @@ function openEmotePage()
 	for(i = 0; i < subs.length; i++)
 	{
 		var sub_lnk = document.createElement("div");
-		sub_lnk.innerHTML = subs[i].toLowerCase() + " |";
-		sub_lnk.onclick = "addEmotes(" + i + ","  + sub_disp +");";
+		sub_lnk.innerHTML = subs[i].toLowerCase() ;
+		sub_lnk.onclick = function(){ addEmotes(sub_disp,i); };
 		over.appendChild(sub_lnk);
 	}
 	
