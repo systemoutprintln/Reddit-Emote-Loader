@@ -465,15 +465,17 @@ function openEmotePage()
 		var sub_lnk = document.createElement("div");
 		sub_lnk.innerHTML = subs[j].toLowerCase() ;
 		sub_lnk.className = "sublnk";
-
+		
+		sub_lnk.setAttribute('onclick',"addEmotes(" + j + ",SubDisplay);");
 		sub_lnk.onclick = addEmotes(j,"SubDisplay");
 		over.appendChild(sub_lnk);
 		i++;
 	}
 	
+	
 
 
-	//addEmotes(0, sub_disp);
+	addEmotes(0, sub_disp);
 	
 
 }
