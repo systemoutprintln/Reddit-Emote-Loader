@@ -480,7 +480,7 @@ function openEmotePage()
 		
 		sub_lnk.onclick = (function(opt) {
     return function() {
-       addEmotes(opt);
+       addEmotes(opt,"SubDisplay");
     };
 	})(j);  //Yo dawg I heard you liked functions
 		
