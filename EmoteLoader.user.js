@@ -133,7 +133,7 @@ function addSub(Sub)
 	
 	head.appendChild(style);
 	
-	GM_log("Added: " + style.href);
+	//GM_log("Added: " + style.href);
 	
 	return style;
 
@@ -144,14 +144,14 @@ function addSub(Sub)
 
 function waitForLoad(style, i)
 {
-	GM_log("Loading: " + style.href);
+	//GM_log("Loading: " + style.href);
 	if(chrome)
 	{
 		var cssnum = document.styleSheets.length;
 		ch[i] = setInterval(function() {
 			//count++;
 			var sheet;
-			GM_log("Loading... " + style.href);
+			//GM_log("Loading... " + style.href);
 			//if(document.styleSheets.length > cssnum)
 			//{
 				sheet = getStyle(style);
@@ -184,7 +184,7 @@ function getStyle(sub)
 	{
 		if(document.styleSheets[i].href == sub.href)
 		{
-			GM_log("Stylesheet " + sub.href + " = " + i);
+			//GM_log("Stylesheet " + sub.href + " = " + i);
 			return document.styleSheets[i];	
 		}
 	}
@@ -291,7 +291,7 @@ function remRules(sub)
 	
 	}
 
-	GM_log(ssheet);
+	//GM_log(ssheet);
 	
 	
 	}
@@ -340,8 +340,8 @@ function styleWalker()
 	ssheets = document.styleSheets;
 	for(i = 0; i < ssheets.length; i++)
 	{
-		GM_log(i + " = " + ssheets[i].href);
-		GM_log(ssheets[i]);
+		//GM_log(i + " = " + ssheets[i].href);
+		//GM_log(ssheets[i]);
 	}
 	}
 	walked = true;
@@ -477,7 +477,7 @@ function openEmotePage()
 		sub_lnk.className = "sublnk";
 		
 		//sub_lnk.setAttribute('onclick',"test();");
-		sub_lnk.addEventListener('click',addEmotes,j,"SubDisplay");
+		sub_lnk.addEventListener('click',function = {addEmotes(j,"SubDisplay"));
 		
 		sub_hold.appendChild(sub_lnk);
 		i++;
@@ -497,6 +497,8 @@ function addEmotes(sub, parID)
 {
 	if(!clickEn) return;
 	//alert(sub + ", " + parID);
+	try
+	{
 	var par = document.getElementById(parID);
 	if(par.hasChildNodes())
 	{
@@ -512,8 +514,7 @@ function addEmotes(sub, parID)
 	s_title.onclick = exitEmotePage;
 	s_title.innerHTML = "/r/" + subs[sub].toLowerCase();
 	par.appendChild(s_title);
-	try
-	{
+
 	for(i = 0; i < emoteSubs[sub].length; i++)
 	{
 		var emote_lnk = document.createElement("a");
@@ -536,7 +537,7 @@ function addEmotes(sub, parID)
 		emote_lnk.onclick = exitEmotePage;		
 		par.appendChild(emote_lnk);
 	}
-	}catch(e){}
+	}catch(e){GM_log(e);}
 
 
 }
