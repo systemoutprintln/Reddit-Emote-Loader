@@ -466,7 +466,7 @@ function openEmotePage()
 		sub_lnk.className = "sublnk";
 		
 		//sub_lnk.setAttribute('onclick',"test();");
-		sub_lnkaddEventListener("click",addEmotes(j,"SubDisplay"));
+		sub_lnk.addEventListener("click",addEmotes(j,"SubDisplay"));
 		over.appendChild(sub_lnk);
 		i++;
 	}
