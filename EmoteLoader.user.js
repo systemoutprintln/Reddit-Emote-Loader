@@ -461,7 +461,7 @@ function openEmotePage()
 function addEmotes(sub, par)
 {
 	var s_title = document.createElement("div");
-	s_title.className = ".subHeader";
+	s_title.className = "subHeader";
 	s_title.onclick = exitEmotePage;
 	s_title.innerHTML = "/r/" + subs[sub].toLowerCase();
 	par.appendChild(s_title);
