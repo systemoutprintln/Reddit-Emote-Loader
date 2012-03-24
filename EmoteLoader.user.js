@@ -476,8 +476,8 @@ function openEmotePage()
 		sub_lnk.innerHTML = subs[j].toLowerCase() ;
 		sub_lnk.className = "sublnk";
 		
-		sub_lnk.setAttribute('onclick',"test();");
-		sub_lnk.onclick = test;
+		//sub_lnk.setAttribute('onclick',"test();");
+		sub_lnk.addEventListener('click',addEmotes,j,"SubDisplay");
 		
 		sub_hold.appendChild(sub_lnk);
 		i++;
