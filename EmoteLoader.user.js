@@ -410,13 +410,16 @@ function createLink()
 {
 	var css = new Array();
 	//Emote link
-	css[0] = ".emotelink { color:blue; text-align:right; font-size:12px; position: fixed; top:50%; right: 10px; z-index: 1000; width:100px height:80px}";
+	css[0] = ".emotelink { color:blue; text-align:right; font-size:12px; position: fixed; bottom:20%; right: 10px; z-index: 1000; width:100px height:80px}";
 	
 	//Emote page
-	css[1] = ".emoteoverlay {background-color:white; opacity: 1; position: fixed; top: 0; left: 0; height:100%;  width:100%; z-index: 1001;overflow : auto; }";
+	css[1] = ".emoteoverlay {background-color:grey; opacity: 1; position: fixed; top: 0; left: 0; height:100%;  width:100%; z-index: 1001;}";
 	
 	//Sub header text
 	css[2] = ".subHeader{font-size:30px; text-align:center; color:black;}"
+	
+	//Sub display
+	css[3] = ".subdisp {background-color:white; overflow : auto; }"
 	
 	for(i = 0; i < css.length; i++)
 	{
@@ -443,23 +446,37 @@ function openEmotePage()
 	over.onclick = exitEmotePage;
 	document.body.appendChild(over);
 	
+	var sub_disp = document.createElement("div");
+	sub_disp.id = "SubDisplay";
+	sub_disp.className = "subdisp";
+	sub_disp.onclick = exitEmotePage;
 	
+	for(i = 0; i < subs.length; i++)
+	{
+		var sub_lnk = document.createElement("a");
+		sub_lnk.innerHTML = subs[i];
+		sub_lnk.onclick = addEmotes(i, sub_disp);
+		over.appendChild(sub_lnk);
+	}
 	
-	
+	over.appendChild(sub_disp);
 
-	
-	var emote_lnk = document.createElement("a");
-		emote_lnk.href = "/sp";
-		emote_lnk.onclick = exitEmotePage;		
-		over.appendChild(emote_lnk);
-	
-	addEmotes(0, over);
+	addEmotes(0, sub_disp);
 	
 
 }
 
 function addEmotes(sub, par)
 {
+	if(par.hasChildNodes())
+	{
+		while(par.childNodes.length >= 1)
+		{
+			par.removeChild(par.firstChild);
+		}
+	
+	}
+
 	var s_title = document.createElement("div");
 	s_title.className = "subHeader";
 	s_title.onclick = exitEmotePage;
@@ -474,6 +491,11 @@ function addEmotes(sub, par)
 		emote_lnk.onclick = exitEmotePage;		
 		par.appendChild(emote_lnk);
 	}
+	
+		var emote_lnk = document.createElement("a");
+		emote_lnk.href = "/sp";
+		emote_lnk.onclick = exitEmotePage;		
+		par.appendChild(emote_lnk);
 	
 	for(i = 0; i < textSubs[sub].length; i++)
 	{
