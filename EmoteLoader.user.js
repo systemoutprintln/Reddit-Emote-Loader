@@ -450,6 +450,7 @@ function openEmotePage()
 	sub_disp.id = "SubDisplay";
 	sub_disp.className = "subdisp";
 	sub_disp.onclick = exitEmotePage;
+	over.appendChild(sub_disp);
 	
 	for(i = 0; i < subs.length; i++)
 	{
@@ -460,7 +461,7 @@ function openEmotePage()
 		over.appendChild(sub_lnk);
 	}
 	
-	over.appendChild(sub_disp);
+
 
 	//addEmotes(0, sub_disp);
 	
