@@ -520,20 +520,6 @@ function addEmotes(sub, parID)
 	s_title.innerHTML = "/r/" + subs[sub].toLowerCase();
 	par.appendChild(s_title);
 
-	for(i = 0; i < emoteSubs[sub].length; i++)
-	{
-		var emote_lnk = document.createElement("a");
-		emote_lnk.href = emoteSubs[sub][i];
-		emote_lnk.title = 	emoteSubs[sub][i];
-		emote_lnk.onclick = exitEmotePage;		
-		par.appendChild(emote_lnk);
-	}
-	
-		var emote_lnk = document.createElement("a");
-		emote_lnk.href = "/sp";
-		emote_lnk.onclick = exitEmotePage;		
-		par.appendChild(emote_lnk);
-	
 	for(i = 0; i < textSubs[sub].length; i++)
 	{
 		var emote_lnk = document.createElement("a");
@@ -542,6 +528,23 @@ function addEmotes(sub, parID)
 		emote_lnk.onclick = exitEmotePage;		
 		par.appendChild(emote_lnk);
 	}
+
+	
+		var emote_lnk = document.createElement("a");
+		emote_lnk.href = "/sp";
+		emote_lnk.onclick = exitEmotePage;		
+		par.appendChild(emote_lnk);
+		
+		for(i = 0; i < emoteSubs[sub].length; i++)
+	{
+		var emote_lnk = document.createElement("a");
+		emote_lnk.href = emoteSubs[sub][i];
+		emote_lnk.title = 	emoteSubs[sub][i];
+		emote_lnk.onclick = exitEmotePage;		
+		par.appendChild(emote_lnk);
+	}
+	
+	
 	}catch(e){GM_log(e);}
 
 
