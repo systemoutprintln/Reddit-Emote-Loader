@@ -455,7 +455,7 @@ function openEmotePage()
 	{
 		var sub_lnk = document.createElement("a");
 		sub_lnk.innerHTML = subs[i];
-		sub_lnk.onclick = addEmotes(i, sub_disp);
+		sub_lnk.onclick = "addEmotes(" + i + ","  + sub_disp +");";
 		over.appendChild(sub_lnk);
 	}
 	
