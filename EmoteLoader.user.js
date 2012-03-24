@@ -241,7 +241,7 @@ function remRules(sub)
 	
 	var srule;
 	
-	var emote = /a\[href\|?="\/[A-Za-z0-9]+"]/
+	var emote = /a\[href\|?="\/[A-Za-z0-9!#]+"]/
 
     var srules = ssheet.cssRules;
 	
