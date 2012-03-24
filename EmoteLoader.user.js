@@ -488,7 +488,7 @@ function openEmotePage()
 		i++;
 	}
 	clickEn = true;
-	addEmotes(0, "SubDisplay");
+	//addEmotes(0, "SubDisplay");
 	
 	
 
