@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name           Reddit Emote Loader
 // @namespace      http://www.reddit.com/r/RedditEmoteLoader
-// @version        0.8.5
+// @version        0.8.6
 // @include        http://www.reddit.com/*
 // @include        http://reddit.com/*
 // @include        http://*.reddit.com/*
@@ -461,7 +461,7 @@ function openEmotePage()
 	
 	over.appendChild(sub_disp);
 
-	addEmotes(0, sub_disp);
+	//addEmotes(0, sub_disp);
 	
 
 }
