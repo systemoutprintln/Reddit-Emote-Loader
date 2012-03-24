@@ -424,7 +424,7 @@ function createLink()
 	css[3] = ".subdisp {background-color:white; overflow : auto; position: fixed; top: 0; left: 20%; height:100%;  width:80%;}"
 	
 	//Sub links
-	css[4] = ".sublnk {background-color:lightblue; width:20%; font-size:15px; text-align:center;}"
+	css[4] = ".sublnk {background-color:lightblue; width:20%; left: 0px; font-size:15px; text-align:center;}"
 	
 	css[5] = ".sublnk:hover {background-color:yellow; cursor:pointer;}"
 	
