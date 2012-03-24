@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name           Reddit Emote Loader
 // @namespace      http://www.reddit.com/r/RedditEmoteLoader
-// @version        0.8.8
+// @version        0.9
 // @include        http://www.reddit.com/*
 // @include        http://reddit.com/*
 // @include        http://*.reddit.com/*
@@ -12,7 +12,7 @@
 // To add a sub add a comma then the sub name in quotes after the last entry
 // For example with MLPLounge it should look like the following:
 // var subs=["mylittlepony","MLPlounge"];
-var subs=["mylittlepony","mylittlewtf","mylittlelistentothis","mylittlenanners","mylittleandysonic1","idliketobeatree","mylittleonions","vinylscratch","applejack" , "MYLITTLESQUIDWARD", "MYLITTLEFORTRESS" , "MYLITTLENOPENOPENOPE" , "DAYLIGHTEMOTES" , "MYLITTLEDAWW" , "MYLITTLENOSLEEP" , "MYLITTLEDAMON" , "ROSELUCK" , "MYLITTLEMUSICIAN" , "MYLITTLECHAOS" , "MYLITTLEALCOHOLIC" , "SURPRISE" , "PINKIEPIE" , "TWILIGHTSPARKLE" , "MINUETTE"];
+var subs=["mylittlepony","mylittlewtf","mylittlelistentothis","mylittlenanners","mylittleandysonic1","idliketobeatree","mylittleonions","vinylscratch","applejack" , "MYLITTLESQUIDWARD", "MYLITTLEFORTRESS" , "MYLITTLENOPENOPENOPE" , "DAYLIGHTEMOTES" , "MYLITTLEDAWW" , "MYLITTLENOSLEEP" , "MYLITTLEDAMON" , "ROSELUCK" , "MYLITTLEMUSICIAN" , "MYLITTLECHAOS" , "MYLITTLEALCOHOLIC" , "SURPRISE", "TWILIGHTSPARKLE" , "MINUETTE"];
 
 // Disables mylittlepony emotes on the MLPLounge 
 var PLounge = true;
@@ -241,7 +241,7 @@ function remRules(sub)
 	
 	var srule;
 	
-	var emote = /a\[href\|="/
+	var emote = /a\[href\|?="\/[A-Za-z0-9]+"]/
 
     var srules = ssheet.cssRules;
 	
