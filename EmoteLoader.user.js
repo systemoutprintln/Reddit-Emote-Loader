@@ -410,7 +410,7 @@ function createLink()
 {
 	var css = new Array();
 	//Emote link
-	css[0] = ".emotelink { color:blue; text-align:right; font-size:12px; position: fixed; bottom:20%; right: 10px; z-index: 1000; width:100px height:80px}";
+	css[0] = ".emotelink { color:blue; cursor:pointer; text-align:right; font-size:12px; position: fixed; bottom:20%; right: 10px; z-index: 1000; width:100px height:80px}";
 	
 	//Emote page
 	css[1] = ".emoteoverlay {background-color:lightgrey; opacity: 1; position: fixed; top: 0; left: 0; height:100%;  width:100%; z-index: 1001;}";
@@ -424,7 +424,7 @@ function createLink()
 	//Sub links
 	css[4] = ".sublnk {background-color:lightblue; width:20%; font-size:15px; text-align:center;}"
 	
-	css[5] = ".sublnk:hover {background-color:yellow;}"
+	css[5] = ".sublnk:hover {background-color:yellow; cursor:pointer;}"
 	
 	for(i = 0; i < css.length; i++)
 	{
@@ -435,7 +435,6 @@ function createLink()
 	link_e.id = "emoteLink";
 	link_e.innerHTML = "Emotes";
 	link_e.className = "emotelink";
-	link_e.style = "cursor:hand";
 	link_e.onclick = openEmotePage;
 	document.body.appendChild(link_e);
 					
