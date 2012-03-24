@@ -268,7 +268,7 @@ function remRules(sub)
 					ecode = stext.substring(stext.indexOf("/"));
 					ecode = ecode.substring(0, ecode.indexOf("\"]")); 
 					//GM_log(ecode);
-					emoteCodes[emoteCodes.length] = ecode;
+					//emoteCodes[emoteCodes.length] = ecode;
 					emoteSubs[subI][emoteSubs[subI].length] = ecode;
 				}
 			}
@@ -277,7 +277,7 @@ function remRules(sub)
 				ecode = stext.substring(stext.indexOf("/"));
 				ecode = ecode.substring(0, ecode.indexOf("\"]")); 
 				//GM_log(ecode);
-				textCodes[textCodes.length] = ecode;
+				//textCodes[textCodes.length] = ecode;
 				textSubs[subI][textSubs[subI].length] = ecode;
 			}
 			
@@ -468,15 +468,15 @@ function openEmotePage()
 	clickEn = false;
 	
 	var i = 0;
-	var j;
 	while(i < subs.length)
 	{
-		j = i;
+		var j = i;
 		var sub_lnk = document.createElement("button");
 		sub_lnk.innerHTML = subs[j].toLowerCase() ;
 		sub_lnk.className = "sublnk";
 		
 		//sub_lnk.setAttribute('onclick',"test();");
+		
 		sub_lnk.onclick = function(){return function(p){addEmotes(p,"SubDisplay");}(j);};  //Yo dawg I heard you liked functions
 		
 		sub_hold.appendChild(sub_lnk);
@@ -490,7 +490,7 @@ function openEmotePage()
 }
 function test()
 {
-	GM_log("Good");
+	//GM_log("Good");
 }
 
 function addEmotes(sub, parID)
