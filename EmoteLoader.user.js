@@ -267,7 +267,7 @@ function remRules(sub)
 					ecode = ecode.substring(0, ecode.indexOf("\"]")); 
 					//GM_log(ecode);
 					emoteCodes[emoteCodes.length] = ecode;
-					emoteSub[subI][emoteSub[subI].length] = ecode;
+					emoteSubs[subI][emoteSubs[subI].length] = ecode;
 				}
 			}
 			if(srule.cssText.indexOf("cursor: text") != -1) //Text
@@ -276,7 +276,7 @@ function remRules(sub)
 				ecode = ecode.substring(0, ecode.indexOf("\"]")); 
 				//GM_log(ecode);
 				textCodes[textCodes.length] = ecode;
-				textSub[subI][textSub[subI].length] = ecode;
+				textSubs[subI][textSubs[subI].length] = ecode;
 			}
 			
 		
