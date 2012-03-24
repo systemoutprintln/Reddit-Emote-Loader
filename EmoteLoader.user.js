@@ -471,7 +471,7 @@ function openEmotePage()
 function addEmotes(sub, parID)
 {
 
-	alert(sub + ", " + parID);
+	//alert(sub + ", " + parID);
 	var par = document.getElementById(parID);
 	if(par.hasChildNodes())
 	{
