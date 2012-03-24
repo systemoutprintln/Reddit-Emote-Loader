@@ -465,18 +465,19 @@ function openEmotePage()
 		sub_lnk.innerHTML = subs[j].toLowerCase() ;
 		sub_lnk.className = "sublnk";
 		
-		sub_lnk.setAttribute('onclick',"addEmotes(" + j + ",SubDisplay);");
+		sub_lnk.setAttribute('onclick',"test();");
 		sub_lnk.onclick = addEmotes(j,"SubDisplay");
 		over.appendChild(sub_lnk);
 		i++;
 	}
-	
-	
-
 
 	addEmotes(0, "SubDisplay");
 	
 
+}
+function test()
+{
+	alert("Good");
 }
 
 function addEmotes(sub, parID)
