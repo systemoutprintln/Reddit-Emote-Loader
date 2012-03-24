@@ -196,7 +196,7 @@ function getSub(style)
 	for(i = 0; i < subs.length; i++)
 	{
 		subMatch = new RegExp(subs[i])
-		if(subMatch.test(style.href)
+		if(subMatch.test(style.href))
 		{
 			return i;
 		}
