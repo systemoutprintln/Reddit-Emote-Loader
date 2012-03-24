@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name           Reddit Emote Loader
 // @namespace      http://www.reddit.com/r/RedditEmoteLoader
-// @version        0.8.6
+// @version        0.8.7
 // @include        http://www.reddit.com/*
 // @include        http://reddit.com/*
 // @include        http://*.reddit.com/*
@@ -455,7 +455,8 @@ function openEmotePage()
 	{
 		var sub_lnk = document.createElement("div");
 		sub_lnk.innerHTML = subs[i].toLowerCase() ;
-		sub_lnk.onclick = function(sub,par){ return function(){ addEmotes(sub,par); }; }(i,sub_disp);
+		var j = i;
+		sub_lnk.setAttribute("onclick") = "addEmotes(" + j + ",SubDisplay);"; 
 		over.appendChild(sub_lnk);
 	}
 	
@@ -466,8 +467,9 @@ function openEmotePage()
 
 }
 
-function addEmotes(sub, par)
+function addEmotes(sub, parID)
 {
+	var par = document.getElementById(parID);
 	if(par.hasChildNodes())
 	{
 		while(par.childNodes.length >= 1)
