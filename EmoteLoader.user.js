@@ -427,7 +427,7 @@ function createLink()
 	css[4] = ".subhld {background-color:lightgrey; opacity: 1; position: fixed; top: 0; left: 0; height:100%;  width:20%; z-index: 1001; overflow : auto;}";
 
 	//Sub links
-	css[5] = ".sublnk {background-color:lightblue; width:20%; left: 0px; font-size:15px; text-align:center;}"
+	css[5] = ".sublnk {background-color:lightblue; width:100%; left: 0px; font-size:15px; text-align:center;}"
 	
 	css[6] = ".sublnk:hover {background-color:yellow; cursor:pointer;}"
 	
