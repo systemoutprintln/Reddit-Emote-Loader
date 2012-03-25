@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name           Reddit Emote Loader
 // @namespace      http://www.reddit.com/r/RedditEmoteLoader
-// @version        0.9.1
+// @version        0.9.2
 // @include        http://www.reddit.com/*
 // @include        http://reddit.com/*
 // @include        http://*.reddit.com/*
@@ -61,7 +61,7 @@ function useSubs(Subs) //Just include sub name, i.e. /r/MLPlounge = MLPlounge
 	//alert(chrome);
 	var sID = new Array();
 		
-	for(i = 0; i < Subs.length; i++)
+	for(i = Subs.length - 1; i >= 0 ; i--)
 	{
 		/*
 		var sReg = new RegExp(Subs[i].toLowerCase());
@@ -248,6 +248,8 @@ function remRules(sub)
 
     var srules = ssheet.cssRules;
 	
+	var erules = emoteSheet.cssRules;
+	
 	//GM_log(srules.length);
 	
 	
@@ -257,6 +259,12 @@ function remRules(sub)
 		
 		srule = srules[i];
 		//GM_log(srule.selectorText);
+		
+		for(j=0; j < erules.length; j++)
+		{
+				
+		}		
+		
 		if(emote.test(srule.selectorText))
 		{
 			emoteSheet.insertRule(srule.cssText,0); //Insert rule into our sheet
