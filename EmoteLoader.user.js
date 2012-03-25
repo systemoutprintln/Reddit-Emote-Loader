@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name           Reddit Emote Loader
 // @namespace      http://www.reddit.com/r/RedditEmoteLoader
-// @version        0.9.2
+// @version        0.9.3
 // @include        http://www.reddit.com/*
 // @include        http://reddit.com/*
 // @include        http://*.reddit.com/*
@@ -63,6 +63,8 @@ function useSubs(Subs) //Just include sub name, i.e. /r/MLPlounge = MLPlounge
 		
 	for(i = Subs.length - 1; i >= 0 ; i--)
 	{
+	
+		
 		/*
 		var sReg = new RegExp(Subs[i].toLowerCase());
 		
@@ -87,7 +89,8 @@ function useSubs(Subs) //Just include sub name, i.e. /r/MLPlounge = MLPlounge
 		}
 		var SubCss = document.location.protocol + "//" + document.domain + "/r/" + Subs[i] + '/stylesheet.css';
 		
-		
+		emoteSubs[i] = new Array();
+		textSubs[i] = new Array();
 		
 	
 				
@@ -237,11 +240,6 @@ function remRules(sub)
 	
 	var subI = getSub(ssheet);
 	
-	emoteSubs[subI] = new Array();
-	textSubs[subI] = new Array();
-	
-	
-	
 	
 	
 	var srule;
@@ -268,9 +266,27 @@ function remRules(sub)
 		{
 			var rcss = srule.cssText;
 			rcss = rcss.replace("important!","");
-			emoteSheet.insertRule(rcss,0); //Insert rule into our sheet
 			var stext = srule.selectorText;
+			//Potential huge slowdown right here
+			var addEm = true;
+			for(j=0; j<subs.length; j++)
+			{
+				if(j==subI) continue;
+				for(k=0; k<emoteSubs[j].length; k++)
+				{
+					var testStr = new RegExp(emoteSubs[j][k]);
+					if(testStr.test(stext))
+					{
+						addEm = false;
+						break;
+					}
+				}
+				if(!addEm) break;
+			}		
 			
+			if(addEm){
+				emoteSheet.insertRule(rcss,0); //Insert rule into our sheet
+			}
 			if(srule.cssText.indexOf("background-image") != -1) //Images
 			{	
 				var ecode 
