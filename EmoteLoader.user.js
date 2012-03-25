@@ -100,7 +100,7 @@ function useSubs(Subs) //Just include sub name, i.e. /r/MLPlounge = MLPlounge
 	
 	
 		
-	for(i = 0; i < Subs.length ; i--)
+	for(i = 0; i < Subs.length ; i++)
 	{
 	
 		
