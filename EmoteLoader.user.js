@@ -312,6 +312,7 @@ function remRules(sub)
 			stext = stext.substring(stext.indexOf("a[href") + 5);
 			ecode = stext.substring(stext.indexOf("/"));
 			ecode = ecode.substring(0, ecode.indexOf("\"]")); 
+			stext = srule.selectorText;
 			
 			//Potential huge slowdown right here
 			var addEm = true;
