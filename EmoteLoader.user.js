@@ -84,7 +84,7 @@ function useSubs(Subs) //Just include sub name, i.e. /r/MLPlounge = MLPlounge
 		
 		for(i=0; i < document.styleSheets.length; i++)
 		{
-			if(subTest.test(document.styleSheets[i].href))
+			if(subTest.test(document.styleSheets[i].href.toLowerCase()))
 			{
 				siteStyle = document.styleSheets[i];
 				break;
