@@ -260,10 +260,7 @@ function remRules(sub)
 		srule = srules[i];
 		//GM_log(srule.selectorText);
 		
-		for(j=0; j < erules.length; j++)
-		{
-				
-		}		
+
 		
 		if(emote.test(srule.selectorText))
 		{
