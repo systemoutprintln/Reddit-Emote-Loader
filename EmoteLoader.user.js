@@ -224,7 +224,7 @@ function remRules(sub)
 		ssheet = getStyle(sub);
 		if(ssheet == -1)
 		{
-			GM_log("Error: " +sub.href);
+			GM_log("227: " +sub.href);
 			return;
 		
 		}
@@ -308,7 +308,7 @@ function remRules(sub)
 	}
 	catch(e)
 	{
-		GM_log(e)
+		GM_log("311: " + e)
 		
 	}
 	
@@ -318,7 +318,7 @@ function remRules(sub)
 	{
 		sub.media = "print";
 		sub.disabled = true;
-		GM_log("Done: " + sub.href);
+		//GM_log("Done: " + sub.href);
 	}
 	else
 	{
@@ -556,7 +556,7 @@ function addEmotes(sub, parID)
 	}
 	
 	
-	}catch(e){GM_log(e);}
+	}catch(e){GM_log("559: " + e);}
 
 
 }
