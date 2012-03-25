@@ -323,7 +323,7 @@ function remRules(sub)
 					var testStr = new RegExp(emoteSubs[j][k]);
 					if(testStr.test(stext))
 					{
-						addEm = false;
+						//addEm = false;
 						break;
 					}
 				}
