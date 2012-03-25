@@ -39,6 +39,8 @@ var ff = new Array();
 var emoteSubs = new Array(subs.length);
 var textSubs = new Array(subs.length);
 
+var siteStyle;
+
 //var emoteCodes = new Array();
 //var textCodes = new Array();
 
@@ -60,6 +62,27 @@ function useSubs(Subs) //Just include sub name, i.e. /r/MLPlounge = MLPlounge
 {
 	//alert(chrome);
 	var sID = new Array();
+	var docURL = document.URL.toLowerCase()
+	var subLoc = docURL.indexOf("/r/") + 3;
+	
+	if(subLoc == -1	) 
+	{ 
+		siteStyle = -1 
+	}
+	else
+	{
+		var subred = docURL.substring(subLoc);
+		subLoc = subred.indexOf("/");
+		if(subLoc != -1)
+		{
+			subred.substring(0,subLoc-1);
+		}
+		GM_log(subred)
+	
+	}
+	
+	
+	
 		
 	for(i = Subs.length - 1; i >= 0 ; i--)
 	{
