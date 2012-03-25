@@ -100,7 +100,7 @@ function useSubs(Subs) //Just include sub name, i.e. /r/MLPlounge = MLPlounge
 	
 	
 		
-	for(i = Subs.length - 1; i >= 0 ; i--)
+	for(i = 0; i < Subs.length ; i--)
 	{
 	
 		
@@ -316,7 +316,7 @@ function remRules(sub)
 			
 			//Potential huge slowdown right here
 			var addEm = true;
-			/*
+			
 			for(j=0; j<subs.length; j++)
 			{
 				if(j==subI) continue;
@@ -325,13 +325,13 @@ function remRules(sub)
 					var testStr = new RegExp(emoteSubs[j][k]);
 					if(testStr.test(stext))
 					{
-						//addEm = false;
+						addEm = false;
 						break;
 					}
 				}
 				if(!addEm) break;
 			}
-			*/
+			
 			if(addEm){
 			var emTest = new RegExp(ecode);
 			if(siteStyle != -1)
