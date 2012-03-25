@@ -73,7 +73,7 @@ function useSubs(Subs) //Just include sub name, i.e. /r/MLPlounge = MLPlounge
 			continue; //Don't load this site's stylesheet
 		}
 		*/
-		
+		/*
 		if(PLounge)
 		{
 			sReg = /mlplounge/
@@ -87,6 +87,7 @@ function useSubs(Subs) //Just include sub name, i.e. /r/MLPlounge = MLPlounge
 			
 			}
 		}
+		*/
 		var SubCss = document.location.protocol + "//" + document.domain + "/r/" + Subs[i] + '/stylesheet.css';
 		
 		emoteSubs[i] = new Array();
