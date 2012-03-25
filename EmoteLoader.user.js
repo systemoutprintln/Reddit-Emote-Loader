@@ -322,7 +322,7 @@ function remRules(sub)
 				if(j==subI) continue;
 				for(k=0; k<emoteSubs[j].length; k++)
 				{
-					var testStr = new RegExp(emoteSubs[j][k]);
+					var testStr = new RegExp("\"" + emoteSubs[j][k] + "\"");
 					if(testStr.test(stext))
 					{
 						addEm = false;
