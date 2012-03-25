@@ -335,7 +335,7 @@ function remRules(sub)
 			{
 				for(j=0; j<	siteStyle.cssRules.length; j++)
 				{
-					if(ecode.test(siteStyle.cssRules[j].selectorText))
+					if(emTest.test(siteStyle.cssRules[j].selectorText))
 					{
 						addEm = false;
 						break;
