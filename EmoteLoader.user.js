@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name           Reddit Emote Loader
 // @namespace      http://www.reddit.com/r/RedditEmoteLoader
-// @version        0.9.4
+// @version        0.9.5
 // @include        http://www.reddit.com/*
 // @include        http://reddit.com/*
 // @include        http://*.reddit.com/*
@@ -315,6 +315,7 @@ function remRules(sub)
 			
 			//Potential huge slowdown right here
 			var addEm = true;
+			/*
 			for(j=0; j<subs.length; j++)
 			{
 				if(j==subI) continue;
@@ -329,6 +330,7 @@ function remRules(sub)
 				}
 				if(!addEm) break;
 			}
+			*/
 			if(addEm){
 			var emTest = new RegExp(ecode);
 			if(siteStyle != -1)
