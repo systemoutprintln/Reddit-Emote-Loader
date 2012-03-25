@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name           Reddit Emote Loader
 // @namespace      http://www.reddit.com/r/RedditEmoteLoader
-// @version        0.9
+// @version        0.9.1
 // @include        http://www.reddit.com/*
 // @include        http://reddit.com/*
 // @include        http://*.reddit.com/*
@@ -12,7 +12,7 @@
 // To add a sub add a comma then the sub name in quotes after the last entry
 // For example with MLPLounge it should look like the following:
 // var subs=["mylittlepony","MLPlounge"];
-var subs=["mylittlepony","mlplounge","mylittlewtf","mylittlelistentothis","mylittlenanners","mylittleandysonic1","idliketobeatree","mylittleonions","DAYLIGHTEMOTES" , "MYLITTLEDAWW" , "MYLITTLEDAMON" ,  "MYLITTLEMUSICIAN" ]; // , "MYLITTLECHAOS" , "MYLITTLEALCOHOLIC" , "SURPRISE", "TWILIGHTSPARKLE" , "MINUETTE"];
+var subs=["mylittlepony","mylittlewtf","mylittlelistentothis","mylittlenanners","mylittleandysonic1","idliketobeatree","mylittleonions","DAYLIGHTEMOTES" , "MYLITTLEDAWW" , "MYLITTLEDAMON" ,  "MYLITTLEMUSICIAN" ]; // , "MYLITTLECHAOS" , "MYLITTLEALCOHOLIC" , "SURPRISE", "TWILIGHTSPARKLE" , "MINUETTE"];
 
 // Disables mylittlepony emotes on the MLPLounge 
 var PLounge = true;
@@ -63,11 +63,14 @@ function useSubs(Subs) //Just include sub name, i.e. /r/MLPlounge = MLPlounge
 		
 	for(i = 0; i < Subs.length; i++)
 	{
+		/*
 		var sReg = new RegExp(Subs[i].toLowerCase());
+		
 		if(sReg.test(document.URL.toLowerCase()))
 		{		
 			continue; //Don't load this site's stylesheet
 		}
+		*/
 		
 		if(PLounge)
 		{
@@ -75,7 +78,7 @@ function useSubs(Subs) //Just include sub name, i.e. /r/MLPlounge = MLPlounge
 			if(sReg.test(document.URL.toLowerCase()))
 			{
 				sReg = /mylittlepony/
-				if(sReg.test(Subs[i]))
+				if(sReg.test(Subs[i].toLowerCase()))
 				{
 					continue;
 				}
