@@ -65,7 +65,7 @@ function useSubs(Subs) //Just include sub name, i.e. /r/MLPlounge = MLPlounge
 	var docURL = document.URL.toLowerCase()
 	var subLoc = docURL.indexOf("/r/") + 3;
 	
-	if(subLoc == -1	) 
+	if(subLoc == 2	) 
 	{ 
 		siteStyle = -1 
 	}
