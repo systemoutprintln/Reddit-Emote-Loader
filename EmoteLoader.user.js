@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name           Reddit Emote Loader
 // @namespace      http://www.reddit.com/r/RedditEmoteLoader
-// @version        0.9.3
+// @version        0.9.4
 // @include        http://www.reddit.com/*
 // @include        http://reddit.com/*
 // @include        http://*.reddit.com/*
@@ -75,9 +75,25 @@ function useSubs(Subs) //Just include sub name, i.e. /r/MLPlounge = MLPlounge
 		subLoc = subred.indexOf("/");
 		if(subLoc != -1)
 		{
-			subred.substring(0,subLoc-1);
+			subred = subred.substring(0,subLoc-1);
 		}
-		GM_log(subred)
+		
+		var subTest = new RegExp(subred);
+		
+		siteStyle = -1;
+		
+		for(i=0; i < document.styleSheets.length; i++)
+		{
+			if(subTest.test(document.styleSheets[i].href))
+			{
+				siteStyle = document.styleSheets[i];
+				break;
+			}
+		
+		}
+			
+		GM_log(siteStyle);
+		
 	
 	}
 	
@@ -291,6 +307,12 @@ function remRules(sub)
 			var rcss = srule.cssText;
 			rcss = rcss.replace("important!","");
 			var stext = srule.selectorText;
+			var ecode;
+			
+			stext = stext.substring(stext.indexOf("a[href") + 5);
+			ecode = stext.substring(stext.indexOf("/"));
+			ecode = ecode.substring(0, ecode.indexOf("\"]")); 
+			
 			//Potential huge slowdown right here
 			var addEm = true;
 			for(j=0; j<subs.length; j++)
@@ -306,14 +328,28 @@ function remRules(sub)
 					}
 				}
 				if(!addEm) break;
-			}		
+			}
+			if(addEm){
+			var emTest = new RegExp(ecode);
+			if(siteStyle != -1)
+			{
+				for(j=0; j<	siteStyle.cssRules.length; j++)
+				{
+					if(ecode.test(siteStyle.cssRules[j].selectorText))
+					{
+						addEm = false;
+						break;
+					}
+				}				
+			}
+			}
 			
 			if(addEm){
 				emoteSheet.insertRule(rcss,0); //Insert rule into our sheet
 			}
 			if(srule.cssText.indexOf("background-image") != -1) //Images
 			{	
-				var ecode 
+				
 				while(stext.indexOf("a[href") > -1)
 				{
 					stext = stext.substring(stext.indexOf("a[href") + 5);
