@@ -242,6 +242,8 @@ function remRules(sub)
 	
 	
 	
+	
+	
 	var srule;
 	
 	var emote = /a\[href\|?="\/[A-Za-z0-9!#]+"]/
@@ -264,7 +266,9 @@ function remRules(sub)
 		
 		if(emote.test(srule.selectorText))
 		{
-			emoteSheet.insertRule(srule.cssText,0); //Insert rule into our sheet
+			var rcss = srule.cssText;
+			rcss = rcss.replace("important!","");
+			emoteSheet.insertRule(,0); //Insert rule into our sheet
 			var stext = srule.selectorText;
 			
 			if(srule.cssText.indexOf("background-image") != -1) //Images
@@ -450,6 +454,8 @@ function createLink()
 	link_e.className = "emotelink";
 	link_e.onclick = openEmotePage;
 	document.body.appendChild(link_e);
+	
+	GM_log(emoteSheet);
 					
 	
 
