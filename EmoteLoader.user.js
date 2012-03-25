@@ -268,7 +268,7 @@ function remRules(sub)
 		{
 			var rcss = srule.cssText;
 			rcss = rcss.replace("important!","");
-			emoteSheet.insertRule(,0); //Insert rule into our sheet
+			emoteSheet.insertRule(rcss,0); //Insert rule into our sheet
 			var stext = srule.selectorText;
 			
 			if(srule.cssText.indexOf("background-image") != -1) //Images
