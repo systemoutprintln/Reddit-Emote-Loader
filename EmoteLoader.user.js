@@ -208,7 +208,7 @@ function waitForLoad(style, i)
 					clearInterval(ch[i]);
 				}
 			//}
-		}, 10);
+		}, 10*subs.length);
 	
 	}else{
 		ff[i] = setInterval(function() {
@@ -220,7 +220,7 @@ function waitForLoad(style, i)
 		
 			clearInterval(ff[i]);
 			} catch (e){}
-		}, 10); 
+		}, 10*subs.length); 
 	}
 }
 
@@ -316,7 +316,7 @@ function remRules(sub)
 			
 			//Potential huge slowdown right here
 			var addEm = true;
-			
+			/*
 			for(j=0; j<subs.length; j++)
 			{
 				if(j==subI) continue;
@@ -331,7 +331,7 @@ function remRules(sub)
 				}
 				if(!addEm) break;
 			}
-			
+			*/
 			if(addEm){
 			var emTest = new RegExp(ecode);
 			if(siteStyle != -1)
