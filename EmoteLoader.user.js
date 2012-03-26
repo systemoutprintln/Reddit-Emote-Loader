@@ -12,7 +12,7 @@
 // To add a sub add a comma then the sub name in quotes after the last entry
 // For example with MLPLounge it should look like the following:
 // var subs=["mylittlepony","MLPlounge"];
-var subs=["mlplounge" , "mylittlepony","mylittlewtf","mylittlelistentothis","mylittlenanners","mylittleandysonic1","idliketobeatree","mylittleonions","DAYLIGHTEMOTES" , "MYLITTLEDAWW" , "MYLITTLEDAMON" ,  "MYLITTLEMUSICIAN" ]; // , "MYLITTLECHAOS" , "MYLITTLEALCOHOLIC" , "SURPRISE", "TWILIGHTSPARKLE" , "MINUETTE"];
+var subs=["mlplounge","mylittlewtf","mylittlelistentothis","mylittlenanners","mylittleandysonic1","idliketobeatree","mylittleonions","DAYLIGHTEMOTES" , "MYLITTLEDAWW" , "MYLITTLEDAMON" ,  "MYLITTLEMUSICIAN" ]; // , "MYLITTLECHAOS" , "MYLITTLEALCOHOLIC" , "SURPRISE", "TWILIGHTSPARKLE" , "MINUETTE"];
 
 // Disables mylittlepony emotes on the MLPLounge 
 var PLounge = true;
