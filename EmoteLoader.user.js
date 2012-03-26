@@ -305,7 +305,7 @@ function remRules(sub)
 		if(emote.test(srule.selectorText))
 		{
 			var rcss = srule.cssText;
-			rcss = rcss.replace("important!","");
+			rcss = ".md .subdisp " + rcss;
 			var stext = srule.selectorText;
 			var ecode;
 			
