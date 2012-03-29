@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name           Reddit Emote Loader
 // @namespace      http://www.reddit.com/r/RedditEmoteLoader
-// @version        0.10
+// @version        0.10.1
 // @include        http://www.reddit.com/*
 // @include        http://reddit.com/*
 // @include        http://*.reddit.com/*
@@ -14,25 +14,20 @@
 // var subs=["mylittlepony","MLPlounge"];
 var subs=["mlplounge","mylittlewtf","mylittlelistentothis","mylittlenanners","mylittleandysonic1","idliketobeatree","mylittleonions","DAYLIGHTEMOTES" , "MYLITTLEDAWW" , "MYLITTLEDAMON" ,  "MYLITTLEMUSICIAN" ]; // , "MYLITTLECHAOS" , "MYLITTLEALCOHOLIC" , "SURPRISE", "TWILIGHTSPARKLE" , "MINUETTE"];
 
-// Disables mylittlepony emotes on the MLPLounge 
-var PLounge = true;
 
-//Use Extra CSS from /r/extraCSS
-var useExtraCSS = true;
 
-var dispEmotePage = true;
 
 //Environ variables - only change if something goes wrong.
 var chrome = navigator.userAgent.toLowerCase().indexOf('chrome') > -1;
-
+var useExtraCSS = true;
+var dispEmotePage = true;
+var version = "0.10.1";
+var daysBeforUpdate = 1;
 //Do not change below this line
-var count=0;
-var unique;
-var walked = false;
+
 
 var emoteStyle = document.createElement('style');
 document.getElementsByTagName('head')[0].appendChild(emoteStyle);
-
 var emoteSheet = document.styleSheets[document.styleSheets.length - 1];
 
 var ch = new Array();
@@ -40,39 +35,103 @@ var ff = new Array();
 
 var emoteSubs = new Array(subs.length);
 var textSubs = new Array(subs.length);
-
 var emoteRules = new Object();
 
-//var emoteCodes = new Array();
-//var textCodes = new Array();
+var loaded = 0;
 
-var clickEn=false;
-
-loadSubs(subs);
+//
+//Start main
+//
+if(checkUpdate())
+{
+	loadSubs(subs);
+	subsLoaded();
+}
+else
+{
+	loadFromStorage();
+}
 
 if(useExtraCSS)
 {
 	CSSFlags();
 }
-if( dispEmotePage)
+if(dispEmotePage)
 {
 	createLink();
 }
-buildCSS();
 
 
-function buildCSS()
+function checkUpdate() //Returns true if needs to be updated
+{
+	//Check version
+	var s_vers = window.localStorage.getItem("RELVersion");
+	
+	console.log(s_vers);
+	
+	if(s_vers != version) return true;
+	
+	//Check time
+	var s_time = parseInt(window.localStorage.getItem("RELTime"));
+	
+	var d = new Date();
+	
+	var daysSinceUpdate = (d.getTime() - s_time) / 86400000; //1 day in ms
+	
+	console.log(daysSinceUpdate);
+	
+	if(daysSinceUpdate > daysBeforUpdate) return true;
+	
+	console.log("No update: last update " + daysSinceUpdate + " days ago");
+	
+	return false;
+}
+
+function loadFromStorage()
+{
+	JSON.parse(window.localStorage.getItem("RELEmoteCSS"), function (key, value) 
+	{
+		console.log(value);
+		emoteSheet.insertRule(value,0);
+	}
+	);
+}
+
+
+function subsLoaded()
+{
+	var sl = setInterval(function() 
+	{
+		console.log(loaded);
+		if(loaded >= subs.length)
+		{
+			saveCSS();
+			clearInterval(sl);			
+		}	
+	
+	},500);
+	
+}
+
+function saveCSS()
 {
 	for(var rule in emoteRules)
 	{
-		console.log(rule);
+		//console.log(rule);
 		if(emoteRules.hasOwnProperty(rule))
 		{
-			console.log("Added");
+			emoteSheet.insertRule(emoteRules[rule],0);
 			
 		}	
 	
 	}
+	var d = new Date();
+	
+	window.localStorage.setItem("RELTime",d.getTime()); //Save update time
+	window.localStorage.setItem("RELVersion",version); //Version
+	window.localStorage.setItem("RELEmoteCSS",JSON.stringify(emoteRules)); //Save emotes in storage
+	
+	console.log("All done");
 	
 
 }
@@ -87,7 +146,7 @@ function loadSubs(Subs) //Just include sub name, i.e. /r/MLPlounge = MLPlounge
 	{
 	
 		
-		var SubCss = document.location.protocol + "//" + document.domain + "/r/" + Subs[i] + '/stylesheet.css';
+		var SubCss = "http://www.reddit.com/r/" + Subs[i] + '/stylesheet.css';
 		
 		emoteSubs[i] = new Array();
 		textSubs[i] = new Array();
@@ -108,9 +167,7 @@ function loadSubs(Subs) //Just include sub name, i.e. /r/MLPlounge = MLPlounge
 function addSub(Sub)
 {
 	var head = document.getElementsByTagName("head")[0];
-	
-	var d = new Date();
-	unique = d.getTime();
+
 	
 	var style;
 	
@@ -120,7 +177,7 @@ function addSub(Sub)
 		style.type = 'text/css'
 		style.rel = 'stylesheet';
 		
-		style.href = Sub; //+ "?v=" + unique;
+		style.href = Sub;
 		style.media = "print";
 	
 	}
@@ -284,10 +341,6 @@ function addRules(sub)
 			}
 			
 		
-		} else
-		{
-			//ssheet.deleteRule(i);
-			//i--;			
 		}
 		
 	
@@ -315,6 +368,8 @@ function addRules(sub)
 	{
 		sub.sheet.disabled = true;	
 	}
+	
+	loaded++;
 	
 
 }
@@ -437,7 +492,7 @@ function openEmotePage()
 	sub_hold.className = "subhld";
 	over.appendChild(sub_hold);
 	
-	clickEn = false;
+
 	
 	var i = 0;
 	while(i < subs.length)
@@ -448,7 +503,6 @@ function openEmotePage()
 		sub_lnk.innerHTML = subs[j].toLowerCase() ;
 		sub_lnk.className = "sublnk";
 		
-		//sub_lnk.setAttribute('onclick',"test();");
 		
 		sub_lnk.onclick = (function(opt) {
     return function() {
@@ -459,21 +513,16 @@ function openEmotePage()
 		sub_hold.appendChild(sub_lnk);
 		i++;
 	}
-	clickEn = true;
-	//addEmotes(0, "SubDisplay");
+
 	
 	
 
 }
-function test()
-{
-	//console.log("Good");
-}
+
 
 function addEmotes(sub, parID)
 {
-	if(!clickEn) return;
-	//alert(sub + ", " + parID);
+
 	try
 	{
 	var par = document.getElementById(parID);
