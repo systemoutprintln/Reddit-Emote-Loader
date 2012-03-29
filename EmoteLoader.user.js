@@ -90,8 +90,10 @@ function checkUpdate() //Returns true if needs to be updated
 
 function loadFromStorage()
 {
+	var emoteCSS = window.localStorage.getItem("RELEmoteCSS");
+	console.log(emoteCSS);
 	try{
-	JSON.parse(window.localStorage.getItem("RELEmoteCSS"), function (key, value) 
+	JSON.parse(emoteCSS, function (key, value) 
 	{
 		//console.log(value);
 		emoteSheet.insertRule(value,0);
@@ -106,7 +108,6 @@ function loadFromStorage()
 	{
 		emoteSubs = JSON.parse(window.localStorage.getItem("RELEmoteCodes"));
 		textSubs = JSON.parse(window.localStorage.getItem("RELTextCodes"));
-		console.log(emoteSubs);
 		createLink();
 	}
 
