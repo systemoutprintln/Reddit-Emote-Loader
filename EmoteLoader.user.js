@@ -61,7 +61,7 @@ if( dispEmotePage)
 buildCSS();
 
 
-buildCSS()
+function buildCSS()
 {
 	for(var rule in emoteRules)
 	{
@@ -253,7 +253,7 @@ function addRules(sub)
 			var ecode;
 			
 			//Test for repeat
-			if(emoteRules.hasOwnProperty(stest))
+			if(emoteRules.hasOwnProperty(stext))
 			{
 				continue; //Skip
 			}
