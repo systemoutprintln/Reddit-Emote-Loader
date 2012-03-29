@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name           Reddit Emote Loader
 // @namespace      http://www.reddit.com/r/RedditEmoteLoader
-// @version        0.10.1
+// @version        0.10.2
 // @include        http://www.reddit.com/*
 // @include        http://reddit.com/*
 // @include        http://*.reddit.com/*
@@ -21,7 +21,7 @@ var subs=["mlplounge","mylittlewtf","mylittlelistentothis","mylittlenanners","my
 var chrome = navigator.userAgent.toLowerCase().indexOf('chrome') > -1;
 var useExtraCSS = true;
 var dispEmotePage = true;
-var version = "0.10.1";
+var version = "0.10.2";
 var daysBeforUpdate = 1;
 //Do not change below this line
 
@@ -99,8 +99,8 @@ function loadFromStorage()
 	
 	if(dispEmotePage)
 	{
-		emoteSubs = JSON.parse(window.localStorage.getItem("RELEmoteCodes");
-		textSubs = JSON.parse(window.localStorage.getItem("RELTextCodes");
+		emoteSubs = JSON.parse(window.localStorage.getItem("RELEmoteCodes"));
+		textSubs = JSON.parse(window.localStorage.getItem("RELTextCodes"));
 		console.log(emoteSubs);
 		createLink();
 	}
