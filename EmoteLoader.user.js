@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name           Reddit Emote Loader
 // @namespace      http://www.reddit.com/r/RedditEmoteLoader
-// @version        0.9.9
+// @version        0.10
 // @include        http://www.reddit.com/*
 // @include        http://reddit.com/*
 // @include        http://*.reddit.com/*
@@ -19,6 +19,8 @@ var PLounge = true;
 
 //Use Extra CSS from /r/extraCSS
 var useExtraCSS = true;
+
+var dispEmotePage = true;
 
 //Environ variables - only change if something goes wrong.
 var chrome = navigator.userAgent.toLowerCase().indexOf('chrome') > -1;
@@ -39,94 +41,50 @@ var ff = new Array();
 var emoteSubs = new Array(subs.length);
 var textSubs = new Array(subs.length);
 
-var siteStyle;
+var emoteRules = new Object();
 
 //var emoteCodes = new Array();
 //var textCodes = new Array();
 
 var clickEn=false;
 
-useSubs(subs);
+loadSubs(subs);
 
 if(useExtraCSS)
 {
 	CSSFlags();
 }
-createLink();
-
-
-
-
-
-function useSubs(Subs) //Just include sub name, i.e. /r/MLPlounge = MLPlounge
+if( dispEmotePage)
 {
-	//alert(chrome);
-	var sID = new Array();
-	var docURL = document.URL.toLowerCase()
-	var subLoc = docURL.indexOf("/r/") + 3;
-	
-	if(subLoc == 2	) 
-	{ 
-		siteStyle = -1 
-	}
-	else
+	createLink();
+}
+buildCSS();
+
+
+buildCSS()
+{
+	for(var rule in emoteRules)
 	{
-		var subred = docURL.substring(subLoc);
-		subLoc = subred.indexOf("/");
-		if(subLoc != -1)
+		if(emoteRules.hasOwnProperty(rule))
 		{
-			subred = subred.substring(0,subLoc-1);
-		}
-		
-		var subTest = new RegExp(subred);
-		
-		siteStyle = -1;
-		
-		for(i=0; i < document.styleSheets.length; i++)
-		{
-			if(subTest.test(document.styleSheets[i].href.toLowerCase()))
-			{
-				siteStyle = document.styleSheets[i];
-				break;
-			}
-		
-		}
-			
-		GM_log(siteStyle);
-		
+			alert(rule);
+		}	
 	
 	}
 	
-	
+
+}
+
+function loadSubs(Subs) //Just include sub name, i.e. /r/MLPlounge = MLPlounge
+{
+
+	var sID = new Array();
 	
 		
 	for(i = 0; i < Subs.length ; i++)
 	{
 	
 		
-		/*
-		var sReg = new RegExp(Subs[i].toLowerCase());
-		
-		if(sReg.test(document.URL.toLowerCase()))
-		{		
-			continue; //Don't load this site's stylesheet
-		}
-		*/
-		/*
-		if(PLounge)
-		{
-			sReg = /mlplounge/
-			if(sReg.test(document.URL.toLowerCase()))
-			{
-				sReg = /mylittlepony/
-				if(sReg.test(Subs[i].toLowerCase()))
-				{
-					continue;
-				}
-			
-			}
-		}
-		*/
 		var SubCss = document.location.protocol + "//" + document.domain + "/r/" + Subs[i] + '/stylesheet.css';
 		
 		emoteSubs[i] = new Array();
@@ -137,12 +95,6 @@ function useSubs(Subs) //Just include sub name, i.e. /r/MLPlounge = MLPlounge
 		sID [i] = addSub(SubCss);
 		
 
-		if(chrome){
-			//sID[i].disabled = true;
-		}
-		else{
-			sID[i].sheet.disabled = true;
-		}
 
 		waitForLoad(sID[i], i);	
 	}
@@ -168,18 +120,18 @@ function addSub(Sub)
 		
 		style.href = Sub; //+ "?v=" + unique;
 		style.media = "print";
-		//style.disabled = true;	
+	
 	}
 	else
 	{
 		style = document.createElement('style');
 		style.textContent = '@import "' + Sub + '"';
-		//style.sheet.disabled = true;	
+		style.sheet.disabled = true;	
 	}
 	
 	head.appendChild(style);
 	
-	//GM_log("Added: " + style.href);
+	//console.log("Added: " + style.href);
 	
 	return style;
 
@@ -190,25 +142,20 @@ function addSub(Sub)
 
 function waitForLoad(style, i)
 {
-	//GM_log("Loading: " + style.href);
 	if(chrome)
 	{
 		var cssnum = document.styleSheets.length;
 		ch[i] = setInterval(function() {
-			//count++;
 			var sheet;
-			//GM_log("Loading... " + style.href);
-			//if(document.styleSheets.length > cssnum)
-			//{
 				sheet = getStyle(style);
 				if(sheet != -1)
 				{
-					remRules(style);
+					addRules(style);
 					
 					clearInterval(ch[i]);
 				}
-			//}
-		}, 10*subs.length);
+			
+		}, 10);
 	
 	}else{
 		ff[i] = setInterval(function() {
@@ -216,11 +163,11 @@ function waitForLoad(style, i)
 		
 		
 			style.sheet.cssRules;
-			remRules(style);
+			addRules(style);
 		
 			clearInterval(ff[i]);
 			} catch (e){}
-		}, 10*subs.length); 
+		}, 10); 
 	}
 }
 
@@ -230,7 +177,7 @@ function getStyle(sub)
 	{
 		if(document.styleSheets[i].href == sub.href)
 		{
-			//GM_log("Stylesheet " + sub.href + " = " + i);
+			
 			return document.styleSheets[i];	
 		}
 	}
@@ -256,7 +203,7 @@ function getSub(style)
 
 }
 
-function remRules(sub)
+function addRules(sub)
 {
 	var ssheet 
 	var isCss;
@@ -267,7 +214,7 @@ function remRules(sub)
 		ssheet = getStyle(sub);
 		if(ssheet == -1)
 		{
-			GM_log("227: " +sub.href);
+			console.log("227: " + sub.href);
 			return;
 		
 		}
@@ -290,66 +237,32 @@ function remRules(sub)
 	
 	var erules = emoteSheet.cssRules;
 	
-	//GM_log(srules.length);
-	
 	
 	for(i = 0; i < srules.length; i++)
 	{
 		srules = ssheet.cssRules;
 		
 		srule = srules[i];
-		//GM_log(srule.selectorText);
 		
 
 		
 		if(emote.test(srule.selectorText))
 		{
 			var rcss = srule.cssText;
-			rcss = ".md .subdisp " + rcss;
 			var stext = srule.selectorText;
 			var ecode;
 			
-			stext = stext.substring(stext.indexOf("a[href") + 5);
-			ecode = stext.substring(stext.indexOf("/"));
-			ecode = ecode.substring(0, ecode.indexOf("\"]")); 
-			stext = srule.selectorText;
-			
-			//Potential huge slowdown right here
-			var addEm = true;
-			/*
-			for(j=0; j<subs.length; j++)
+			//Test for repeat
+			if(emoteRules.hasOwnProperty(stest))
 			{
-				if(j==subI) continue;
-				for(k=0; k<emoteSubs[j].length; k++)
-				{
-					var testStr = new RegExp("\"" + emoteSubs[j][k] + "\"");
-					if(testStr.test(stext))
-					{
-						addEm = false;
-						break;
-					}
-				}
-				if(!addEm) break;
-			}
-			*/
-			if(addEm){
-			var emTest = new RegExp(ecode);
-			if(siteStyle != -1)
-			{
-				for(j=0; j<	siteStyle.cssRules.length; j++)
-				{
-					if(emTest.test(siteStyle.cssRules[j].selectorText))
-					{
-						addEm = false;
-						break;
-					}
-				}				
-			}
+				continue; //Skip
 			}
 			
-			if(addEm){
-				emoteSheet.insertRule(rcss,0); //Insert rule into our sheet
-			}
+			//Add it
+			
+			emoteRules[stext] = rcss;
+			 
+
 			if(srule.cssText.indexOf("background-image") != -1) //Images
 			{	
 				
@@ -358,8 +271,6 @@ function remRules(sub)
 					stext = stext.substring(stext.indexOf("a[href") + 5);
 					ecode = stext.substring(stext.indexOf("/"));
 					ecode = ecode.substring(0, ecode.indexOf("\"]")); 
-					//GM_log(ecode);
-					//emoteCodes[emoteCodes.length] = ecode;
 					emoteSubs[subI][emoteSubs[subI].length] = ecode;
 				}
 			}
@@ -367,8 +278,6 @@ function remRules(sub)
 			{
 				ecode = stext.substring(stext.indexOf("/"));
 				ecode = ecode.substring(0, ecode.indexOf("\"]")); 
-				//GM_log(ecode);
-				//textCodes[textCodes.length] = ecode;
 				textSubs[subI][textSubs[subI].length] = ecode;
 			}
 			
@@ -382,13 +291,13 @@ function remRules(sub)
 	
 	}
 
-	//GM_log(ssheet);
+	//console.log(ssheet);
 	
 	
 	}
 	catch(e)
 	{
-		GM_log("311: " + e)
+		console.log("311: " + e)
 		
 	}
 	
@@ -398,44 +307,12 @@ function remRules(sub)
 	{
 		sub.media = "print";
 		sub.disabled = true;
-		//GM_log("Done: " + sub.href);
+		console.log("Done: " + sub.href);
 	}
 	else
 	{
 		sub.sheet.disabled = true;	
 	}
-	
-
-}
-/*
-function disable(style)
-{
-	//GM_log("Error with " + style.href);
-	var Hlinks = document.getElementsByTagName("link");
-	for(i = 0; i < Hlinks.length; i++)
-	{
-		if(Hlinks[i].getAttribute("href") == style.href)
-		{
-			Hlinks[i].parentNode.removeChild(Hlinks[i]);
-			
-		}
-	
-	}
-
-}
-*/
-
-function styleWalker()
-{
-	if(!walked){
-	ssheets = document.styleSheets;
-	for(i = 0; i < ssheets.length; i++)
-	{
-		//GM_log(i + " = " + ssheets[i].href);
-		//GM_log(ssheets[i]);
-	}
-	}
-	walked = true;
 	
 
 }
@@ -445,7 +322,7 @@ function styleWalker()
 
 
 
-function CSSFlags()
+function CSSFlags() //TODO: Replace with stylesheet
 {
 	var css = new Array();
 	
@@ -534,7 +411,7 @@ function createLink()
 	link_e.onclick = openEmotePage;
 	document.body.appendChild(link_e);
 	
-	GM_log(emoteSheet);
+	console.log(emoteSheet);
 					
 	
 
@@ -588,7 +465,7 @@ function openEmotePage()
 }
 function test()
 {
-	//GM_log("Good");
+	//console.log("Good");
 }
 
 function addEmotes(sub, parID)
@@ -638,7 +515,7 @@ function addEmotes(sub, parID)
 	}
 	
 	
-	}catch(e){GM_log("559: " + e);}
+	}catch(e){console.log("559: " + e);}
 
 
 }
