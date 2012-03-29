@@ -46,20 +46,21 @@ if(checkUpdate())
 {
 	loadSubs(subs);
 	subsLoaded();
+	if(dispEmotePage)
+	{
+		createLink();
+	}
 }
 else
 {
 	loadFromStorage();
 }
+	if(useExtraCSS)
+	{
+		CSSFlags();
+	}
 
-if(useExtraCSS)
-{
-	CSSFlags();
-}
-if(dispEmotePage)
-{
-	createLink();
-}
+
 
 
 function checkUpdate() //Returns true if needs to be updated
@@ -95,6 +96,17 @@ function loadFromStorage()
 		emoteSheet.insertRule(value,0);
 	}
 	);
+	
+	if(dispEmotePage)
+	{
+		emoteSubs = JSON.parse(window.localStorage.getItem("RELEmoteCodes");
+		textSubs = JSON.parse(window.localStorage.getItem("RELTextCodes");
+		console.log(emoteSubs);
+		createLink();
+	}
+
+	
+	
 }
 
 
@@ -130,6 +142,8 @@ function saveCSS()
 	window.localStorage.setItem("RELTime",d.getTime()); //Save update time
 	window.localStorage.setItem("RELVersion",version); //Version
 	window.localStorage.setItem("RELEmoteCSS",JSON.stringify(emoteRules)); //Save emotes in storage
+	window.localStorage.setItem("RELEmoteCodes",JSON.stringify(emoteSubs));
+	window.localStorage.setItem("RELTextCodes",JSON.stringify(textSubs));
 	
 	console.log("All done");
 	
