@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name           Reddit Emote Loader
 // @namespace      http://www.reddit.com/r/RedditEmoteLoader
-// @version        0.10.2
+// @version        0.10.3
 // @include        http://www.reddit.com/*
 // @include        http://reddit.com/*
 // @include        http://*.reddit.com/*
@@ -21,8 +21,8 @@ var subs=["mlplounge","mylittlewtf","mylittlelistentothis","mylittlenanners","my
 var chrome = navigator.userAgent.toLowerCase().indexOf('chrome') > -1;
 var useExtraCSS = true;
 var dispEmotePage = true;
-var version = "0.10.2";
-var daysBeforUpdate = 1;
+var version = "0.10.3";
+var daysBeforUpdate = 5;
 //Do not change below this line
 
 
@@ -79,7 +79,7 @@ function checkUpdate() //Returns true if needs to be updated
 	
 	var daysSinceUpdate = (d.getTime() - s_time) / 86400000; //1 day in ms
 	
-	console.log(daysSinceUpdate);
+	//console.log(daysSinceUpdate);
 	
 	if(daysSinceUpdate > daysBeforUpdate) return true;
 	
@@ -91,7 +91,7 @@ function checkUpdate() //Returns true if needs to be updated
 function loadFromStorage()
 {
 	var emoteCSS = window.localStorage.getItem("RELEmoteCSS");
-	console.log(emoteCSS);
+	//console.log(emoteCSS);
 	try{
 	JSON.parse(emoteCSS, function (key, value) 
 	{
@@ -120,7 +120,7 @@ function subsLoaded()
 {
 	var sl = setInterval(function() 
 	{
-		console.log(loaded);
+		//console.log(loaded);
 		if(loaded >= subs.length)
 		{
 			saveCSS();
@@ -293,7 +293,7 @@ function addRules(sub)
 		ssheet = getStyle(sub);
 		if(ssheet == -1)
 		{
-			console.log("227: " + sub.href);
+			console.log("296: " + sub.href);
 			return;
 		
 		}
@@ -372,7 +372,7 @@ function addRules(sub)
 	}
 	catch(e)
 	{
-		console.log("311: " + e)
+		console.log("375: " + e)
 		
 	}
 	
@@ -488,7 +488,7 @@ function createLink()
 	link_e.onclick = openEmotePage;
 	document.body.appendChild(link_e);
 	
-	console.log(emoteSheet);
+	//console.log(emoteSheet);
 					
 	
 
