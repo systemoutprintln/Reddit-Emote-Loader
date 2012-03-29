@@ -303,7 +303,7 @@ function addRules(sub)
 	//}
 	//else
 	//{
-		ssheet = sub.sheet.cssRules[0].styleSheet;
+	//ssheet = sub.sheet.cssRules[0].styleSheet;
 	//}
 	
 	var subI = getSub(ssheet);
@@ -380,16 +380,16 @@ function addRules(sub)
 	
 	
 	
-	if(chrome)
-	{
+	//if(chrome)
+	//{
 		sub.media = "print";
 		sub.disabled = true;
 		console.log("Done: " + sub.href);
-	}
-	else
-	{
+	//}
+	//else
+	//{
 		sub.sheet.disabled = true;	
-	}
+	//}
 	
 	loaded++;
 	
