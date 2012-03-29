@@ -90,12 +90,17 @@ function checkUpdate() //Returns true if needs to be updated
 
 function loadFromStorage()
 {
+	try{
 	JSON.parse(window.localStorage.getItem("RELEmoteCSS"), function (key, value) 
 	{
-		console.log(value);
+		//console.log(value);
 		emoteSheet.insertRule(value,0);
+	});
+	} catch(e)
+	{
+		console.log("101: ");
+		console.log(e);
 	}
-	);
 	
 	if(dispEmotePage)
 	{
