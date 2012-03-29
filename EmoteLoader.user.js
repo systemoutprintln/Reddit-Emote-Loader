@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name           Reddit Emote Loader
 // @namespace      http://www.reddit.com/r/RedditEmoteLoader
-// @version        0.10.3
+// @version        0.10.4
 // @include        http://www.reddit.com/*
 // @include        http://reddit.com/*
 // @include        http://*.reddit.com/*
@@ -21,8 +21,8 @@ var subs=["mlplounge","mylittlewtf","mylittlelistentothis","mylittlenanners","my
 var chrome = navigator.userAgent.toLowerCase().indexOf('chrome') > -1;
 var useExtraCSS = true;
 var dispEmotePage = true;
-var version = "0.10.3";
-var daysBeforUpdate = 5;
+var version = "0.10.4";
+var daysBeforUpdate = 2;
 //Do not change below this line
 
 
@@ -190,16 +190,17 @@ function addSub(Sub)
 
 	
 	var style;
-	
+	/*
 	if(chrome)
 	{
+	*/
 		style =	document.createElement('link');
 		style.type = 'text/css'
 		style.rel = 'stylesheet';
 		
 		style.href = Sub;
 		style.media = "print";
-	
+	/*
 	}
 	else
 	{
@@ -207,6 +208,7 @@ function addSub(Sub)
 		style.textContent = '@import "' + Sub + '"';
 		style.sheet.disabled = true;	
 	}
+	*/
 	
 	head.appendChild(style);
 	
@@ -287,8 +289,8 @@ function addRules(sub)
 	var ssheet 
 	var isCss;
 	try{
-	if(chrome)
-	{
+	//if(chrome)
+	//{
 		sub.media = "all";
 		ssheet = getStyle(sub);
 		if(ssheet == -1)
@@ -298,11 +300,11 @@ function addRules(sub)
 		
 		}
 		
-	}
-	else
-	{
+	//}
+	//else
+	//{
 		ssheet = sub.sheet.cssRules[0].styleSheet;
-	}
+	//}
 	
 	var subI = getSub(ssheet);
 	
@@ -476,6 +478,11 @@ function createLink()
 	
 	css[6] = ".sublnk:hover {background-color:yellow; cursor:pointer;}"
 	
+	//Force update
+	css[5] = ".forup {background-color:red; width:100%; left: 0px; font-size:15px; text-align:center;}"
+	
+	css[6] = ".forup:hover {background-color:yellow; cursor:pointer;}"
+	
 	for(i = 0; i < css.length; i++)
 	{
 		emoteSheet.insertRule(css[i], 0);
@@ -533,6 +540,11 @@ function openEmotePage()
 		sub_hold.appendChild(sub_lnk);
 		i++;
 	}
+	
+	var force_up = document.createElement("button");
+		force_up.innerHTML = "Force Update";
+		force_up.className = "forup";
+		force_up.onclick = forceUpdate;
 
 	
 	
@@ -588,6 +600,11 @@ function addEmotes(sub, parID)
 	
 	}catch(e){console.log("559: " + e);}
 
+
+}
+
+function forceUpdate()
+{
 
 }
 
