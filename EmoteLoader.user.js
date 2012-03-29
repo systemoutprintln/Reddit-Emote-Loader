@@ -65,9 +65,11 @@ function buildCSS()
 {
 	for(var rule in emoteRules)
 	{
+		console.log(rule);
 		if(emoteRules.hasOwnProperty(rule))
 		{
-			alert(rule);
+			console.log("Added");
+			
 		}	
 	
 	}
