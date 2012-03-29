@@ -605,7 +605,8 @@ function addEmotes(sub, parID)
 
 function forceUpdate()
 {
-
+	loadSubs(subs);
+	subsLoaded();
 }
 
 function exitEmotePage()
