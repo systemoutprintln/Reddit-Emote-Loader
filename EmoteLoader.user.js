@@ -479,7 +479,7 @@ function createLink()
 	css[6] = ".sublnk:hover {background-color:yellow; cursor:pointer;}"
 	
 	//Force update
-	css[7] = ".forup {background-color:red; width:100%; left: 0px; font-size:15px; text-align:center;}"
+	css[7] = ".forup {background-color:white; width:100%; left: 0px; font-size:15px; text-align:center;}"
 	
 	css[8] = ".forup:hover {background-color:yellow; cursor:pointer;}"
 	
