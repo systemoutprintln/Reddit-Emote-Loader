@@ -128,7 +128,7 @@ function subsLoaded()
 			clearInterval(sl);			
 		}	
 	
-	},500);
+	},250);
 	
 }
 
@@ -172,14 +172,14 @@ function loadSubs(Subs) //Just include sub name, i.e. /r/MLPlounge = MLPlounge
 	{
 	
 		
-		var SubCss = "http://www.reddit.com/r/" + Subs[i] + '/stylesheet.css';
+		
 		
 		emoteSubs[i] = new Array();
 		textSubs[i] = new Array();
 		
 	
 				
-		sID [i] = addSub(SubCss);
+		sID [i] = addSub(Subs[i]);
 		
 
 
@@ -193,7 +193,7 @@ function loadSubs(Subs) //Just include sub name, i.e. /r/MLPlounge = MLPlounge
 function addSub(Sub)
 {
 	var head = document.getElementsByTagName("head")[0];
-
+	var SubCss = "http://www.reddit.com/r/" + Sub + '/stylesheet.css';
 	
 	var style;
 	/*
@@ -203,8 +203,9 @@ function addSub(Sub)
 		style =	document.createElement('link');
 		style.type = 'text/css'
 		style.rel = 'stylesheet';
+		sub.id = Sub;
 		
-		style.href = Sub;
+		style.href = SubCss;
 		style.media = "print";
 	/*
 	}
@@ -386,8 +387,7 @@ function addRules(sub)
 	
 	
 	//Delete the style
-	sub.ID = "DeleteMe";
-	var del = document.getElementById("DeleteMe")
+	var del = document.getElementById(subs[subI])
 	del.parentNode.removeChild(del);
 
 	console.log("Done: " + sub.href);
