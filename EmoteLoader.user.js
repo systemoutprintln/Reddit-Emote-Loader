@@ -615,6 +615,8 @@ function forceUpdate()
 	forced = true;
 	loadSubs(subs);
 	subsLoaded();
+	exitEmotePage();
+	
 }
 
 function exitEmotePage()
