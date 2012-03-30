@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name           Reddit Emote Loader
 // @namespace      http://www.reddit.com/r/RedditEmoteLoader
-// @version        0.10.4
+// @version        0.10.5
 // @include        http://www.reddit.com/*
 // @include        http://reddit.com/*
 // @include        http://*.reddit.com/*
@@ -21,7 +21,7 @@ var subs=["mlplounge","mylittlewtf","mylittlelistentothis","mylittlenanners","my
 var chrome = navigator.userAgent.toLowerCase().indexOf('chrome') > -1;
 var useExtraCSS = true;
 var dispEmotePage = true;
-var version = "0.10.4";
+var version = "0.10.5";
 var daysBeforUpdate = 2;
 //Do not change below this line
 
@@ -385,17 +385,13 @@ function addRules(sub)
 	}
 	
 	
-	
-	//if(chrome)
-	//{
-		sub.media = "print";
-		sub.disabled = true;
-		console.log("Done: " + sub.href);
-	//}
-	//else
-	//{
-		sub.sheet.disabled = true;	
-	//}
+	//Delete the style
+	sub.ID = "DeleteMe";
+	var del = document.getElementById("DeleteMe")
+	del.parentNode.removeChild(del);
+
+	console.log("Done: " + sub.href);
+
 	
 	loaded++;
 	
