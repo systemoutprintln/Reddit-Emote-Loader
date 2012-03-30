@@ -609,6 +609,8 @@ function forceUpdate()
 {
 	loaded = 0;
 	forced = true;
+	emoteRules = new Object();
+	
 	loadSubs(subs);
 	subsLoaded();
 	exitEmotePage();
