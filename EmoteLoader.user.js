@@ -38,6 +38,7 @@ var textSubs = new Array(subs.length);
 var emoteRules = new Object();
 
 var loaded = 0;
+var forced = false;
 
 //
 //Start main
@@ -152,6 +153,11 @@ function saveCSS()
 	window.localStorage.setItem("RELTextCodes",JSON.stringify(textSubs));
 	
 	console.log("All done");
+	if(forced)
+	{
+		alert("Update sucessful");
+		forced = false;
+	}
 	
 
 }
@@ -605,6 +611,8 @@ function addEmotes(sub, parID)
 
 function forceUpdate()
 {
+	loaded = 0;
+	forced = true;
 	loadSubs(subs);
 	subsLoaded();
 }
