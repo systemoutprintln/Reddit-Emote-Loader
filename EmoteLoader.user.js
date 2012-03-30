@@ -203,7 +203,7 @@ function addSub(Sub)
 		style =	document.createElement('link');
 		style.type = 'text/css'
 		style.rel = 'stylesheet';
-		sub.id = Sub;
+		style.id = Sub;
 		
 		style.href = SubCss;
 		style.media = "print";
