@@ -341,14 +341,14 @@ function addRules(sub)
 			var ecode;
 			
 			//Test for repeat
-			if(emoteRules.hasOwnProperty(stext))
+			if(!emoteRules.hasOwnProperty(stext))
 			{
-				continue; //Skip
+				//Add it
+				emoteRules[stext] = rcss;
 			}
 			
-			//Add it
 			
-			emoteRules[stext] = rcss;
+			
 			 
 
 			if(srule.cssText.indexOf("background-image") != -1) //Images
