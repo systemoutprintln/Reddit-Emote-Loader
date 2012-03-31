@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name           Reddit Emote Loader
 // @namespace      http://www.reddit.com/r/RedditEmoteLoader
-// @version        0.10.5
+// @version        1.0
 // @include        http://www.reddit.com/*
 // @include        http://reddit.com/*
 // @include        http://*.reddit.com/*
@@ -21,7 +21,7 @@ var subs=["mlplounge","mylittlewtf","mylittlelistentothis","mylittlenanners","my
 var chrome = navigator.userAgent.toLowerCase().indexOf('chrome') > -1;
 var useExtraCSS = true;
 var dispEmotePage = true;
-var version = "0.10.5";
+var version = "1.0";
 var daysBeforUpdate = 2;
 //Do not change below this line
 
@@ -192,8 +192,10 @@ function loadSubs(Subs) //Just include sub name, i.e. /r/MLPlounge = MLPlounge
 
 function addSub(Sub)
 {
+	var d = new Date();
+	var t = d.getTime(); //Ensure fresh CSS
 	var head = document.getElementsByTagName("head")[0];
-	var SubCss = "http://www.reddit.com/r/" + Sub + '/stylesheet.css';
+	var SubCss = "http://www.reddit.com/r/" + Sub + '/stylesheet.css?v=' + t;
 	
 	var style;
 	/*
@@ -325,6 +327,8 @@ function addRules(sub)
 	
 	var erules = emoteSheet.cssRules;
 	
+	var tempRules = new Object();
+	
 	
 	for(i = 0; i < srules.length; i++)
 	{
@@ -343,8 +347,13 @@ function addRules(sub)
 			//Test for repeat
 			if(!emoteRules.hasOwnProperty(stext))
 			{
+			
+				while(tempRules.hasOwnProperty(stext))
+				{
+					stext += "d";
+				}
 				//Add it
-				emoteRules[stext] = rcss;
+				tempRules[stext] = rcss;
 			}
 			
 			
@@ -377,6 +386,19 @@ function addRules(sub)
 
 	//console.log(ssheet);
 	
+	//Merge rules
+	for(var rule in tempRules)
+	{
+		if(tempRules.hasOwnProperty(rule))
+		{
+			emoteRules[rule] = tempRules[rule];
+		}
+	}
+	
+	
+	//Delete the style
+	var del = document.getElementById(subs[subI])
+	del.parentNode.removeChild(del);
 	
 	}
 	catch(e)
@@ -386,9 +408,7 @@ function addRules(sub)
 	}
 	
 	
-	//Delete the style
-	var del = document.getElementById(subs[subI])
-	del.parentNode.removeChild(del);
+
 
 	console.log("Done: " + sub.href);
 
