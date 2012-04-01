@@ -22,7 +22,7 @@ var chrome = navigator.userAgent.toLowerCase().indexOf('chrome') > -1;
 var useExtraCSS = true;
 var dispEmotePage = true;
 var version = "1.0.1";
-var daysBeforUpdate = 2;
+var daysBeforUpdate = 3;
 //Do not change below this line
 
 
