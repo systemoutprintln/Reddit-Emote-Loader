@@ -21,7 +21,7 @@ var subs=["mlplounge","mylittlewtf","mylittlelistentothis","mylittlenanners","my
 var chrome = navigator.userAgent.toLowerCase().indexOf('chrome') > -1;
 var useExtraCSS = true;
 var dispEmotePage = true;
-var version = "1.0";
+var version = "1.0.1";
 var daysBeforUpdate = 2;
 //Do not change below this line
 
@@ -39,6 +39,7 @@ var emoteRules = new Object();
 
 var loaded = 0;
 var forced = false;
+var error = false;
 
 //
 //Start main
@@ -134,6 +135,13 @@ function subsLoaded()
 
 function saveCSS()
 {
+	if(error)
+	{
+		error = false;
+		alert("Update Failed");
+		return;
+	}
+	
 	for(var rule in emoteRules)
 	{
 		//console.log(rule);
@@ -195,7 +203,7 @@ function addSub(Sub)
 	var d = new Date();
 	var t = d.getTime(); //Ensure fresh CSS
 	var head = document.getElementsByTagName("head")[0];
-	var SubCss = "http://www.reddit.com/r/" + Sub + '/stylesheet.css?v=' + t;
+	var SubCss = "http://" + document.domain + "/r/" + Sub + '/stylesheet.css?v=' + t;
 	
 	var style;
 	/*
@@ -304,7 +312,8 @@ function addRules(sub)
 		ssheet = getStyle(sub);
 		if(ssheet == -1)
 		{
-			console.log("296: " + sub.href);
+			console.log("315: " + sub.href);
+			error = true;
 			return;
 		
 		}
@@ -396,18 +405,19 @@ function addRules(sub)
 	}
 	
 	
-	//Delete the style
-	var del = document.getElementById(subs[subI])
-	del.parentNode.removeChild(del);
+
 	
 	}
 	catch(e)
 	{
-		console.log("375: " + e)
+		error = true;
+		console.log("414: " + e)
 		
 	}
 	
-	
+	//Delete the style
+	var del = document.getElementById(subs[subI])
+	del.parentNode.removeChild(del);
 
 
 	console.log("Done: " + sub.href);
@@ -620,7 +630,7 @@ function addEmotes(sub, parID)
 	}
 	
 	
-	}catch(e){console.log("559: " + e);}
+	}catch(e){console.log("633: " + e);}
 
 
 }
