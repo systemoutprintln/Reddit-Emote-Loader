@@ -206,10 +206,10 @@ function addSub(Sub)
 	var SubCss = "http://" + document.domain + "/r/" + Sub + '/stylesheet.css?v=' + t;
 	
 	var style;
-	/*
+	
 	if(chrome)
 	{
-	*/
+	
 		style =	document.createElement('link');
 		style.type = 'text/css'
 		style.rel = 'stylesheet';
@@ -217,7 +217,7 @@ function addSub(Sub)
 		
 		style.href = SubCss;
 		style.media = "print";
-	/*
+	
 	}
 	else
 	{
@@ -225,7 +225,7 @@ function addSub(Sub)
 		style.textContent = '@import "' + Sub + '"';
 		style.sheet.disabled = true;	
 	}
-	*/
+	
 	
 	head.appendChild(style);
 	
@@ -306,8 +306,8 @@ function addRules(sub)
 	var ssheet 
 	var isCss;
 	try{
-	//if(chrome)
-	//{
+	if(chrome)
+	{
 		sub.media = "all";
 		ssheet = getStyle(sub);
 		if(ssheet == -1)
@@ -318,11 +318,11 @@ function addRules(sub)
 		
 		}
 		
-	//}
-	//else
-	//{
-	//ssheet = sub.sheet.cssRules[0].styleSheet;
-	//}
+	}
+	else
+	{
+	ssheet = sub.sheet.cssRules[0].styleSheet;
+	}
 	
 	var subI = getSub(ssheet);
 	
