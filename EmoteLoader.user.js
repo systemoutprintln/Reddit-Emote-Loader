@@ -222,7 +222,7 @@ function addSub(Sub)
 	else
 	{
 		style = document.createElement('style');
-		style.textContent = '@import "' + Sub + '"';
+		style.textContent = '@import "' + SubCss + '"';
 		style.sheet.disabled = true;	
 	}
 	
