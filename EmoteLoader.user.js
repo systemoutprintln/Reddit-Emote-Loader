@@ -27,7 +27,7 @@ var subs=[ "mylittleandysonic1", "mlas1animotes", "mylittlewtf", "idliketobeatre
 var chrome = navigator.userAgent.toLowerCase().indexOf('chrome') > -1;
 var useExtraCSS = true;
 var dispEmotePage = true;
-var version = "1.1.2";
+var version = "1.1.3";
 var daysBeforeUpdate = 3;
 //Do not change below this line
 
@@ -375,14 +375,15 @@ function addRules(sub)
 				while(stext.indexOf("a[href") > -1)
 				{
 					stext = stext.substring(stext.indexOf("a[href") + 5);
-					ecode = stext.substring(stext.indexOf("/"), stext.indexOf("]") - 1);
-					
+					ecode = stext.substring(stext.indexOf("/"));
+					ecode = ecode.substring(0, ecode.indexOf("\"]")); 
+										
 					if(eCodes.hasOwnProperty(ecode))
 					{
 						addRule = false;
 					}
 					
-					ecode = ecode.substring(0, ecode.indexOf("\"]")); 
+
 					emoteSubs[subI][emoteSubs[subI].length] = ecode;
 					tempCodes[ecode] = "Exists";
 				}
