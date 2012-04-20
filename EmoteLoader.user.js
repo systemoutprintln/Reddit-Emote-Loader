@@ -27,7 +27,7 @@ var subs=[ "mylittleandysonic1", "mlas1animotes", "mylittlewtf", "idliketobeatre
 var chrome = navigator.userAgent.toLowerCase().indexOf('chrome') > -1;
 var useExtraCSS = true;
 var dispEmotePage = true;
-var version = "1.1.0";
+var version = "1.1.1";
 var daysBeforeUpdate = 3;
 //Do not change below this line
 
@@ -377,7 +377,7 @@ function addRules(sub)
 					stext = stext.substring(stext.indexOf("a[href") + 5);
 					ecode = stext.substring(stext.indexOf("/"));
 					
-					if(!eCodes.hasOwnProperty(ecode))
+					if(eCodes.hasOwnProperty(ecode))
 					{
 						addRule = false;
 					}
@@ -392,7 +392,7 @@ function addRules(sub)
 				ecode = stext.substring(stext.indexOf("/"));
 				ecode = ecode.substring(0, ecode.indexOf("\"]")); 
 				
-				if(!eCodes.hasOwnProperty(ecode))
+				if(eCodes.hasOwnProperty(ecode))
 				{
 					addRule = false;
 				}
