@@ -402,6 +402,7 @@ function addRules(sub)
 			}
 			
 			//Test for repeat
+			stext = srule.selectorText;
 			if(addRule)
 			{
 			
