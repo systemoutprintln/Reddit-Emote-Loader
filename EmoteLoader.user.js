@@ -27,7 +27,7 @@ var subs=[ "mylittleandysonic1", "mlas1animotes", "mylittlewtf", "idliketobeatre
 var chrome = navigator.userAgent.toLowerCase().indexOf('chrome') > -1;
 var useExtraCSS = true;
 var dispEmotePage = true;
-var version = "1.1.1";
+var version = "1.1.2";
 var daysBeforeUpdate = 3;
 //Do not change below this line
 
@@ -375,7 +375,7 @@ function addRules(sub)
 				while(stext.indexOf("a[href") > -1)
 				{
 					stext = stext.substring(stext.indexOf("a[href") + 5);
-					ecode = stext.substring(stext.indexOf("/"));
+					ecode = stext.substring(stext.indexOf("/"), stext.indexOf("]") - 1);
 					
 					if(eCodes.hasOwnProperty(ecode))
 					{
