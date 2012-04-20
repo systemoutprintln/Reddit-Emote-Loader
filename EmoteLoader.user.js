@@ -1,11 +1,18 @@
 // ==UserScript==
 // @name           Reddit Emote Loader
 // @namespace      http://www.reddit.com/r/RedditEmoteLoader
-// @version        1.0
+// @version        1.1
 // @include        http://www.reddit.com/*
 // @include        http://reddit.com/*
 // @include        http://*.reddit.com/*
 // ==/UserScript==
+
+/* To Do:
+
+-Change emote table to only add an emote if the code does not exist in other subs
+
+
+*/
 
 //Options
 
@@ -21,8 +28,8 @@ var subs=["mlplounge","mylittlewtf","mylittlelistentothis","mylittlenanners","my
 var chrome = navigator.userAgent.toLowerCase().indexOf('chrome') > -1;
 var useExtraCSS = true;
 var dispEmotePage = true;
-var version = "1.0.1";
-var daysBeforUpdate = 3;
+var version = "1.1.0";
+var daysBeforeUpdate = 3;
 //Do not change below this line
 
 
@@ -36,6 +43,7 @@ var ff = new Array();
 var emoteSubs = new Array(subs.length);
 var textSubs = new Array(subs.length);
 var emoteRules = new Object();
+var eCodes = new Object();
 
 var loaded = 0;
 var forced = false;
@@ -83,7 +91,7 @@ function checkUpdate() //Returns true if needs to be updated
 	
 	//console.log(daysSinceUpdate);
 	
-	if(daysSinceUpdate > daysBeforUpdate) return true;
+	if(daysSinceUpdate > daysBeforeUpdate) return true;
 	
 	console.log("No update: last update " + daysSinceUpdate + " days ago");
 	
@@ -338,6 +346,9 @@ function addRules(sub)
 	var erules = emoteSheet.cssRules;
 	
 	var tempRules = new Object();
+	var tempCodes = new Object();
+	
+	var addRule = true;
 	
 	
 	for(i = 0; i < srules.length; i++)
@@ -347,15 +358,52 @@ function addRules(sub)
 		srule = srules[i];
 		
 
-		
+		//Test if it is an emote
 		if(emote.test(srule.selectorText))
 		{
 			var rcss = srule.cssText;
 			var stext = srule.selectorText;
 			var ecode;
 			
+			
+
+
+
+			if(srule.cssText.indexOf("background-image") != -1) //Images
+			{	
+				addRule = true;
+				
+				while(stext.indexOf("a[href") > -1)
+				{
+					stext = stext.substring(stext.indexOf("a[href") + 5);
+					ecode = stext.substring(stext.indexOf("/"));
+					
+					if(!eCodes.hasOwnProperty(ecode))
+					{
+						addRule = false;
+					}
+					
+					ecode = ecode.substring(0, ecode.indexOf("\"]")); 
+					emoteSubs[subI][emoteSubs[subI].length] = ecode;
+					tempCodes[ecode] = "Exists";
+				}
+			}
+			if(srule.cssText.indexOf("cursor: text") != -1) //Text
+			{
+				ecode = stext.substring(stext.indexOf("/"));
+				ecode = ecode.substring(0, ecode.indexOf("\"]")); 
+				
+				if(!eCodes.hasOwnProperty(ecode))
+				{
+					addRule = false;
+				}
+				
+				textSubs[subI][textSubs[subI].length] = ecode;
+				tempCodes[ecode] = "Exists";
+			}
+			
 			//Test for repeat
-			if(!emoteRules.hasOwnProperty(stext))
+			if(addRule)
 			{
 			
 				while(tempRules.hasOwnProperty(stext))
@@ -367,27 +415,6 @@ function addRules(sub)
 			}
 			
 			
-			
-			 
-
-			if(srule.cssText.indexOf("background-image") != -1) //Images
-			{	
-				
-				while(stext.indexOf("a[href") > -1)
-				{
-					stext = stext.substring(stext.indexOf("a[href") + 5);
-					ecode = stext.substring(stext.indexOf("/"));
-					ecode = ecode.substring(0, ecode.indexOf("\"]")); 
-					emoteSubs[subI][emoteSubs[subI].length] = ecode;
-				}
-			}
-			if(srule.cssText.indexOf("cursor: text") != -1) //Text
-			{
-				ecode = stext.substring(stext.indexOf("/"));
-				ecode = ecode.substring(0, ecode.indexOf("\"]")); 
-				textSubs[subI][textSubs[subI].length] = ecode;
-			}
-			
 		
 		}
 		
@@ -396,12 +423,20 @@ function addRules(sub)
 
 	//console.log(ssheet);
 	
-	//Merge rules
+	//Merge rules / codes
 	for(var rule in tempRules)
 	{
 		if(tempRules.hasOwnProperty(rule))
 		{
 			emoteRules[rule] = tempRules[rule];
+		}
+	}
+	
+		for(var rule in tempCodes)
+	{
+		if(tempCodes.hasOwnProperty(rule))
+		{
+			eCodes[rule] = "Exists";
 		}
 	}
 	
@@ -631,7 +666,7 @@ function addEmotes(sub, parID)
 	}
 	
 	
-	}catch(e){console.log("633: " + e);}
+	}catch(e){console.log("642: " + e);}
 
 
 }
@@ -641,6 +676,7 @@ function forceUpdate()
 	loaded = 0;
 	forced = true;
 	emoteRules = new Object();
+	eCodes = new Object();
 	
 	loadSubs(subs);
 	subsLoaded();
