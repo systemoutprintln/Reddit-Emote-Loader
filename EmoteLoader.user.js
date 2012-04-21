@@ -553,7 +553,7 @@ function createLink()
 	css[8] = ".forup:hover {background-color:yellow; cursor:pointer;}"
 	
 	//Disable clicking
-	css[9] = ".subdisp .active {  pointer-events: none;   cursor: default; }"
+	css[9] = ".subdisp a{  pointer-events: none;   cursor: default; }"
 
 	
 	for(i = 0; i < css.length; i++)
