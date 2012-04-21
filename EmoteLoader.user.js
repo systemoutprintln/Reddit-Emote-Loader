@@ -554,7 +554,7 @@ function createLink()
 	
 	//Disable clicking
 	css[9] = ".subdisp .active {  pointer-events: none;   cursor: default; }"
-}
+
 	
 	for(i = 0; i < css.length; i++)
 	{
