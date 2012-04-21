@@ -1,16 +1,16 @@
 // ==UserScript==
 // @name           Reddit Emote Loader
 // @namespace      http://www.reddit.com/r/RedditEmoteLoader
-// @version        1.1
+// @version        1.2
 // @include        http://www.reddit.com/*
 // @include        http://reddit.com/*
 // @include        http://*.reddit.com/*
 // ==/UserScript==
 
-/* To Do:
+/* Woking on:
 
--Change emote table to only add an emote if the code does not exist in other subs
-
+-Disable clicking
+-Disable scroll
 
 */
 
@@ -27,7 +27,7 @@ var subs=[ "mylittleandysonic1", "mlas1animotes", "mylittlewtf", "idliketobeatre
 var chrome = navigator.userAgent.toLowerCase().indexOf('chrome') > -1;
 var useExtraCSS = true;
 var dispEmotePage = true;
-var version = "1.1.3";
+var version = "1.2.0";
 var daysBeforeUpdate = 3;
 //Do not change below this line
 
@@ -551,6 +551,10 @@ function createLink()
 	css[7] = ".forup {background-color:white; width:100%; left: 0px; font-size:15px; text-align:center;}"
 	
 	css[8] = ".forup:hover {background-color:yellow; cursor:pointer;}"
+	
+	//Disable clicking
+	css[9] = ".subdisp .active {  pointer-events: none;   cursor: default; }"
+}
 	
 	for(i = 0; i < css.length; i++)
 	{
