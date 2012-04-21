@@ -553,7 +553,7 @@ function createLink()
 	css[8] = ".forup:hover {background-color:yellow; cursor:pointer;}"
 	
 	//Disable clicking
-	css[9] = ".subdisp a{  pointer-events: none;   cursor: default; }"
+	css[9] = ".clickdis{  pointer-events: none;   cursor: default; }"
 
 	
 	for(i = 0; i < css.length; i++)
@@ -658,7 +658,8 @@ function addEmotes(sub, parID)
 	
 		var emote_lnk = document.createElement("a");
 		emote_lnk.href = "/sp";
-		emote_lnk.onclick = exitEmotePage;		
+		emote_lnk.onclick = exitEmotePage;
+		emote_lnk.className = "clickdis";
 		par.appendChild(emote_lnk);
 		
 		for(i = 0; i < emoteSubs[sub].length; i++)
