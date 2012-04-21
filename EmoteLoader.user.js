@@ -659,7 +659,6 @@ function addEmotes(sub, parID)
 		var emote_lnk = document.createElement("a");
 		emote_lnk.href = "/sp";
 		emote_lnk.onclick = exitEmotePage;
-		emote_lnk.className = "clickdis";
 		par.appendChild(emote_lnk);
 		
 		for(i = 0; i < emoteSubs[sub].length; i++)
@@ -667,7 +666,8 @@ function addEmotes(sub, parID)
 		var emote_lnk = document.createElement("a");
 		emote_lnk.href = emoteSubs[sub][i];
 		emote_lnk.title = 	emoteSubs[sub][i];
-		emote_lnk.onclick = exitEmotePage;		
+		emote_lnk.onclick = exitEmotePage;	
+		emote_lnk.className = "clickdis";		
 		par.appendChild(emote_lnk);
 	}
 	
