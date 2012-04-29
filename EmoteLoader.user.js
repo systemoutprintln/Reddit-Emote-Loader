@@ -557,8 +557,8 @@ function createLink()
 	//Disable clicking
 	css[9] = ".clickdis{  pointer-events: none;   cursor: default; }"
 	
-	//Emote table
-	css[10] = ".eTable{ width: 500px !important; margin-left:5%; margin-right:5%; }"
+	//Emote div
+	css[10] = ".ediv{ border:1px solid black; }"
 
 	
 	for(i = 0; i < css.length; i++)
@@ -673,6 +673,7 @@ function addEmotes(sub, parID)
 		for(i = 0; i < emoteSubs[sub].length; i++)
 	{
 		var e_div = document.createElement("div");
+		e_div.className = "ediv";
 		par.appendChild(e_div);
 		
 		var emote_lnk = document.createElement("a");
