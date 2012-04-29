@@ -667,22 +667,24 @@ function addEmotes(sub, parID)
 		emote_lnk.onclick = exitEmotePage;
 		par.appendChild(emote_lnk);
 		
-		var e_table = document.createElement("table");
-		e_table.className = "eTable"
-		par.appendChild(e_table)
+
 
 		
 		for(i = 0; i < emoteSubs[sub].length; i++)
 	{
-		var e_td = document.createElement("td");
-		e_table.appendChild(e_td);
+		var e_div = document.createElement("div");
+		par.appendChild(e_td);
 		
 		var emote_lnk = document.createElement("a");
 		emote_lnk.href = emoteSubs[sub][i];
 		emote_lnk.title = 	emoteSubs[sub][i];
 		emote_lnk.onclick = exitEmotePage;	
 		//emote_lnk.className = "clickdis";		
-		e_td.appendChild(emote_lnk);	
+		e_div.appendChild(emote_lnk);
+		
+		var emote_id = document.createElement("p");
+		p.innerText = emoteSubs[sub][i];
+		e_div.appendChild(emote_id);
 		
 	}
 	
