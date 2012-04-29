@@ -582,6 +582,8 @@ function createLink()
 
 function openEmotePage()
 {
+	document.documentElement.style.overflow = 'hidden';
+
 	var over = document.createElement("div");
 	over.id = "EmoteOverlay";
 	over.className = "emoteoverlay";
@@ -711,6 +713,7 @@ function forceUpdate()
 
 function exitEmotePage()
 {
+	document.documentElement.style.overflow = 'visible';
 	document.body.removeChild(document.getElementById("EmoteOverlay"));
 	//alert(ecode);
 }
