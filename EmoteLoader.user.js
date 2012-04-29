@@ -558,7 +558,7 @@ function createLink()
 	css[9] = ".clickdis{  pointer-events: none;   cursor: default; }"
 	
 	//Emote table
-	css[10] = ".eTable{ width: 90%; margin-left:5%; margin-right:5%; }"
+	css[10] = ".eTable{ width: 500px !important; margin-left:5%; margin-right:5%; }"
 
 	
 	for(i = 0; i < css.length; i++)
