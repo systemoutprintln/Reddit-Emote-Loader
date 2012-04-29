@@ -672,7 +672,7 @@ function addEmotes(sub, parID)
 		
 		for(i = 0; i < emoteSubs[sub].length; i++)
 	{
-		var e_div = document.createElement("div");
+		var e_div = document.createElement("table");
 		e_div.className = "ediv";
 		par.appendChild(e_div);
 		
