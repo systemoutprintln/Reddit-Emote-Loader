@@ -683,7 +683,7 @@ function addEmotes(sub, parID)
 		e_div.appendChild(emote_lnk);
 		
 		var emote_id = document.createElement("p");
-		p.innerText = emoteSubs[sub][i];
+		emote_id.innerText = emoteSubs[sub][i];
 		e_div.appendChild(emote_id);
 		
 	}
