@@ -539,7 +539,7 @@ function createLink()
 	css[2] = ".subHeader{font-size:30px; text-align:center; color:black;}"
 	
 	//Sub display
-	css[3] = ".subdisp {background-color:white; overflow : auto; position: fixed; top: 0; left: 20%; height:100%;  width:80%;}"
+	css[3] = ".subdisp {background-color:white; overflow-x: hidden; overflow-y: scroll; position: fixed; top: 0; left: 20%; height:100%;  width:80%;}"
 	
 	//Sub holder
 	css[4] = ".subhld {background-color:lightgrey; opacity: 1; position: fixed; top: 0; left: 0; height:100%;  width:20%; z-index: 1001; overflow : auto;}";
@@ -677,7 +677,7 @@ function addEmotes(sub, parID)
 		emote_lnk.href = emoteSubs[sub][i];
 		emote_lnk.title = 	emoteSubs[sub][i];
 		emote_lnk.onclick = exitEmotePage;	
-		emote_lnk.className = "clickdis";		
+		//emote_lnk.className = "clickdis";		
 		e_td.appendChild(emote_lnk);	
 		
 	}
