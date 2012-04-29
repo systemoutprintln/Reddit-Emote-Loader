@@ -1,18 +1,7 @@
-
-
-a[href^="/"][href*="-blink!"] {
-    text-decoration: blink !important
-    }
-a[href^="/"][href*="-comicsans!"] {
-    font-family: "Comic-Sans MS", cursive
-    }
-a[href^="/"][href*="-impact!"] {
-    font-family: Impact, Charcoal, sans-serif
-    }
-a[href^="/"][href*="-tahoma!"] {
-    font-family: Tahoma, Geneva, sans-serif
-    }
-
+a[href^="/"][href*="-blink!"] {text-decoration: blink !important}
+a[href^="/"][href*="-comicsans!"] {font-family: "Comic-Sans MS", cursive}
+a[href^="/"][href*="-impact!"] {font-family: Impact, Charcoal, sans-serif}
+a[href^="/"][href*="-tahoma!"] {font-family: Tahoma, Geneva, sans-serif}
 @-moz-keyframes spin{from{-moz-transform:rotate(0deg)scaleX(1)rotateX(0deg)rotateY(0deg)rotateZ(0deg)}to{-moz-transform:rotate(0deg)scaleX(1)rotateX(360deg)rotateY(360deg)rotateZ(360deg)}}
 @-moz-keyframes spin-45{from{-moz-transform:rotate(45deg)scaleX(1)rotateX(0deg)rotateY(0deg)rotateZ(0deg)}to{-moz-transform:rotate(45deg)scaleX(1)rotateX(360deg)rotateY(360deg)rotateZ(360deg)}}
 @-moz-keyframes spin-90{from{-moz-transform:rotate(90deg)scaleX(1)rotateX(0deg)rotateY(0deg)rotateZ(0deg)}to{-moz-transform:rotate(90deg)scaleX(1)rotateX(360deg)rotateY(360deg)rotateZ(360deg)}}
@@ -141,7 +130,6 @@ a[href^="/"][href*="-tahoma!"] {
 @-webkit-keyframes zspin-225-r{from{-webkit-transform:rotate(225deg)scaleX(-1)rotatez(0deg)}to{-webkit-transform:rotate(225deg)scaleX(-1)rotatez(360deg)}}
 @-webkit-keyframes zspin-270-r{from{-webkit-transform:rotate(270deg)scaleX(-1)rotatez(0deg)}to{-webkit-transform:rotate(270deg)scaleX(-1)rotatez(360deg)}}
 @-webkit-keyframes zspin-315-r{from{-webkit-transform:rotate(315deg)scaleX(-1)rotatez(0deg)}to{-webkit-transform:rotate(315deg)scaleX(-1)rotatez(360deg)}}
-
 a:hover[href^='/'][href*='-r'][href*='-d']{-moz-transform:rotate(0deg)scaleX(1);-o-transform:rotate(0deg)scaleX(1);-webkit-transform:rotate(0deg)scaleX(1);image-rendering:-moz-crisp-edges}
 a[href^='/'][href*='-45'],a:hover[href^='/'][href*='-45'][href*='-r'][href*='-d']{-moz-transform:rotate(45deg)scaleX(1);-o-transform:rotate(45deg)scaleX(1);-webkit-transform:rotate(45deg)scaleX(1);image-rendering:-moz-crisp-edges}
 a[href^='/'][href*='-90'],a:hover[href^='/'][href*='-90'][href*='-r'][href*='-d']{-moz-transform:rotate(90deg)scaleX(1);-o-transform:rotate(90deg)scaleX(1);-webkit-transform:rotate(90deg)scaleX(1);image-rendering:-moz-crisp-edges}
@@ -172,7 +160,6 @@ a[href^='/'][href*='-f'],a:hover[href^='/'][href*='-f'][href*='-r'][href*='-d']{
 a[href^='/'][href*='-45'][href*='-f'],a:hover[href^='/'][href*='-45'][href*='-f'][href*='-r'][href*='-d']{-moz-transform:rotate(225deg)scaleX(-1);-o-transform:rotate(225deg)scaleX(-1);-webkit-transform:rotate(225deg)scaleX(-1);image-rendering:-moz-crisp-edges}
 a[href^='/'][href*='-90'][href*='-f'],a:hover[href^='/'][href*='-90'][href*='-f'][href*='-r'][href*='-d']{-moz-transform:rotate(270deg)scaleX(-1);-o-transform:rotate(270deg)scaleX(-1);-webkit-transform:rotate(270deg)scaleX(-1);image-rendering:-moz-crisp-edges}
 a[href^='/'][href*='-135'][href*='-f'],a:hover[href^='/'][href*='-135'][href*='-f'][href*='-r'][href*='-d']{-moz-transform:rotate(315deg)scaleX(-1);-o-transform:rotate(315deg)scaleX(-1);-webkit-transform:rotate(315deg)scaleX(-1);image-rendering:-moz-crisp-edges}
-
 a[href^="/"][href*=-spin],a:hover[href^='/'][href*='-r'][href*='-d'][href*=-spin]{-moz-animation:spin 2s infinite linear;-webkit-animation:spin 2s infinite linear;image-rendering:-moz-crisp-edges}
 a[href^='/'][href*='-45'][href*=-spin],a:hover[href^='/'][href*='-45'][href*='-r'][href*='-d'][href*=-spin]{-moz-animation:spin-45 2s infinite linear;-webkit-animation:spin-45 2s infinite linear;image-rendering:-moz-crisp-edges}
 a[href^='/'][href*='-90'][href*=-spin],a:hover[href^='/'][href*='-90'][href*='-r'][href*='-d'][href*=-spin]{-moz-animation:spin-90 2s infinite linear;-webkit-animation:spin-90 2s infinite linear;image-rendering:-moz-crisp-edges}
@@ -203,7 +190,6 @@ a[href^='/'][href*='-f'][href*=-spin],a:hover[href^='/'][href*='-f'][href*='-r']
 a[href^='/'][href*='-45'][href*='-f'][href*=-spin],a:hover[href^='/'][href*='-45'][href*='-f'][href*='-r'][href*='-d'][href*=-spin]{-moz-animation:spin-225-r 2s infinite linear;-webkit-animation:spin-225-r 2s infinite linear;image-rendering:-moz-crisp-edges}
 a[href^='/'][href*='-90'][href*='-f'][href*=-spin],a:hover[href^='/'][href*='-90'][href*='-f'][href*='-r'][href*='-d'][href*=-spin]{-moz-animation:spin-270-r 2s infinite linear;-webkit-animation:spin-270-r 2s infinite linear;image-rendering:-moz-crisp-edges}
 a[href^='/'][href*='-135'][href*='-f'][href*=-spin],a:hover[href^='/'][href*='-135'][href*='-f'][href*='-r'][href*='-d'][href*=-spin]{-moz-animation:spin-315-r 2s infinite linear;-webkit-animation:spin-315-r 2s infinite linear;image-rendering:-moz-crisp-edges}
-
 a[href^="/"][href*=-xspin],a:hover[href^='/'][href*='-r'][href*='-d'][href*=-xspin]{-moz-animation:xspin 2s infinite linear;-webkit-animation:xspin 2s infinite linear;image-rendering:-moz-crisp-edges}
 a[href^='/'][href*='-45'][href*=-xspin],a:hover[href^='/'][href*='-45'][href*='-r'][href*='-d'][href*=-xspin]{-moz-animation:xspin-45 2s infinite linear;-webkit-animation:xspin-45 2s infinite linear;image-rendering:-moz-crisp-edges}
 a[href^='/'][href*='-90'][href*=-xspin],a:hover[href^='/'][href*='-90'][href*='-r'][href*='-d'][href*=-xspin]{-moz-animation:xspin-90 2s infinite linear;-webkit-animation:xspin-90 2s infinite linear;image-rendering:-moz-crisp-edges}
@@ -234,7 +220,6 @@ a[href^='/'][href*='-f'][href*=-xspin],a:hover[href^='/'][href*='-f'][href*='-r'
 a[href^='/'][href*='-45'][href*='-f'][href*=-xspin],a:hover[href^='/'][href*='-45'][href*='-f'][href*='-r'][href*='-d'][href*=-xspin]{-moz-animation:xspin-225-r 2s infinite linear;-webkit-animation:xspin-225-r 2s infinite linear;image-rendering:-moz-crisp-edges}
 a[href^='/'][href*='-90'][href*='-f'][href*=-xspin],a:hover[href^='/'][href*='-90'][href*='-f'][href*='-r'][href*='-d'][href*=-xspin]{-moz-animation:xspin-270-r 2s infinite linear;-webkit-animation:xspin-270-r 2s infinite linear;image-rendering:-moz-crisp-edges}
 a[href^='/'][href*='-135'][href*='-f'][href*=-xspin],a:hover[href^='/'][href*='-135'][href*='-f'][href*='-r'][href*='-d'][href*=-xspin]{-moz-animation:xspin-315-r 2s infinite linear;-webkit-animation:xspin-315-r 2s infinite linear;image-rendering:-moz-crisp-edges}
-
 a[href^="/"][href*=-yspin],a:hover[href^='/'][href*='-r'][href*='-d'][href*=-yspin]{-moz-animation:yspin 2s infinite linear;-webkit-animation:yspin 2s infinite linear;image-rendering:-moz-crisp-edges}
 a[href^='/'][href*='-45'][href*=-yspin],a:hover[href^='/'][href*='-45'][href*='-r'][href*='-d'][href*=-yspin]{-moz-animation:yspin-45 2s infinite linear;-webkit-animation:yspin-45 2s infinite linear;image-rendering:-moz-crisp-edges}
 a[href^='/'][href*='-90'][href*=-yspin],a:hover[href^='/'][href*='-90'][href*='-r'][href*='-d'][href*=-yspin]{-moz-animation:yspin-90 2s infinite linear;-webkit-animation:yspin-90 2s infinite linear;image-rendering:-moz-crisp-edges}
@@ -265,7 +250,6 @@ a[href^='/'][href*='-f'][href*=-yspin],a:hover[href^='/'][href*='-f'][href*='-r'
 a[href^='/'][href*='-45'][href*='-f'][href*=-yspin],a:hover[href^='/'][href*='-45'][href*='-f'][href*='-r'][href*='-d'][href*=-yspin]{-moz-animation:yspin-225-r 2s infinite linear;-webkit-animation:yspin-225-r 2s infinite linear;image-rendering:-moz-crisp-edges}
 a[href^='/'][href*='-90'][href*='-f'][href*=-yspin],a:hover[href^='/'][href*='-90'][href*='-f'][href*='-r'][href*='-d'][href*=-yspin]{-moz-animation:yspin-270-r 2s infinite linear;-webkit-animation:yspin-270-r 2s infinite linear;image-rendering:-moz-crisp-edges}
 a[href^='/'][href*='-135'][href*='-f'][href*=-yspin],a:hover[href^='/'][href*='-135'][href*='-f'][href*='-r'][href*='-d'][href*=-yspin]{-moz-animation:yspin-315-r 2s infinite linear;-webkit-animation:yspin-315-r 2s infinite linear;image-rendering:-moz-crisp-edges}
-
 a[href^="/"][href*=-zspin],a:hover[href^='/'][href*='-r'][href*='-d'][href*=-zspin]{-moz-animation:zspin 2s infinite linear;-webkit-animation:zspin 2s infinite linear;image-rendering:-moz-crisp-edges}
 a[href^='/'][href*='-45'][href*=-zspin],a:hover[href^='/'][href*='-45'][href*='-r'][href*='-d'][href*=-zspin]{-moz-animation:zspin-45 2s infinite linear;-webkit-animation:zspin-45 2s infinite linear;image-rendering:-moz-crisp-edges}
 a[href^='/'][href*='-90'][href*=-zspin],a:hover[href^='/'][href*='-90'][href*='-r'][href*='-d'][href*=-zspin]{-moz-animation:zspin-90 2s infinite linear;-webkit-animation:zspin-90 2s infinite linear;image-rendering:-moz-crisp-edges}
@@ -296,7 +280,6 @@ a[href^='/'][href*='-f'][href*=-zspin],a:hover[href^='/'][href*='-f'][href*='-r'
 a[href^='/'][href*='-45'][href*='-f'][href*=-zspin],a:hover[href^='/'][href*='-45'][href*='-f'][href*='-r'][href*='-d'][href*=-zspin]{-moz-animation:zspin-225-r 2s infinite linear;-webkit-animation:zspin-225-r 2s infinite linear;image-rendering:-moz-crisp-edges}
 a[href^='/'][href*='-90'][href*='-f'][href*=-zspin],a:hover[href^='/'][href*='-90'][href*='-f'][href*='-r'][href*='-d'][href*=-zspin]{-moz-animation:zspin-270-r 2s infinite linear;-webkit-animation:zspin-270-r 2s infinite linear;image-rendering:-moz-crisp-edges}
 a[href^='/'][href*='-135'][href*='-f'][href*=-zspin],a:hover[href^='/'][href*='-135'][href*='-f'][href*='-r'][href*='-d'][href*=-zspin]{-moz-animation:zspin-315-r 2s infinite linear;-webkit-animation:zspin-315-r 2s infinite linear;image-rendering:-moz-crisp-edges}
-
 a:hover[href^='/'][href$='-rd']{-moz-transform:rotate(0deg)scaleX(1);-o-transform:rotate(0deg)scaleX(1);-webkit-transform:rotate(0deg)scaleX(1);image-rendering:-moz-crisp-edges}
 a[href^='/'][href$='-90d'],a:hover[href^='/'][href$='-90rd']{-moz-transform:rotate(90deg)scaleX(1);-o-transform:rotate(90deg)scaleX(1);-webkit-transform:rotate(90deg)scaleX(1);image-rendering:-moz-crisp-edges}
 a[href^='/'][href$='-180d'],a:hover[href^='/'][href$='-fd']{-moz-transform:rotate(180deg)scaleX(1);-o-transform:rotate(180deg)scaleX(1);-webkit-transform:rotate(180deg)scaleX(1);image-rendering:-moz-crisp-edges}
@@ -308,7 +291,6 @@ a[href^='/'][href$='-270r'],a[href^='/'][href$='-270rd'],a:hover[href^='/'][href
 a[href^="/"][href*=-ispin]{-moz-animation:spin 2s infinite linear;-webkit-animation:spin 2s infinite linear;image-rendering:-moz-crisp-edges}
 a[href^="/"][href*=-rotate],a[href*=-lrotate]{-moz-animation:zspin 2s infinite linear;-webkit-animation:zspin 2s infinite linear;image-rendering:-moz-crisp-edges}
 a[href^="/"][href*=-rrotate],a[href*=-lrrotate]{-moz-animation:zspin-r 2s infinite linear;-webkit-animation:zspin-r 2s infinite linear;image-rendering:-moz-crisp-edges}
-
 .md{overflow-y:hidden !important}
 a[href^="/"][href*="-inp"]{float: none !important;display: inline-block !important}
 a[href^="/"][href*="-ar"]{float: right !important}

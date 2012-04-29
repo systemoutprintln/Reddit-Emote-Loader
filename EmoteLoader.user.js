@@ -9,8 +9,10 @@
 
 /* Woking on:
 
--Disable clicking
+-Disable clicking X
+-emote Table 
 -Disable scroll
+
 
 */
 
@@ -475,7 +477,7 @@ function CSSFlags() //TODO: Replace with stylesheet
 	var css = new Array();
 	
 	//Dance (-d)
-	css[0] = ".md a[href*=\'-d\']:hover {\
+	css[0] = "a[href*=\'-d\']:hover {\
 			-moz-transform: scaleX(-1);\
 			-o-transform: scaleX(-1);\
 			-webkit-transform: scaleX(-1);\
@@ -484,7 +486,7 @@ function CSSFlags() //TODO: Replace with stylesheet
 	
 	//Reverse (-r)
 	
-	css[1] = ".md a[href*=\'-r\'] {\
+	css[1] = "a[href*=\'-r\'] {\
 			-moz-transform: scaleX(-1);\
 			-o-transform: scaleX(-1);\
 			-webkit-transform: scaleX(-1);\
@@ -493,7 +495,7 @@ function CSSFlags() //TODO: Replace with stylesheet
 			
 	//Flip (-f)
 	
-		css[2] = ".md a[href*=\'-f\'] {\
+		css[2] = "a[href*=\'-f\'] {\
 			-moz-transform: scaleY(-1);\
 			-o-transform: scaleY(-1);\
 			-webkit-transform: scaleY(-1);\
@@ -502,23 +504,23 @@ function CSSFlags() //TODO: Replace with stylesheet
 	
 	//Inline (-inp)
 	
-		css[3] = ".md a[href*=\'-inp\'] {float:none !important;display:inline-block !important}";
+		css[3] = "a[href*=\'-inp\'] {float:none !important;display:inline-block !important}";
 		
 	//Right (-ar)
 	
-		css[4] = ".md a[href*=\'-ar\'] {float:right !important;display:inline-block !important}";
+		css[4] = "a[href*=\'-ar\'] {float:right !important;display:inline-block !important}";
 		
 	//Rotates (-45/90...)
 	var j = 5;
 	for(i = 45; i < 360; i+= 45)
 	{
-		css[j] = ".md a[href*=\'-" + i + "\']{-moz-transform:rotate(" + i + "deg)scaleX(1);-o-transform:rotate(" + i + "deg)scaleX(1);-webkit-transform:rotate(" + i + "deg)scaleX(1);image-rendering:-moz-crisp-edges}"			
+		css[j] = "a[href*=\'-" + i + "\']{-moz-transform:rotate(" + i + "deg)scaleX(1);-o-transform:rotate(" + i + "deg)scaleX(1);-webkit-transform:rotate(" + i + "deg)scaleX(1);image-rendering:-moz-crisp-edges}"			
 		j++;
 	}		
 
 	for(i = 0; i < css.length; i++)
 	{
-		emoteSheet.insertRule(css[i], 0);
+		emoteSheet.insertRule("a[href^=\'/\']" + css[i], 0);
 	}
 
 }
@@ -645,7 +647,8 @@ function addEmotes(sub, parID)
 	s_title.onclick = exitEmotePage;
 	s_title.innerHTML = "/r/" + subs[sub].toLowerCase();
 	par.appendChild(s_title);
-
+	
+	
 	for(i = 0; i < textSubs[sub].length; i++)
 	{
 		var emote_lnk = document.createElement("a");
@@ -661,18 +664,26 @@ function addEmotes(sub, parID)
 		emote_lnk.onclick = exitEmotePage;
 		par.appendChild(emote_lnk);
 		
+		var e_table = document.createElement("table");
+		par.appendChild(e_table)
+
+		
 		for(i = 0; i < emoteSubs[sub].length; i++)
 	{
+		var e_td = document.createElement("td");
+		e_table.appendChild(e_td);
+		
 		var emote_lnk = document.createElement("a");
 		emote_lnk.href = emoteSubs[sub][i];
 		emote_lnk.title = 	emoteSubs[sub][i];
 		emote_lnk.onclick = exitEmotePage;	
 		emote_lnk.className = "clickdis";		
-		par.appendChild(emote_lnk);
+		e_td.appendChild(emote_lnk);	
+		
 	}
 	
 	
-	}catch(e){console.log("642: " + e);}
+	}catch(e){console.log("686: " + e);}
 
 
 }
