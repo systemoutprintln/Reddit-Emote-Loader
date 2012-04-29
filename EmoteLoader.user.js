@@ -520,7 +520,8 @@ function CSSFlags() //TODO: Replace with stylesheet
 
 	for(i = 0; i < css.length; i++)
 	{
-		emoteSheet.insertRule("a[href^=\'/\']" + css[i], 0);
+		var s = "a[href^=\'/\']" + css[i];
+		emoteSheet.insertRule(s, 0);
 	}
 
 }
@@ -558,7 +559,7 @@ function createLink()
 	css[9] = ".clickdis{  pointer-events: none;   cursor: default; }"
 	
 	//Emote div
-	css[10] = ".ediv{ border:1px solid black; }"
+	css[10] = ".ediv{ border:1px solid black; float:none !important;display:inline-block !important}"
 
 	
 	for(i = 0; i < css.length; i++)
