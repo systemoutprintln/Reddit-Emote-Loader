@@ -673,7 +673,7 @@ function addEmotes(sub, parID)
 		for(i = 0; i < emoteSubs[sub].length; i++)
 	{
 		var e_div = document.createElement("div");
-		par.appendChild(e_td);
+		par.appendChild(e_div);
 		
 		var emote_lnk = document.createElement("a");
 		emote_lnk.href = emoteSubs[sub][i];
