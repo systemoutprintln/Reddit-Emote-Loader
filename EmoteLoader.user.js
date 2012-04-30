@@ -341,6 +341,8 @@ function addRules(sub)
 	var srule;
 	
 	var emote = /a\[href\|?="\/[A-Za-z0-9!#]+"]/
+	
+	var oclass = /.[A-Za-z0-9]+/
 
     var srules = ssheet.cssRules;
 	
@@ -366,13 +368,19 @@ function addRules(sub)
 			var stext = srule.selectorText;
 			var ecode;
 			
+			addRule = true;
 			
-
+			if(oclass.test(srule.selectorText))
+			{
+			  addRule = false;
+			}
 
 
 			if(srule.cssText.indexOf("background-image") != -1) //Images
 			{	
-				addRule = true;
+				
+				
+				
 				
 				while(stext.indexOf("a[href") > -1)
 				{
@@ -450,7 +458,7 @@ function addRules(sub)
 	catch(e)
 	{
 		error = true;
-		console.log("414: " + e)
+		console.log("453: " + e)
 		
 	}
 	
@@ -682,7 +690,7 @@ function addEmotes(sub, parID)
 		var emote_lnk = document.createElement("a");
 		emote_lnk.href = emoteSubs[sub][i];
 		emote_lnk.title = 	emoteSubs[sub][i];
-		emote_lnk.onclick = exitEmotePage;	
+		emote_lnk.onclick = function(){return false;}
 		//emote_lnk.className = "clickdis";		
 		e_div.appendChild(emote_lnk);
 		
