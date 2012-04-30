@@ -7,13 +7,9 @@
 // @include        http://*.reddit.com/*
 // ==/UserScript==
 
-/* Woking on:
-
--Disable clicking X
--emote Table 
--Disable scroll
-
-
+/* To Do:
+-Search Feature
+-Close button
 */
 
 //Options
@@ -29,7 +25,7 @@ var subs=[ "mylittleandysonic1", "mlas1animotes", "mylittlewtf", "idliketobeatre
 var chrome = navigator.userAgent.toLowerCase().indexOf('chrome') > -1;
 var useExtraCSS = true;
 var dispEmotePage = true;
-var version = "1.3.1";
+var version = "1.3.2";
 var daysBeforeUpdate = 3;
 //Do not change below this line
 
@@ -551,7 +547,7 @@ function CSSFlags() //TODO: Replace with stylesheet
 
 	for(i = 0; i < css.length; i++)
 	{
-		var s = "a[href^=\'/\']" + css[i];
+		var s = "a[href^=\'/\'] " + css[i];
 		emoteSheet.insertRule(s, 0);
 	}
 
