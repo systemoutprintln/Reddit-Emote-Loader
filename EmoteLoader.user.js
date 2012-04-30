@@ -29,7 +29,7 @@ var subs=[ "mylittleandysonic1", "mlas1animotes", "mylittlewtf", "idliketobeatre
 var chrome = navigator.userAgent.toLowerCase().indexOf('chrome') > -1;
 var useExtraCSS = true;
 var dispEmotePage = true;
-var version = "1.3.0";
+var version = "1.3.1";
 var daysBeforeUpdate = 3;
 //Do not change below this line
 
