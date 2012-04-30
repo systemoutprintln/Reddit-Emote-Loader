@@ -397,7 +397,7 @@ function addRules(sub)
 					tempCodes[ecode] = "Exists";
 				}
 			}
-			else //(srule.cssText.indexOf("cursor: text") != -1) //Text
+			else if(srule.cssText.indexOf("cursor: text") != -1 || srule.cssText.indexOf("color:") != -1 ) //Text
 			{
 				ecode = stext.substring(stext.indexOf("/"));
 				ecode = ecode.substring(0, ecode.indexOf("\"]")); 
@@ -485,13 +485,13 @@ function ruleFilter(sel_text)
 	
 	filter[1] = /.expando/
 	
-	//for(i = 0; i < filter.length; i++)
-	//{
+	for(i = 0; i < filter.length; i++)
+	{
 	    if(filter[0].test(sel_text))
 		{
 		    good = false;
 		}
-	//}
+	}
 	
 	return good;
 
