@@ -374,13 +374,24 @@ function addRules(sub)
 			  continue;
 			}
 
-
-			if(srule.cssText.indexOf("background-image") != -1) //Images
+            if(srule.cssText.indexOf("cursor: text") != -1 || srule.cssText.indexOf("color:") != -1 ) //Text
+			{
+				ecode = stext.substring(stext.indexOf("/"));
+				ecode = ecode.substring(0, ecode.indexOf("\"]")); 
+				
+				if(eCodes.hasOwnProperty(ecode))
+				{
+					//addRule = false;
+					rcss.replace(ecode,"/dup_dump");
+				}
+				else
+				{				
+				    textSubs[subI][textSubs[subI].length] = ecode;
+				    tempCodes[ecode] = "Exists";
+				}
+			}
+			else if(srule.cssText.indexOf("background-image") != -1) //Images
 			{	
-				
-				
-				
-				
 				while(stext.indexOf("a[href") > -1)
 				{
 					stext = stext.substring(stext.indexOf("a[href") + 5);
@@ -389,30 +400,17 @@ function addRules(sub)
 										
 					if(eCodes.hasOwnProperty(ecode))
 					{
-						addRule = false;
+						//addRule = false;
+						rcss.replace(ecode,"/dup_dump");
 					}
 					else
 				    {	
-					emoteSubs[subI][emoteSubs[subI].length] = ecode;
-					tempCodes[ecode] = "Exists";
+					    emoteSubs[subI][emoteSubs[subI].length] = ecode;
+					    tempCodes[ecode] = "Exists";
 					}
 				}
 			}
-			else if(srule.cssText.indexOf("cursor: text") != -1 || srule.cssText.indexOf("color:") != -1 ) //Text
-			{
-				ecode = stext.substring(stext.indexOf("/"));
-				ecode = ecode.substring(0, ecode.indexOf("\"]")); 
-				
-				if(eCodes.hasOwnProperty(ecode))
-				{
-					addRule = false;
-				}
-				else
-				{				
-				    textSubs[subI][textSubs[subI].length] = ecode;
-				    tempCodes[ecode] = "Exists";
-				}
-			}
+			
 			
 			//Test for repeat
 			stext = srule.selectorText;
@@ -491,7 +489,7 @@ function ruleFilter(sel_text)
 	var i = 0;
 	for( i = 0; i < filter.length; i++)
 	{
-	    if(filter[0].test(sel_text))
+	    if(filter[i].test(sel_text))
 		{
 		    good = false;
 		}
