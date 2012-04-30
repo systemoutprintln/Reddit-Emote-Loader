@@ -371,6 +371,7 @@ function addRules(sub)
 			if(!ruleFilter(stext))
 			{
 			  addRule = false;
+			  continue;
 			}
 
 
@@ -396,7 +397,7 @@ function addRules(sub)
 					tempCodes[ecode] = "Exists";
 				}
 			}
-			if(srule.cssText.indexOf("cursor: text") != -1) //Text
+			else //(srule.cssText.indexOf("cursor: text") != -1) //Text
 			{
 				ecode = stext.substring(stext.indexOf("/"));
 				ecode = ecode.substring(0, ecode.indexOf("\"]")); 
@@ -484,10 +485,13 @@ function ruleFilter(sel_text)
 	
 	filter[1] = /.expando/
 	
-	for(i = 0; i < filter.length; i++)
-	{
-	    if(filter[i].test(sel_text)) good = false;
-	}
+	//for(i = 0; i < filter.length; i++)
+	//{
+	    if(filter[0].test(sel_text))
+		{
+		    good = false;
+		}
+	//}
 	
 	return good;
 
