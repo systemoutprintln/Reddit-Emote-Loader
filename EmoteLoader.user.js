@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name           Reddit Emote Loader
 // @namespace      http://www.reddit.com/r/RedditEmoteLoader
-// @version        1.2
+// @version        1.3
 // @include        http://www.reddit.com/*
 // @include        http://reddit.com/*
 // @include        http://*.reddit.com/*
@@ -29,7 +29,7 @@ var subs=[ "mylittleandysonic1", "mlas1animotes", "mylittlewtf", "idliketobeatre
 var chrome = navigator.userAgent.toLowerCase().indexOf('chrome') > -1;
 var useExtraCSS = true;
 var dispEmotePage = true;
-var version = "1.2.0";
+var version = "1.3.0";
 var daysBeforeUpdate = 3;
 //Do not change below this line
 
@@ -341,8 +341,6 @@ function addRules(sub)
 	var srule;
 	
 	var emote = /a\[href\|?="\/[A-Za-z0-9!#]+"]/
-	
-	var oclass = /.[A-Za-z0-9]+/
 
     var srules = ssheet.cssRules;
 	
@@ -370,7 +368,7 @@ function addRules(sub)
 			
 			addRule = true;
 			
-			if(oclass.test(srule.selectorText))
+			if(!ruleFilter(stext))
 			{
 			  addRule = false;
 			}
@@ -458,7 +456,7 @@ function addRules(sub)
 	catch(e)
 	{
 		error = true;
-		console.log("453: " + e)
+		console.log("461: " + e)
 		
 	}
 	
@@ -475,6 +473,25 @@ function addRules(sub)
 
 }
 
+
+function ruleFilter(sel_text)
+{
+	var filter = new Array();
+	var good = true;
+	
+	//Thumbnails
+	filter[0] = /.thumbnail/
+	
+	filter[1] = /.expando/
+	
+	for(i = 0; i < filter.length; i++)
+	{
+	    if(filter[i].test(sel_text)) good = false;
+	}
+	
+	return good;
+
+}
 
 //// Special CSS flags ////
 
