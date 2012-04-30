@@ -391,10 +391,11 @@ function addRules(sub)
 					{
 						addRule = false;
 					}
-					
-
+					else
+				    {	
 					emoteSubs[subI][emoteSubs[subI].length] = ecode;
 					tempCodes[ecode] = "Exists";
+					}
 				}
 			}
 			else if(srule.cssText.indexOf("cursor: text") != -1 || srule.cssText.indexOf("color:") != -1 ) //Text
@@ -406,9 +407,11 @@ function addRules(sub)
 				{
 					addRule = false;
 				}
-				
-				textSubs[subI][textSubs[subI].length] = ecode;
-				tempCodes[ecode] = "Exists";
+				else
+				{				
+				    textSubs[subI][textSubs[subI].length] = ecode;
+				    tempCodes[ecode] = "Exists";
+				}
 			}
 			
 			//Test for repeat
