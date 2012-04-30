@@ -488,7 +488,8 @@ function ruleFilter(sel_text)
 	
 	filter[1] = /.expando/
 	
-	for(i = 0; i < filter.length; i++)
+	var i = 0;
+	for( i = 0; i < filter.length; i++)
 	{
 	    if(filter[0].test(sel_text))
 		{
