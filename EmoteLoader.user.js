@@ -402,7 +402,7 @@ function addRules(sub)
 					else
 				    {	
 					    emoteSubs[subI][emoteSubs[subI].length] = ecode;
-					    tempCodes[ecode] = "Exists";
+					    tempCodes[ecode] = subs[subI];
 					}
 				}
 			}
@@ -421,7 +421,7 @@ function addRules(sub)
 					}
 					else
 					{
-					    tempCodes[ecode] = "Exists";
+					    //tempCodes[ecode] = "Exists";
 					}
 				}
 			
