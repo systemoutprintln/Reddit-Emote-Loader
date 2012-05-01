@@ -17,7 +17,7 @@
 // To add a sub add a comma then the sub name in quotes after the last entry
 // For example with MLPLounge it should look like the following:
 // var subs=["mylittlepony","MLPlounge"];
-var subs=[ "mlplounge", "mylittlefoodmanes", "mylittleandysonic1", "mlas1animotes", "mylittlewtf", "idliketobeatree", "mylittlelivestream", "vinylscratch", "daylightemotes", "mylittlesquidward", "mylittlenopenopenope", "mylittlenanners", "mylittlenosleep", "mylittledamon", "thebestpony", "tbpimagedump", "roseluck", "applejack", "mylittlemusician", "mylittlecelestias", "mylittlechaos", "mylittlealcoholic", "mylittlelistentothis", "surprise", "pinkiepie", "twilightSparkle", "minuette", "lyra"];
+var subs=[ "mlplounge", "mylittlefoodmanes", "mylittleandysonic1", "mylittlewtf","daylightemotes"];
 
 
 
@@ -25,7 +25,7 @@ var subs=[ "mlplounge", "mylittlefoodmanes", "mylittleandysonic1", "mlas1animote
 var chrome = navigator.userAgent.toLowerCase().indexOf('chrome') > -1;
 var useExtraCSS = true;
 var dispEmotePage = true;
-var version = "1.3.4";
+var version = "1.3.5";
 var daysBeforeUpdate = 3;
 //Do not change below this line
 
