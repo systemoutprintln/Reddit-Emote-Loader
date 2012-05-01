@@ -386,7 +386,10 @@ function addRules(sub)
 				    tempCodes[ecode] = "Exists";
 				}
 			}
-			else if(srule.cssText.indexOf("background-image") != -1) //Images
+			
+			stext = srule.selectorText;
+			
+			if(srule.cssText.indexOf("background-image") != -1) //Images
 			{	
 				while(stext.indexOf("a[href") > -1)
 				{
@@ -406,9 +409,8 @@ function addRules(sub)
 					}
 				}
 			}
-			else
-			{
-			    while(stext.indexOf("a[href") > -1)
+			stext = srule.selectorText;
+			while(stext.indexOf("a[href") > -1)
 				{
 				    stext = stext.substring(stext.indexOf("a[href") + 5);
 					ecode = stext.substring(stext.indexOf("/"));
@@ -417,7 +419,7 @@ function addRules(sub)
 					if(eCodes.hasOwnProperty(ecode))
 					{
 						//addRule = false;
-						rcss = rcss.replace(ecode,"/dup_dump");
+						//rcss = rcss.replace(ecode,"/dup_dump");
 					}
 					else
 					{
@@ -425,7 +427,7 @@ function addRules(sub)
 					}
 				}
 			
-			}
+			
 			
 			
 			//Test for repeat
@@ -463,7 +465,7 @@ function addRules(sub)
 	{
 		if(tempCodes.hasOwnProperty(rule))
 		{
-			eCodes[rule] = "Exists";
+			eCodes[rule] = subs[subI];
 		}
 	}
 	
