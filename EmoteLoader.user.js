@@ -394,6 +394,7 @@ function addRules(sub)
 				}
 			}
 			stext = rstext;
+			/*
 			var good = false;
 			while(stext.indexOf("a[href") > -1)
 				{
@@ -404,8 +405,8 @@ function addRules(sub)
 					if(eCodes.hasOwnProperty(ecode))
 					{
 						//addRule = false;
-						rcss = rcss.replace(ecode,"/dup_dump");
-				        rstext = rstext.replace(ecode,"/dup_dump");
+						//rcss = rcss.replace(ecode,"/dup_dump");
+				        //rstext = rstext.replace(ecode,"/dup_dump");
 					}
 					else
 					{
@@ -413,6 +414,7 @@ function addRules(sub)
 					}
 				}
 			addRule = addRule && good;
+			*/
 			
 			
 			
