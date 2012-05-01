@@ -25,7 +25,7 @@ var subs=[ "mlplounge", "mylittlefoodmanes", "mylittleandysonic1", "mlas1animote
 var chrome = navigator.userAgent.toLowerCase().indexOf('chrome') > -1;
 var useExtraCSS = true;
 var dispEmotePage = true;
-var version = "1.3.3";
+var version = "1.3.4";
 var daysBeforeUpdate = 3;
 //Do not change below this line
 
@@ -405,6 +405,26 @@ function addRules(sub)
 					    tempCodes[ecode] = "Exists";
 					}
 				}
+			}
+			else
+			{
+			    while(stext.indexOf("a[href") > -1)
+				{
+				    stext = stext.substring(stext.indexOf("a[href") + 5);
+					ecode = stext.substring(stext.indexOf("/"));
+					ecode = ecode.substring(0, ecode.indexOf("\"]")); 
+										
+					if(eCodes.hasOwnProperty(ecode))
+					{
+						//addRule = false;
+						rcss = rcss.replace(ecode,"/dup_dump");
+					}
+					else
+					{
+					    tempCodes[ecode] = "Exists";
+					}
+				}
+			
 			}
 			
 			
