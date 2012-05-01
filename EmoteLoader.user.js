@@ -359,7 +359,8 @@ function addRules(sub)
 		if(emote.test(srule.selectorText))
 		{
 			var rcss = srule.cssText;
-			var stext = srule.selectorText;
+			var rstext = srule.selectorText;
+			var stext = rstext;
 			var ecode;
 			
 			addRule = true;
@@ -373,21 +374,12 @@ function addRules(sub)
             if(srule.cssText.indexOf("cursor: text") != -1 || srule.cssText.indexOf("color:") != -1 ) //Text
 			{
 				ecode = stext.substring(stext.indexOf("/"));
-				ecode = ecode.substring(0, ecode.indexOf("\"]")); 
-				
-				if(eCodes.hasOwnProperty(ecode))
-				{
-					//addRule = false;
-					rcss = rcss.replace(ecode,"/dup_dump");
-				}
-				else
-				{				
-				    textSubs[subI][textSubs[subI].length] = ecode;
-				    tempCodes[ecode] = "Exists";
-				}
+				ecode = ecode.substring(0, ecode.indexOf("\"]"));
+                textSubs[subI][textSubs[subI].length] = ecode;
+				tempCodes[ecode] = subs[subI];
 			}
 			
-			stext = srule.selectorText;
+			stext = rstext;
 			
 			if(srule.cssText.indexOf("background-image") != -1) //Images
 			{	
@@ -396,20 +388,13 @@ function addRules(sub)
 					stext = stext.substring(stext.indexOf("a[href") + 5);
 					ecode = stext.substring(stext.indexOf("/"));
 					ecode = ecode.substring(0, ecode.indexOf("\"]")); 
-										
-					if(eCodes.hasOwnProperty(ecode))
-					{
-						//addRule = false;
-						rcss = rcss.replace(ecode,"/dup_dump");
-					}
-					else
-				    {	
-					    emoteSubs[subI][emoteSubs[subI].length] = ecode;
-					    tempCodes[ecode] = subs[subI];
-					}
+					emoteSubs[subI][emoteSubs[subI].length] = ecode;
+					tempCodes[ecode] = subs[subI];
+
 				}
 			}
-			stext = srule.selectorText;
+			stext = rstext;
+			var good = false;
 			while(stext.indexOf("a[href") > -1)
 				{
 				    stext = stext.substring(stext.indexOf("a[href") + 5);
@@ -419,28 +404,30 @@ function addRules(sub)
 					if(eCodes.hasOwnProperty(ecode))
 					{
 						//addRule = false;
-						//rcss = rcss.replace(ecode,"/dup_dump");
+						rcss = rcss.replace(ecode,"/dup_dump");
+				        rstext = rstext.replace(ecode,"/dup_dump");
 					}
 					else
 					{
-					    //tempCodes[ecode] = "Exists";
+					    good = true; //If all rules are dup_dump, don't add it.
 					}
 				}
+			addRule = addRule && good;
 			
 			
 			
 			
 			//Test for repeat
-			stext = srule.selectorText;
+			
 			if(addRule)
 			{
 			
-				while(tempRules.hasOwnProperty(stext))
+				while(tempRules.hasOwnProperty(rstext))
 				{
 					stext += "d";
 				}
 				//Add it
-				tempRules[stext] = rcss;
+				tempRules[rstext] = rcss;
 			}
 			
 			
