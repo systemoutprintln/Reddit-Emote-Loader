@@ -20,7 +20,7 @@
 // To add a sub add a comma then the sub name in quotes after the last entry
 // For example with MLPLounge it should look like the following:
 // var subs=["mylittlepony","MLPlounge"];
-console.debug("Start");
+console.log("Start");
 var subs = subs= [ "mylittleandysonic1", "mlas1animotes", "mylittlewtf", "mylittlepony", "mlplounge", "idliketobeatree", "mylittlelivestream", "vinylscratch", "daylightemotes", "mylittlesquidward", "mylittlenopenopenope", "mylittlenanners", "mylittlenosleep", "mylittledamon", "thebestpony", "tbpimagedump", "roseluck", "applejack", "mylittlemusician", "mylittlecelestias", "mylittlechaos", "mylittlealcoholic", "mylittlelistentothis", "surprise", "pinkiepie", "twilightSparkle", "minuette", "lyra", "mylittlefoodmanes", "futemotes"];
 
 
@@ -54,7 +54,7 @@ var error = false;
 //
 //Start main
 //
-console.debug("Reddit Emote Loader, version: " + version);
+console.log("Reddit Emote Loader, version: " + version);
 
 if(checkUpdate())
 {
@@ -89,7 +89,7 @@ function checkUpdate() //Returns true if needs to be updated
 	//Check version
 	var s_vers = window.localStorage.getItem("RELVersion");
 	
-	//console.debug(s_vers);
+	//console.log(s_vers);
 	
 	if(s_vers != version) return true;
 	
@@ -105,15 +105,15 @@ function checkUpdate() //Returns true if needs to be updated
 	
 	var daysSinceUpdate = (d.getTime() - s_time) / 86400000; //1 day in ms
 	
-	console.debug(daysSinceUpdate);
+	console.log(daysSinceUpdate);
 	
 	if(daysSinceUpdate > daysBeforeUpdate) return true;
 	
-	console.debug("No update: last update " + daysSinceUpdate + " days ago");
+	console.log("No update: last update " + daysSinceUpdate + " days ago");
 	}
 	catch(e)
 	{
-	    console.debug("no cache found");
+	    console.log("no cache found");
 		
 		return true;
 	}
@@ -131,17 +131,17 @@ function checkUpdate() //Returns true if needs to be updated
 function loadFromStorage()
 {
 	var emoteCSS = window.localStorage.getItem("RELEmoteCSS");
-	//console.debug(emoteCSS);
+	//console.log(emoteCSS);
 	try{
 	JSON.parse(emoteCSS, function (key, value) 
 	{
-		//console.debug(value);
+		//console.log(value);
 		emoteSheet.insertRule(value,0);
 	});
 	} catch(e)
 	{
-		console.debug("LoadFromStorage1: ");
-		console.debug(e);
+		console.log("LoadFromStorage1: ");
+		console.log(e);
 	}
 	
 	if(dispEmotePage)
@@ -239,7 +239,7 @@ function loadSyncI(i)
 	    saveCSS();
 		return;
 	}
-	console.debug("Loading: " + subs[i]);
+	console.log("Loading: " + subs[i]);
 	
     emoteSubs[i] = new Array();
 	textSubs[i] = new Array();
@@ -269,7 +269,7 @@ function waitForLoadSync(style, i)
 		ff[i] = setInterval(function() {
 			try {
 		
-			console.debug("Waiting...");
+			console.log("Waiting...");
 			style.sheet.cssRules;
 			addRules(style);
 		    syncI++;
@@ -283,7 +283,7 @@ function waitForLoadSync(style, i)
 
 function addSub(Sub)
 {
-    console.debug("Added: " + Sub);
+    console.log("Added: " + Sub);
 	var d = new Date();
 	var t = d.getTime(); //Ensure fresh CSS
 	var head = document.getElementsByTagName("head")[0];
@@ -307,14 +307,14 @@ function addSub(Sub)
 	{
 		style = document.createElement('style');
 		style.textContent = '@import "' + SubCss + '"';
-		//console.debug(SubCss);
+		//console.log(SubCss);
 		style.sheet.disabled = true;	
 	}
 	
 	
 	head.appendChild(style);
 	
-	//console.debug("Added: " + style.href);
+	//console.log("Added: " + style.href);
 	
 	return style;
 
@@ -330,7 +330,7 @@ function addSub(Sub)
 
 function addRules(sub)
 {
-console.debug("Adding: " + sub);
+console.log("Adding: " + sub);
 
 	var ssheet 
 	var isCss;
@@ -341,7 +341,7 @@ console.debug("Adding: " + sub);
 		ssheet = getStyle(sub);
 		if(ssheet == -1)
 		{
-			console.debug("315: " + sub.href);
+			console.log("315: " + sub.href);
 			error = true;
 			return;
 		
@@ -355,7 +355,7 @@ console.debug("Adding: " + sub);
 	
 	var subI = getSub(ssheet);
 	
-	console.debug("Adding 2:" + subI);
+	console.log("Adding 2:" + subI);
 	
 	
 	
@@ -375,7 +375,7 @@ console.debug("Adding: " + sub);
 
 	for(i = 0; i < srules.length; i++)
 	{
-	console.debug("Rule " i + "/" + srules.length);
+	console.log("Rule " i + "/" + srules.length);
 
 		srules = ssheet.cssRules;
 		
@@ -434,7 +434,7 @@ console.debug("Adding: " + sub);
 					if(eCodes.hasOwnProperty(ecode))
 					{
 						//addRule = false;
-						console.debug(ecode + ": duplicate");
+						console.log(ecode + ": duplicate");
 						rcss = rcss.replace(ecode,"/dup_dump");
 				        rstext = rstext.replace(ecode,"/dup_dump");
 					}
@@ -469,7 +469,7 @@ console.debug("Adding: " + sub);
 	
 	}
 
-	//console.debug(ssheet);
+	//console.log(ssheet);
 	
 	//Merge rules / codes
 	for(var rule in tempRules)
@@ -495,8 +495,8 @@ console.debug("Adding: " + sub);
 	catch(e)
 	{
 		error = true;
-		console.debug("addRules1: ")
-		console.debug(e);
+		console.log("addRules1: ")
+		console.log(e);
 	}
 	
 	//Delete the style
@@ -504,7 +504,7 @@ console.debug("Adding: " + sub);
 	del.parentNode.removeChild(del);
 
 
-	console.debug("Done: " + sub.href);
+	console.log("Done: " + sub.href);
 
 	
 	loaded++;
@@ -599,7 +599,7 @@ function subsLoaded()
 {
 	var sl = setInterval(function() 
 	{
-		//console.debug(loaded);
+		//console.log(loaded);
 		if(loaded >= subs.length)
 		{
 			saveCSS();
@@ -630,7 +630,7 @@ function saveCSS()
 	
 	for(var rule in emoteRules)
 	{
-		//console.debug(rule);
+		//console.log(rule);
 		if(emoteRules.hasOwnProperty(rule))
 		{
 			emoteSheet.insertRule(emoteRules[rule],0);
@@ -648,7 +648,7 @@ function saveCSS()
 	window.localStorage.setItem("RELEmoteSub",JSON.stringify(eCodes));
 	window.localStorage.setItem("RELTextCodes",JSON.stringify(textSubs));
 	
-	console.debug("All done");
+	console.log("All done");
 	alert("Update sucessful\nPlease refresh the page");
 	if(forced)
 	{
@@ -679,7 +679,7 @@ function createLink()
 	link_e.onclick = openEmotePage;
 	document.body.appendChild(link_e);
 	
-	//console.debug(emoteSheet);
+	//console.log(emoteSheet);
 					
 	
 
@@ -820,8 +820,8 @@ function addEmotes(sub, parID)
 	
 	
 	}catch(e){
-	console.debug("AddEmotes1:");	
-	console.debug(e);
+	console.log("AddEmotes1:");	
+	console.log(e);
 	}
 
 
