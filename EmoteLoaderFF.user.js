@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name           Reddit Emote Loader
 // @namespace      http://www.reddit.com/r/RedditEmoteLoader
-// @version        2.0.2
+// @version        2.0.3
 // @include        http://www.reddit.com/*
 // @include        http://reddit.com/*
 // @include        http://*.reddit.com/*
@@ -14,18 +14,13 @@
 -Extra CSS - to do later
 */
 
-var e = document.createElement("script");
-
-e.src = 'https://github.com/systemoutprintln/Reddit-Emote-Loader/raw/master/EmoteLoaderFF.user.js';
-e.type="text/javascript";
-document.getElementsByTagName("head")[0].appendChild(e);
 
 //Options
 
 // To add a sub add a comma then the sub name in quotes after the last entry
 // For example with MLPLounge it should look like the following:
 // var subs=["mylittlepony","MLPlounge"];
-
+console.debug("Start");
 var subs = subs= [ "mylittleandysonic1", "mlas1animotes", "mylittlewtf", "mylittlepony", "mlplounge", "idliketobeatree", "mylittlelivestream", "vinylscratch", "daylightemotes", "mylittlesquidward", "mylittlenopenopenope", "mylittlenanners", "mylittlenosleep", "mylittledamon", "thebestpony", "tbpimagedump", "roseluck", "applejack", "mylittlemusician", "mylittlecelestias", "mylittlechaos", "mylittlealcoholic", "mylittlelistentothis", "surprise", "pinkiepie", "twilightSparkle", "minuette", "lyra", "mylittlefoodmanes", "futemotes"];
 
 
@@ -34,7 +29,7 @@ var subs = subs= [ "mylittleandysonic1", "mlas1animotes", "mylittlewtf", "mylitt
 var chrome = navigator.userAgent.toLowerCase().indexOf('chrome') > -1;
 var useExtraCSS = true;
 var dispEmotePage = true;
-var version = "2.0";
+var version = "2.0.0.2";
 var daysBeforeUpdate = 3;
 //Do not change below this line
 
@@ -110,7 +105,7 @@ function checkUpdate() //Returns true if needs to be updated
 	
 	var daysSinceUpdate = (d.getTime() - s_time) / 86400000; //1 day in ms
 	
-	//console.debug(daysSinceUpdate);
+	console.debug(daysSinceUpdate);
 	
 	if(daysSinceUpdate > daysBeforeUpdate) return true;
 	
