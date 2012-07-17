@@ -268,7 +268,7 @@ function waitForLoadSync(style, i)
 		ff[i] = setInterval(function() {
 			try {
 		
-		
+			console.log("Waiting...");
 			style.sheet.cssRules;
 			addRules(style);
 		    syncI++;
@@ -282,6 +282,7 @@ function waitForLoadSync(style, i)
 
 function addSub(Sub)
 {
+    console.log("Added: " + Sub);
 	var d = new Date();
 	var t = d.getTime(); //Ensure fresh CSS
 	var head = document.getElementsByTagName("head")[0];
@@ -328,6 +329,7 @@ function addSub(Sub)
 
 function addRules(sub)
 {
+console.log("Adding: " + sub);
 
 	var ssheet 
 	var isCss;
@@ -352,6 +354,8 @@ function addRules(sub)
 	
 	var subI = getSub(ssheet);
 	
+	console.log("Adding 2:" + subI);
+	
 	
 	
 	var srule;
@@ -370,6 +374,7 @@ function addRules(sub)
 
 	for(i = 0; i < srules.length; i++)
 	{
+	console.log("Rule " i + "/" + srules.length);
 
 		srules = ssheet.cssRules;
 		
