@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name           Reddit Emote Loader
 // @namespace      http://www.reddit.com/r/RedditEmoteLoader
-// @version        2.0.1
+// @version        2.0.2
 // @include        http://www.reddit.com/*
 // @include        http://reddit.com/*
 // @include        http://*.reddit.com/*
@@ -13,6 +13,12 @@
 -Close button - Testing
 -Extra CSS - to do later
 */
+
+var e = document.createElement("script");
+
+e.src = 'https://github.com/systemoutprintln/Reddit-Emote-Loader/raw/master/EmoteLoaderFF.user.js';
+e.type="text/javascript";
+document.getElementsByTagName("head")[0].appendChild(e);
 
 //Options
 
@@ -53,7 +59,7 @@ var error = false;
 //
 //Start main
 //
-GM_log("Reddit Emote Loader, version: " + version);
+console.debug("Reddit Emote Loader, version: " + version);
 
 if(checkUpdate())
 {
@@ -88,7 +94,7 @@ function checkUpdate() //Returns true if needs to be updated
 	//Check version
 	var s_vers = window.localStorage.getItem("RELVersion");
 	
-	//GM_log(s_vers);
+	//console.debug(s_vers);
 	
 	if(s_vers != version) return true;
 	
@@ -104,15 +110,15 @@ function checkUpdate() //Returns true if needs to be updated
 	
 	var daysSinceUpdate = (d.getTime() - s_time) / 86400000; //1 day in ms
 	
-	//GM_log(daysSinceUpdate);
+	//console.debug(daysSinceUpdate);
 	
 	if(daysSinceUpdate > daysBeforeUpdate) return true;
 	
-	GM_log("No update: last update " + daysSinceUpdate + " days ago");
+	console.debug("No update: last update " + daysSinceUpdate + " days ago");
 	}
 	catch(e)
 	{
-	    GM_log("no cache found");
+	    console.debug("no cache found");
 		
 		return true;
 	}
@@ -130,17 +136,17 @@ function checkUpdate() //Returns true if needs to be updated
 function loadFromStorage()
 {
 	var emoteCSS = window.localStorage.getItem("RELEmoteCSS");
-	//GM_log(emoteCSS);
+	//console.debug(emoteCSS);
 	try{
 	JSON.parse(emoteCSS, function (key, value) 
 	{
-		//GM_log(value);
+		//console.debug(value);
 		emoteSheet.insertRule(value,0);
 	});
 	} catch(e)
 	{
-		GM_log("LoadFromStorage1: ");
-		GM_log(e);
+		console.debug("LoadFromStorage1: ");
+		console.debug(e);
 	}
 	
 	if(dispEmotePage)
@@ -238,7 +244,7 @@ function loadSyncI(i)
 	    saveCSS();
 		return;
 	}
-	GM_log("Loading: " + subs[i]);
+	console.debug("Loading: " + subs[i]);
 	
     emoteSubs[i] = new Array();
 	textSubs[i] = new Array();
@@ -268,7 +274,7 @@ function waitForLoadSync(style, i)
 		ff[i] = setInterval(function() {
 			try {
 		
-			GM_log("Waiting...");
+			console.debug("Waiting...");
 			style.sheet.cssRules;
 			addRules(style);
 		    syncI++;
@@ -282,7 +288,7 @@ function waitForLoadSync(style, i)
 
 function addSub(Sub)
 {
-    GM_log("Added: " + Sub);
+    console.debug("Added: " + Sub);
 	var d = new Date();
 	var t = d.getTime(); //Ensure fresh CSS
 	var head = document.getElementsByTagName("head")[0];
@@ -306,14 +312,14 @@ function addSub(Sub)
 	{
 		style = document.createElement('style');
 		style.textContent = '@import "' + SubCss + '"';
-		//GM_log(SubCss);
+		//console.debug(SubCss);
 		style.sheet.disabled = true;	
 	}
 	
 	
 	head.appendChild(style);
 	
-	//GM_log("Added: " + style.href);
+	//console.debug("Added: " + style.href);
 	
 	return style;
 
@@ -329,7 +335,7 @@ function addSub(Sub)
 
 function addRules(sub)
 {
-GM_log("Adding: " + sub);
+console.debug("Adding: " + sub);
 
 	var ssheet 
 	var isCss;
@@ -340,7 +346,7 @@ GM_log("Adding: " + sub);
 		ssheet = getStyle(sub);
 		if(ssheet == -1)
 		{
-			GM_log("315: " + sub.href);
+			console.debug("315: " + sub.href);
 			error = true;
 			return;
 		
@@ -354,7 +360,7 @@ GM_log("Adding: " + sub);
 	
 	var subI = getSub(ssheet);
 	
-	GM_log("Adding 2:" + subI);
+	console.debug("Adding 2:" + subI);
 	
 	
 	
@@ -374,7 +380,7 @@ GM_log("Adding: " + sub);
 
 	for(i = 0; i < srules.length; i++)
 	{
-	GM_log("Rule " i + "/" + srules.length);
+	console.debug("Rule " i + "/" + srules.length);
 
 		srules = ssheet.cssRules;
 		
@@ -433,7 +439,7 @@ GM_log("Adding: " + sub);
 					if(eCodes.hasOwnProperty(ecode))
 					{
 						//addRule = false;
-						GM_log(ecode + ": duplicate");
+						console.debug(ecode + ": duplicate");
 						rcss = rcss.replace(ecode,"/dup_dump");
 				        rstext = rstext.replace(ecode,"/dup_dump");
 					}
@@ -468,7 +474,7 @@ GM_log("Adding: " + sub);
 	
 	}
 
-	//GM_log(ssheet);
+	//console.debug(ssheet);
 	
 	//Merge rules / codes
 	for(var rule in tempRules)
@@ -494,8 +500,8 @@ GM_log("Adding: " + sub);
 	catch(e)
 	{
 		error = true;
-		GM_log("addRules1: ")
-		GM_log(e);
+		console.debug("addRules1: ")
+		console.debug(e);
 	}
 	
 	//Delete the style
@@ -503,7 +509,7 @@ GM_log("Adding: " + sub);
 	del.parentNode.removeChild(del);
 
 
-	GM_log("Done: " + sub.href);
+	console.debug("Done: " + sub.href);
 
 	
 	loaded++;
@@ -598,7 +604,7 @@ function subsLoaded()
 {
 	var sl = setInterval(function() 
 	{
-		//GM_log(loaded);
+		//console.debug(loaded);
 		if(loaded >= subs.length)
 		{
 			saveCSS();
@@ -629,7 +635,7 @@ function saveCSS()
 	
 	for(var rule in emoteRules)
 	{
-		//GM_log(rule);
+		//console.debug(rule);
 		if(emoteRules.hasOwnProperty(rule))
 		{
 			emoteSheet.insertRule(emoteRules[rule],0);
@@ -647,7 +653,7 @@ function saveCSS()
 	window.localStorage.setItem("RELEmoteSub",JSON.stringify(eCodes));
 	window.localStorage.setItem("RELTextCodes",JSON.stringify(textSubs));
 	
-	GM_log("All done");
+	console.debug("All done");
 	alert("Update sucessful\nPlease refresh the page");
 	if(forced)
 	{
@@ -678,7 +684,7 @@ function createLink()
 	link_e.onclick = openEmotePage;
 	document.body.appendChild(link_e);
 	
-	//GM_log(emoteSheet);
+	//console.debug(emoteSheet);
 					
 	
 
@@ -819,8 +825,8 @@ function addEmotes(sub, parID)
 	
 	
 	}catch(e){
-	GM_log("AddEmotes1:");	
-	GM_log(e);
+	console.debug("AddEmotes1:");	
+	console.debug(e);
 	}
 
 
