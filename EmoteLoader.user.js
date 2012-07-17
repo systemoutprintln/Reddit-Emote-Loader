@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name           Reddit Emote Loader
 // @namespace      http://www.reddit.com/r/RedditEmoteLoader
-// @version        1.3
+// @version        2.0
 // @include        http://www.reddit.com/*
 // @include        http://reddit.com/*
 // @include        http://*.reddit.com/*
@@ -9,7 +9,9 @@
 
 /* To Do:
 -Search Feature
--Close button
+-Fix duplicate manager - testing
+-Close button - Testing
+-Extra CSS - to do later
 */
 
 //Options
@@ -17,7 +19,8 @@
 // To add a sub add a comma then the sub name in quotes after the last entry
 // For example with MLPLounge it should look like the following:
 // var subs=["mylittlepony","MLPlounge"];
-var subs=[ "mlplounge", "mylittlefoodmanes", "mylittleandysonic1", "mylittlewtf","daylightemotes"];
+
+var subs = new Array( "mlplounge" , "mylittlepony" , "mylittlefoodmanes" , "mylittleandysonic1" , "mylittlewtf" , "daylightemotes" );
 
 
 
@@ -25,7 +28,7 @@ var subs=[ "mlplounge", "mylittlefoodmanes", "mylittleandysonic1", "mylittlewtf"
 var chrome = navigator.userAgent.toLowerCase().indexOf('chrome') > -1;
 var useExtraCSS = true;
 var dispEmotePage = true;
-var version = "1.3.5";
+var version = "2.0.0";
 var daysBeforeUpdate = 3;
 //Do not change below this line
 
@@ -39,6 +42,7 @@ var ff = new Array();
 
 var emoteSubs = new Array(subs.length);
 var textSubs = new Array(subs.length);
+
 var emoteRules = new Object();
 var eCodes = new Object();
 
@@ -49,10 +53,12 @@ var error = false;
 //
 //Start main
 //
+console.log("Reddit Emote Loader, version: " + version);
+
 if(checkUpdate())
 {
-	loadSubs(subs);
-	subsLoaded();
+	loadSync(subs);
+	//subsLoaded();
 	if(dispEmotePage)
 	{
 		createLink();
@@ -62,23 +68,35 @@ else
 {
 	loadFromStorage();
 }
-	if(useExtraCSS)
-	{
-		CSSFlags();
-	}
 
+//
+//End main
+//
 
-
+///////////////////////////////////////////////////////////////////////////////
+//
+//				Step 1: Check update
+//				If up to date go to 2A, otherwise 2B
+//
+//////////////////////////////////////////////////////////////////////////////
 
 function checkUpdate() //Returns true if needs to be updated
 {
+    try
+	{
+
 	//Check version
 	var s_vers = window.localStorage.getItem("RELVersion");
 	
-	console.log(s_vers);
+	//console.log(s_vers);
 	
 	if(s_vers != version) return true;
 	
+	//Check subs
+
+	if(subs != JSON.parse(window.localStorage.getItem("RELSubs"))) return false;
+	
+
 	//Check time
 	var s_time = parseInt(window.localStorage.getItem("RELTime"));
 	
@@ -91,9 +109,23 @@ function checkUpdate() //Returns true if needs to be updated
 	if(daysSinceUpdate > daysBeforeUpdate) return true;
 	
 	console.log("No update: last update " + daysSinceUpdate + " days ago");
+	}
+	catch(e)
+	{
+	    console.log("no cache found");
+		
+		return true;
+	}
 	
 	return false;
 }
+
+///////////////////////////////////////////////////////////////////////////////
+//
+//				Step 2A: Load from Storage
+//				Skip to step 6
+//
+//////////////////////////////////////////////////////////////////////////////
 
 function loadFromStorage()
 {
@@ -107,7 +139,7 @@ function loadFromStorage()
 	});
 	} catch(e)
 	{
-		console.log("101: ");
+		console.log("LoadFromStorage1: ");
 		console.log(e);
 	}
 	
@@ -115,6 +147,7 @@ function loadFromStorage()
 	{
 		emoteSubs = JSON.parse(window.localStorage.getItem("RELEmoteCodes"));
 		textSubs = JSON.parse(window.localStorage.getItem("RELTextCodes"));
+		eCodes = JSON.parse(window.localStorage.getItem("RELEmoteSub"));
 		createLink();
 	}
 
@@ -122,60 +155,16 @@ function loadFromStorage()
 	
 }
 
+///////////////////////////////////////////////////////////////////////////////
+//
+//				Step 2B: Start loading
+//				Go to step 3
+//
+//////////////////////////////////////////////////////////////////////////////
 
-function subsLoaded()
-{
-	var sl = setInterval(function() 
-	{
-		//console.log(loaded);
-		if(loaded >= subs.length)
-		{
-			saveCSS();
-			clearInterval(sl);			
-		}	
-	
-	},250);
-	
-}
 
-function saveCSS()
-{
-	if(error)
-	{
-		error = false;
-		alert("Update Failed");
-		return;
-	}
-	
-	for(var rule in emoteRules)
-	{
-		//console.log(rule);
-		if(emoteRules.hasOwnProperty(rule))
-		{
-			emoteSheet.insertRule(emoteRules[rule],0);
-			
-		}	
-	
-	}
-	var d = new Date();
-	
-	window.localStorage.setItem("RELTime",d.getTime()); //Save update time
-	window.localStorage.setItem("RELVersion",version); //Version
-	window.localStorage.setItem("RELEmoteCSS",JSON.stringify(emoteRules)); //Save emotes in storage
-	window.localStorage.setItem("RELEmoteCodes",JSON.stringify(emoteSubs));
-	window.localStorage.setItem("RELTextCodes",JSON.stringify(textSubs));
-	
-	console.log("All done");
-	if(forced)
-	{
-		alert("Update sucessful");
-		forced = false;
-	}
-	
-
-}
-
-function loadSubs(Subs) //Just include sub name, i.e. /r/MLPlounge = MLPlounge
+/////////////////////// Async ///////////////////////////////
+function loadAsync(Subs) //Just include sub name, i.e. /r/MLPlounge = MLPlounge
 {
 
 	var sID = new Array();
@@ -196,12 +185,100 @@ function loadSubs(Subs) //Just include sub name, i.e. /r/MLPlounge = MLPlounge
 		
 
 
-		waitForLoad(sID[i], i);	
+		waitForLoadAsync(sID[i], i);	
 	}
 	
 
 	
 }
+function waitForLoadAsync(style, i)
+{
+	if(chrome)
+	{
+		var cssnum = document.styleSheets.length;
+		ch[i] = setInterval(function() {
+			var sheet;
+				sheet = getStyle(style);
+				if(sheet != -1)
+				{
+					addRules(style);
+					
+					clearInterval(ch[i]);
+				}
+			
+		}, 10);
+	
+	}else{
+		ff[i] = setInterval(function() {
+			try {
+		
+		
+			style.sheet.cssRules;
+			addRules(style);
+		    
+			clearInterval(ff[i]);
+			} catch (e){}
+		}, 10); 
+	}
+}
+/////////////////// Sync /////////////////////
+var syncI;
+
+function loadSync(Subs)
+{
+  syncI = 0;
+  loadSyncI(0);
+  
+}
+function loadSyncI(i)
+{
+    
+    if(i >= subs.length)
+	{
+	    saveCSS();
+		return;
+	}
+	console.log("Loading: " + subs[i]);
+	
+    emoteSubs[i] = new Array();
+	textSubs[i] = new Array();
+	waitForLoadSync(addSub(subs[i]), i);
+
+}
+function waitForLoadSync(style, i)
+{
+	if(chrome)
+	{
+		var cssnum = document.styleSheets.length;
+		ch[i] = setInterval(function() {
+			var sheet;
+				sheet = getStyle(style);
+				if(sheet != -1)
+				{
+
+					addRules(style);
+					syncI++;
+					loadSyncI(syncI);
+					clearInterval(ch[i]);
+				}
+			
+		}, 10);
+	
+	}else{
+		ff[i] = setInterval(function() {
+			try {
+		
+		
+			style.sheet.cssRules;
+			addRules(style);
+		    syncI++;
+			loadSyncI(syncI);
+			clearInterval(ff[i]);
+			} catch (e){}
+		}, 10); 
+	}
+}
+//////////////// Both ///////////////////////////
 
 function addSub(Sub)
 {
@@ -228,7 +305,7 @@ function addSub(Sub)
 	{
 		style = document.createElement('style');
 		style.textContent = '@import "' + SubCss + '"';
-		console.log(SubCss);
+		//console.log(SubCss);
 		style.sheet.disabled = true;	
 	}
 	
@@ -242,73 +319,16 @@ function addSub(Sub)
 
 }
 
-
-
-function waitForLoad(style, i)
-{
-	if(chrome)
-	{
-		var cssnum = document.styleSheets.length;
-		ch[i] = setInterval(function() {
-			var sheet;
-				sheet = getStyle(style);
-				if(sheet != -1)
-				{
-					addRules(style);
-					
-					clearInterval(ch[i]);
-				}
-			
-		}, 10);
-	
-	}else{
-		ff[i] = setInterval(function() {
-			try {
-		
-		
-			style.sheet.cssRules;
-			addRules(style);
-		
-			clearInterval(ff[i]);
-			} catch (e){}
-		}, 10); 
-	}
-}
-
-function getStyle(sub)
-{
-	for(i=0; i < document.styleSheets.length; i++)
-	{
-		if(document.styleSheets[i].href == sub.href)
-		{
-			
-			return document.styleSheets[i];	
-		}
-	}
-	return -1;
-
-}
-
-function getSub(style)
-{
-	var subMatch;
-	for(i = 0; i < subs.length; i++)
-	{
-		subMatch = new RegExp(subs[i])
-		if(subMatch.test(style.href))
-		{
-			return i;
-		}
-		
-	
-	}
-	
-	return 0;
-
-}
+///////////////////////////////////////////////////////////////////////////////
+//
+//				Step 3: Add rules
+//				Go to step 4
+//
+//////////////////////////////////////////////////////////////////////////////
 
 function addRules(sub)
 {
+
 	var ssheet 
 	var isCss;
 	try{
@@ -327,7 +347,7 @@ function addRules(sub)
 	}
 	else
 	{
-	ssheet = sub.sheet.cssRules[0].styleSheet;
+	    ssheet = sub.sheet.cssRules[0].styleSheet;
 	}
 	
 	var subI = getSub(ssheet);
@@ -347,9 +367,10 @@ function addRules(sub)
 	
 	var addRule = true;
 	
-	
+
 	for(i = 0; i < srules.length; i++)
 	{
+
 		srules = ssheet.cssRules;
 		
 		srule = srules[i];
@@ -364,14 +385,14 @@ function addRules(sub)
 			var ecode;
 			
 			addRule = true;
-			
+			//Filter out rules that use emotes elsewhere
 			if(!ruleFilter(stext))
 			{
 			  addRule = false;
 			  continue;
 			}
-
-            if(srule.cssText.indexOf("cursor: text") != -1 || srule.cssText.indexOf("color:") != -1 ) //Text
+            //Get text rules
+            if(srule.cssText.indexOf("cursor: text") != -1 || srule.cssText.indexOf("color:") != -1 )
 			{
 				ecode = stext.substring(stext.indexOf("/"));
 				ecode = ecode.substring(0, ecode.indexOf("\"]"));
@@ -381,7 +402,8 @@ function addRules(sub)
 			
 			stext = rstext;
 			
-			if(srule.cssText.indexOf("background-image") != -1) //Images
+			//Get emote rules
+			if(srule.cssText.indexOf("background-image") != -1)
 			{	
 				while(stext.indexOf("a[href") > -1)
 				{
@@ -394,7 +416,8 @@ function addRules(sub)
 				}
 			}
 			stext = rstext;
-			/*
+			
+			//Test for repeats of loaded subs
 			var good = false;
 			while(stext.indexOf("a[href") > -1)
 				{
@@ -405,8 +428,9 @@ function addRules(sub)
 					if(eCodes.hasOwnProperty(ecode))
 					{
 						//addRule = false;
-						//rcss = rcss.replace(ecode,"/dup_dump");
-				        //rstext = rstext.replace(ecode,"/dup_dump");
+						console.log(ecode + ": duplicate");
+						rcss = rcss.replace(ecode,"/dup_dump");
+				        rstext = rstext.replace(ecode,"/dup_dump");
 					}
 					else
 					{
@@ -414,22 +438,22 @@ function addRules(sub)
 					}
 				}
 			addRule = addRule && good;
-			*/
+			
+			stext = rstext;
 			
 			
 			
-			
-			//Test for repeat
+			//Fix inner sub repeats
 			
 			if(addRule)
 			{
 			
-				while(tempRules.hasOwnProperty(rstext))
+				while(tempRules.hasOwnProperty(stext))
 				{
 					stext += "d";
 				}
 				//Add it
-				tempRules[rstext] = rcss;
+				tempRules[stext] = rcss;
 			}
 			
 			
@@ -465,8 +489,8 @@ function addRules(sub)
 	catch(e)
 	{
 		error = true;
-		console.log("461: " + e)
-		
+		console.log("addRules1: ")
+		console.log(e);
 	}
 	
 	//Delete the style
@@ -479,95 +503,31 @@ function addRules(sub)
 	
 	loaded++;
 	
-
 }
 
-
-function ruleFilter(sel_text)
-{
-	var filter = new Array();
-	var good = true;
-	
-	//Thumbnails
-	filter[0] = /.thumbnail/
-	
-	filter[1] = /.expando/
-	
-	var i = 0;
-	for( i = 0; i < filter.length; i++)
-	{
-	    if(filter[i].test(sel_text))
-		{
-		    good = false;
-		}
-	}
-	
-	return good;
-
-}
-
-//// Special CSS flags ////
+///////////////////////////////////////////////////////////////////////////////
+//
+//				Step 4: Setup extra CSS
+//				Go to step 5
+//
+//////////////////////////////////////////////////////////////////////////////
 
 
-
-function CSSFlags() //TODO: Replace with stylesheet
+function ExtraCSS() 
 {
 	var css = new Array();
 	
-	//Dance (-d)
-	css[0] = "a[href*=\'-d\']:hover {\
-			-moz-transform: scaleX(-1);\
-			-o-transform: scaleX(-1);\
-			-webkit-transform: scaleX(-1);\
-			transform: scaleX(-1);\
-			}";
-	
-	//Reverse (-r)
-	
-	css[1] = "a[href*=\'-r\'] {\
-			-moz-transform: scaleX(-1);\
-			-o-transform: scaleX(-1);\
-			-webkit-transform: scaleX(-1);\
-			transform: scaleX(-1);\
-			}";
-			
-	//Flip (-f)
-	
-		css[2] = "a[href*=\'-f\'] {\
-			-moz-transform: scaleY(-1);\
-			-o-transform: scaleY(-1);\
-			-webkit-transform: scaleY(-1);\
-			transform: scaleY(-1);\
-			}";
-	
-	//Inline (-inp)
-	
-		css[3] = "a[href*=\'-inp\'] {float:none !important;display:inline-block !important}";
-		
-	//Right (-ar)
-	
-		css[4] = "a[href*=\'-ar\'] {float:right !important;display:inline-block !important}";
-		
-	//Rotates (-45/90...)
-	var j = 5;
-	for(i = 45; i < 360; i+= 45)
-	{
-		css[j] = "a[href*=\'-" + i + "\']{-moz-transform:rotate(" + i + "deg)scaleX(1);-o-transform:rotate(" + i + "deg)scaleX(1);-webkit-transform:rotate(" + i + "deg)scaleX(1);image-rendering:-moz-crisp-edges}"			
-		j++;
-	}		
 
 	for(i = 0; i < css.length; i++)
 	{
-		var s = "a[href^=\'/\'] " + css[i];
-		emoteSheet.insertRule(s, 0);
+		emoteRules["exCSS" + i] = css[i];
 	}
 
 }
 
-//// Emote page ////
-function createLink()
+function emotePageCSS()
 {
-	var css = new Array();
+    var css = new Array();
 	//Emote link
 	css[0] = ".emotelink { color:blue; cursor:pointer; text-align:right; font-size:12px; position: fixed; bottom:20%; right: 10px; z-index: 1000; width:100px height:80px}";
 	
@@ -598,12 +558,113 @@ function createLink()
 	
 	//Emote div
 	css[10] = ".ediv{ border:1px solid black; float:none !important;display:inline-block !important}"
+	
+	
+	//Exit button
+	css[11] = ".exitbtn {background-color:#F27777; width:100%; left: 0px; font-size:15px; text-align:center;}"
+	
+	css[12] = ".exitbtn:hover {background-color:yellow; cursor:pointer;}"
+	//Search button
+	css[13] = ".searchb {background-color:lightblue; width:200px; left: 0px; font-size:15px; text-align:center;}"
+	
+	css[14] = ".searchb:hover {background-color:yellow; cursor:pointer;}"
+	
+	//Search box
+	
+	css.push(".searchi {margin: 30px 10px 10px 10px;}");
+	
 
 	
 	for(i = 0; i < css.length; i++)
 	{
-		emoteSheet.insertRule(css[i], 0);
+		emoteRules["epageCSS" + i] = css[i];
 	}
+}
+
+///////////////////////////////////////////////////////////////////////////////
+//
+//				Step 5: Cache CSS
+//				Done
+//
+//////////////////////////////////////////////////////////////////////////////
+
+/*
+function subsLoaded()
+{
+	var sl = setInterval(function() 
+	{
+		//console.log(loaded);
+		if(loaded >= subs.length)
+		{
+			saveCSS();
+			clearInterval(sl);			
+		}	
+	
+	},250);
+	
+}
+*/
+
+function saveCSS()
+{
+
+    
+	if(error)
+	{
+		error = false;
+		alert("Update Failed");
+		return;
+	}
+	
+	emotePageCSS();
+	if(useExtraCSS)
+	{
+		ExtraCSS();
+	}
+	
+	for(var rule in emoteRules)
+	{
+		//console.log(rule);
+		if(emoteRules.hasOwnProperty(rule))
+		{
+			emoteSheet.insertRule(emoteRules[rule],0);
+			
+		}	
+	
+	}
+	var d = new Date();
+	
+	window.localStorage.setItem("RELTime",d.getTime()); //Save update time
+	window.localStorage.setItem("RELVersion",version); //Version
+	window.localStorage.setItem("RELSubs",JSON.stringify(subs)); //Saves subs that are chosen
+	window.localStorage.setItem("RELEmoteCSS",JSON.stringify(emoteRules)); //Save emotes in storage
+	window.localStorage.setItem("RELEmoteCodes",JSON.stringify(emoteSubs));
+	window.localStorage.setItem("RELEmoteSub",JSON.stringify(eCodes));
+	window.localStorage.setItem("RELTextCodes",JSON.stringify(textSubs));
+	
+	console.log("All done");
+	alert("Update sucessful\nPlease refresh the page");
+	if(forced)
+	{
+
+		forced = false;
+	}
+	
+}
+
+
+
+///////////////////////////////////////////////////////////////////////////////
+//
+//				Step 6: Setup emote page
+//				Done
+//
+//////////////////////////////////////////////////////////////////////////////
+
+// link setup
+function createLink()
+{
+
 	
 	var link_e = document.createElement("div");
 	link_e.id = "emoteLink";
@@ -618,6 +679,7 @@ function createLink()
 
 }
 
+//Open page
 function openEmotePage()
 {
 	document.documentElement.style.overflow = 'hidden';
@@ -631,14 +693,29 @@ function openEmotePage()
 	var sub_disp = document.createElement("div");
 	sub_disp.id = "SubDisplay";
 	sub_disp.className = "subdisp";
-	sub_disp.onclick = exitEmotePage;
+	//sub_disp.onclick = exitEmotePage;
 	over.appendChild(sub_disp);
 	
 	var sub_hold = document.createElement("div");
 	sub_hold.className = "subhld";
 	over.appendChild(sub_hold);
 	
-
+    var exit_btn = document.createElement("button");
+		exit_btn.innerHTML = "Exit";
+		exit_btn.className = "exitbtn";
+		exit_btn.onclick = exitEmotePage;
+		sub_hold.appendChild(exit_btn);
+		
+		
+	var search_lnk = document.createElement("button");
+		search_lnk.innerHTML = "Search" ;
+		search_lnk.className = "forup";
+		
+		
+		search_lnk.onclick = function() {
+       searchPage("SubDisplay");
+	};
+	sub_hold.appendChild(search_lnk);
 	
 	var i = 0;
 	while(i < subs.length)
@@ -670,7 +747,7 @@ function openEmotePage()
 
 }
 
-
+//Show emotes on page
 function addEmotes(sub, parID)
 {
 
@@ -688,7 +765,7 @@ function addEmotes(sub, parID)
 
 	var s_title = document.createElement("div");
 	s_title.className = "subHeader";
-	s_title.onclick = exitEmotePage;
+	//s_title.onclick = exitEmotePage;
 	s_title.innerHTML = "/r/" + subs[sub].toLowerCase();
 	par.appendChild(s_title);
 	
@@ -698,21 +775,22 @@ function addEmotes(sub, parID)
 		var emote_lnk = document.createElement("a");
 		emote_lnk.href = textSubs[sub][i];
 		emote_lnk.innerText = 	textSubs[sub][i];
-		emote_lnk.onclick = exitEmotePage;		
+		//emote_lnk.onclick = exitEmotePage;		
 		par.appendChild(emote_lnk);
 	}
 
 	
 		var emote_lnk = document.createElement("a");
 		emote_lnk.href = "/sp";
-		emote_lnk.onclick = exitEmotePage;
+		//emote_lnk.onclick = exitEmotePage;
 		par.appendChild(emote_lnk);
 		
 
 
-		
-		for(i = 0; i < emoteSubs[sub].length; i++)
+	
+	for(i = 0; i < emoteSubs[sub].length; i++)
 	{
+
 		var e_div = document.createElement("table");
 		e_div.className = "ediv";
 		par.appendChild(e_div);
@@ -725,30 +803,143 @@ function addEmotes(sub, parID)
 		e_div.appendChild(emote_lnk);
 		
 		var emote_id = document.createElement("p");
-		emote_id.innerText = emoteSubs[sub][i];
+		emote_id.innerText = emoteSubs[sub][i] + "\n" + eCodes[emoteSubs[sub][i]];
 		e_div.appendChild(emote_id);
-		
+		/*
+		var sub_id = document.createElement("p");
+		emote_id.innerText = eCodes[emoteSubs[sub][i]];
+		e_div.appendChild(sub_id);
+		*/
 	}
 	
 	
-	}catch(e){console.log("686: " + e);}
+	}catch(e){
+	console.log("AddEmotes1:");	
+	console.log(e);
+	}
 
 
 }
 
+//Create search page
+function searchPage(parID)
+{
+    var par = document.getElementById(parID);
+	if(par.hasChildNodes())
+	{
+		while(par.childNodes.length >= 1)
+		{
+			par.removeChild(par.firstChild);
+		}
+	
+	}
+
+    var s_title = document.createElement("div");
+	s_title.className = "searchHeader";
+
+	par.appendChild(s_title);
+	
+	var search_in = document.createElement("input");
+	search_in.type = "text";
+	search_in.id = "search_box";
+	search_in.className = "searchi";
+	s_title.appendChild(search_in);
+	
+	var search_button = document.createElement("button");
+	search_button.className = "searchb";
+	search_button.innerHTML = "Search";
+	search_button.onclick = startSearch;
+	s_title.appendChild(search_button);
+	
+	var s_title = document.createElement("div");
+	s_title.id = "searchResults";
+
+	par.appendChild(s_title);
+}
+
+function startSearch()
+{
+    addSearchResults(searchResults(".*" + document.getElementById("search_box").value + ".*"),"searchResults");
+}
+
+//Get search results
+function searchResults(SearchRegex)
+{
+	var resEmotes = new Array();
+	
+	var search = RegExp(SearchRegex,"i");
+	
+	for(var code in eCodes)
+	{
+	    //Add it to the search results
+	    if(search.test(code))
+		{
+		    resEmotes.push(code);
+		}
+	}
+	
+	return resEmotes;
+}
+
+//Display the results and their sub
+function addSearchResults(results, parID)
+{
+    var par = document.getElementById(parID);
+	if(par.hasChildNodes())
+	{
+		while(par.childNodes.length >= 1)
+		{
+			par.removeChild(par.firstChild);
+		}
+	
+	}
+	
+	for(i = 0; i < results.length; i++)
+	{
+		var e_div = document.createElement("table");
+		e_div.className = "ediv";
+		par.appendChild(e_div);
+		
+		var emote_lnk = document.createElement("a");
+		emote_lnk.href = results[i];
+		emote_lnk.title = 	results[i];
+		emote_lnk.onclick = function(){return false;}
+		//emote_lnk.className = "clickdis";		
+		e_div.appendChild(emote_lnk);
+		
+		var emote_id = document.createElement("p");
+		emote_id.innerText = results[i] + "\n" + eCodes[results[i]];
+		e_div.appendChild(emote_id);
+		/*
+		var sub_id = document.createElement("p");
+		emote_id.innerText = eCodes[results[i]];
+		e_div.appendChild(sub_id);
+		*/
+		
+	}
+
+}
+
+//Force update the script
 function forceUpdate()
 {
 	loaded = 0;
 	forced = true;
-	emoteRules = new Object();
-	eCodes = new Object();
 	
-	loadSubs(subs);
-	subsLoaded();
+	//Reset globals
+emoteSubs = new Array(subs.length);
+textSubs = new Array(subs.length);
+
+emoteRules = new Object();
+eCodes = new Object();
+	
+	loadSync(subs);
+	//subsLoaded();
 	exitEmotePage();
 	
 }
 
+//Exit the page
 function exitEmotePage()
 {
 	document.documentElement.style.overflow = 'visible';
@@ -757,4 +948,68 @@ function exitEmotePage()
 }
 
 
+
+
+
+///////////////////////////////////////////////////////////////////////////////
+//
+//				Utilities
+//
+//////////////////////////////////////////////////////////////////////////////
+
+function getStyle(sub)
+{
+	for(i=0; i < document.styleSheets.length; i++)
+	{
+		if(document.styleSheets[i].href == sub.href)
+		{
+			
+			return document.styleSheets[i];	
+		}
+	}
+	return -1;
+
+}
+
+function getSub(style)
+{
+	var subMatch;
+	for(i = 0; i < subs.length; i++)
+	{
+		subMatch = new RegExp(subs[i])
+		if(subMatch.test(style.href))
+		{
+			return i;
+		}
+		
+	
+	}
+	
+	return 0;
+
+}
+
+
+function ruleFilter(sel_text)
+{
+	var filter = new Array();
+	var good = true;
+	
+	//Thumbnails
+	filter[0] = /.thumbnail/
+	
+	filter[1] = /.expando/
+	
+	var i = 0;
+	for( i = 0; i < filter.length; i++)
+	{
+	    if(filter[i].test(sel_text))
+		{
+		    good = false;
+		}
+	}
+	
+	return good;
+
+}
 
