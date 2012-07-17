@@ -28,7 +28,7 @@ var subs = subs= [ "mylittleandysonic1", "mlas1animotes", "mylittlewtf", "mylitt
 var chrome = navigator.userAgent.toLowerCase().indexOf('chrome') > -1;
 var useExtraCSS = true;
 var dispEmotePage = true;
-var version = "2.0.0";
+var version = "2.5.0";
 var daysBeforeUpdate = 3;
 //Do not change below this line
 
