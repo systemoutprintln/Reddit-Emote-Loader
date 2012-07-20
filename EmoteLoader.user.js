@@ -939,7 +939,7 @@ function addSearchResults(results, parID)
        emoteClick(opt);
 	   return false;
     };
-	})(emoteSubs[sub][i]);
+	})(results[i]);
 		//emote_lnk.className = "clickdis";		
 		e_div.appendChild(emote_lnk);
 
