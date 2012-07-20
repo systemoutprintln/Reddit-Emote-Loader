@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name           Reddit Emote Loader
 // @namespace      http://www.reddit.com/r/RedditEmoteLoader
-// @version        3.0
+// @version        3.1
 // @include        http://www.reddit.com/*
 // @include        http://reddit.com/*
 // @include        http://*.reddit.com/*
@@ -28,7 +28,7 @@ var subs= [ "mylittleandysonic1", "mlas1animotes", "mylittlewtf", "mylittlepony"
 var chrome = navigator.userAgent.toLowerCase().indexOf('chrome') > -1;
 var useExtraCSS = true;
 var dispEmotePage = true;
-var version = "3.0.0";
+var version = "3.0.1";
 var daysBeforeUpdate = 3;
 //Do not change below this line
 
@@ -57,7 +57,7 @@ console.log("Reddit Emote Loader, version: " + version);
 
 if(checkUpdate())
 {
-    alert("Loading emotes...");
+    //alert("Loading emotes...");
 	loadSync(subs);
 	//subsLoaded();
 	if(dispEmotePage)
@@ -339,7 +339,7 @@ function addRules(sub)
 		ssheet = getStyle(sub);
 		if(ssheet == -1)
 		{
-			console.log("315: " + sub.href);
+			console.log("addRules: " + sub.href);
 			error = true;
 			return;
 
@@ -820,7 +820,11 @@ function addEmotes(sub, parID)
 		var emote_lnk = document.createElement("a");
 		emote_lnk.href = emoteSubs[sub][i];
 		emote_lnk.title = 	emoteSubs[sub][i];
-		emote_lnk.onclick = function(){return false;}
+		emote_lnk.onclick = (function(opt) {
+    return function() {
+       emoteClick(opt);
+    };
+	})(emoteSubs[sub][i]); 
 		//emote_lnk.className = "clickdis";		
 		e_div.appendChild(emote_lnk);
 
@@ -841,6 +845,10 @@ function addEmotes(sub, parID)
 	}
 
 
+}
+function emoteClick(ecode)
+{
+    var pb = prompt("Copy and paste the following emote code:","[](" + ecode +")");
 }
 
 //Create search page
