@@ -57,6 +57,7 @@ console.log("Reddit Emote Loader, version: " + version);
 
 if(checkUpdate())
 {
+    alert("Loading emotes...");
 	loadSync(subs);
 	//subsLoaded();
 	if(dispEmotePage)
@@ -616,16 +617,23 @@ function saveCSS()
 	{
 		ExtraCSS();
 	}
-
+    try{
 	for(var rule in emoteRules)
 	{
-		//console.log(rule);
 		if(emoteRules.hasOwnProperty(rule))
 		{
+		    console.log(rule);
 			emoteSheet.insertRule(emoteRules[rule],0);
+			
 
 		}	
 
+	}
+	}
+	catch(e)
+	{
+	    console.log("SaveCSS");
+		console.log(e);
 	}
 	var d = new Date();
 
