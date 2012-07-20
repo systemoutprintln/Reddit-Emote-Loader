@@ -823,6 +823,7 @@ function addEmotes(sub, parID)
 		emote_lnk.onclick = (function(opt) {
     return function() {
        emoteClick(opt);
+	   return false;
     };
 	return false;})(emoteSubs[sub][i]); 
 		//emote_lnk.className = "clickdis";		
@@ -936,8 +937,9 @@ function addSearchResults(results, parID)
 		emote_lnk.onclick = (function(opt) {
     return function() {
        emoteClick(opt);
+	   return false;
     };
-	return false;})(emoteSubs[sub][i]);
+	})(emoteSubs[sub][i]);
 		//emote_lnk.className = "clickdis";		
 		e_div.appendChild(emote_lnk);
 
