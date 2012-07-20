@@ -28,7 +28,7 @@ var subs = subs= [ "mylittleandysonic1", "mlas1animotes", "mylittlewtf", "mylitt
 var chrome = navigator.userAgent.toLowerCase().indexOf('chrome') > -1;
 var useExtraCSS = true;
 var dispEmotePage = true;
-var version = "2.5.3";
+var version = "2.5.4";
 var daysBeforeUpdate = 3;
 //Do not change below this line
 
@@ -517,11 +517,10 @@ function addRules(sub)
 function ExtraCSS() 
 {
     var ecssar = ExCss.split("\n");
-	var i = 1;
-	for(var ecss in ecssar)
+
+	for(i=0; i < ecssar.length; i++)
 	{
 	    emoteRules["exCSS" + i] = ecss;
-		i++;
 	}
 
 
