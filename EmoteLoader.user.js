@@ -25,7 +25,7 @@ var subs= [ "mylittleandysonic1", "mlas1animotes", "mylittlewtf",  "mlplounge", 
 var chrome = navigator.userAgent.toLowerCase().indexOf('chrome') > -1;
 var useExtraCSS = true;
 var dispEmotePage = true;
-var version = "3.2.1";
+var version = "3.2.2";
 var daysBeforeUpdate = 3;
 //Do not change below this line
 
@@ -354,7 +354,7 @@ function addRules(sub)
 
 	var srule;
 
-	var emote = /\[href[\|\*]?="\/[A-Za-z0-9!#]+"]/
+	var emote = /\[href[\|\*]?="[A-Za-z0-9!#]+?[\/|-][A-Za-z0-9!#]+"]/
 
     var srules = ssheet.cssRules;
 
