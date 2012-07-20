@@ -1,17 +1,14 @@
 // ==UserScript==
 // @name           Reddit Emote Loader
 // @namespace      http://www.reddit.com/r/RedditEmoteLoader
-// @version        3.1
+// @version        3.2
 // @include        http://www.reddit.com/*
 // @include        http://reddit.com/*
 // @include        http://*.reddit.com/*
 // ==/UserScript==
 
 /* To Do:
--Search Feature
--Fix duplicate manager - testing
--Close button - Testing
--Extra CSS - to do later
+
 */
 
 //Options
@@ -28,7 +25,7 @@ var subs= [ "mylittleandysonic1", "mlas1animotes", "mylittlewtf",  "mlplounge", 
 var chrome = navigator.userAgent.toLowerCase().indexOf('chrome') > -1;
 var useExtraCSS = true;
 var dispEmotePage = true;
-var version = "3.0.1";
+var version = "3.2.1";
 var daysBeforeUpdate = 3;
 //Do not change below this line
 
@@ -357,7 +354,7 @@ function addRules(sub)
 
 	var srule;
 
-	var emote = /a\[href\|?="\/[A-Za-z0-9!#]+"]/
+	var emote = /a\[href[\|\*]?="\/[A-Za-z0-9!#]+"]/
 
     var srules = ssheet.cssRules;
 
