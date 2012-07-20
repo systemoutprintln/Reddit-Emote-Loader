@@ -520,7 +520,7 @@ function ExtraCSS()
 
 	for(i=0; i < ecssar.length; i++)
 	{
-	    emoteRules["exCSS" + i] = ecss;
+	    emoteRules["exCSS" + i] = ecssar[i];
 	}
 
 
