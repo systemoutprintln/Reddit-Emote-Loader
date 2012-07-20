@@ -95,7 +95,7 @@ function checkUpdate() //Returns true if needs to be updated
 
 	//Check subs
 
-	if(subs != JSON.parse(window.localStorage.getItem("RELSubs"))) return true;
+	if(JSON.stringify(subs) != window.localStorage.getItem("RELSubs")) return true;
 
 
 	//Check time
@@ -809,6 +809,7 @@ function addEmotes(sub, parID)
 		var emote_lnk = document.createElement("a");
 		emote_lnk.href = textSubs[sub][i];
 		emote_lnk.innerText = 	textSubs[sub][i];
+		emote_lnk.onclick = function(){return false;}
 		//emote_lnk.onclick = exitEmotePage;		
 		par.appendChild(emote_lnk);
 	}
