@@ -28,7 +28,7 @@ var subs= [ "mylittleandysonic1", "mlas1animotes", "mylittlewtf",  "mlplounge", 
 var chrome = navigator.userAgent.toLowerCase().indexOf('chrome') > -1;
 var useExtraCSS = true;
 var dispEmotePage = true;
-var version = "3.2.5";
+var version = "3.2.6";
 var daysBeforeUpdate = 3;
 //Do not change below this line
 
@@ -358,7 +358,7 @@ function addRules(sub)
 	var srule;
 
 	var emote = /a\[href\|?="\/[A-Za-z0-9!#]+"]/
-	var emcss = /[href\*="[A-Za-z0-9!#\]+-combine"]/ //For combined emotes
+	var emcss = /[href\*="[A-Za-z0-9!#]+\-combine"]/ //For combined emotes
 
     var srules = ssheet.cssRules;
 
