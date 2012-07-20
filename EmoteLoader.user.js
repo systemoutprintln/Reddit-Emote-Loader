@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name           Reddit Emote Loader
 // @namespace      http://www.reddit.com/r/RedditEmoteLoader
-// @version        2.5
+// @version        3.0
 // @include        http://www.reddit.com/*
 // @include        http://reddit.com/*
 // @include        http://*.reddit.com/*
@@ -28,7 +28,7 @@ var subs = subs= [ "mylittleandysonic1", "mlas1animotes", "mylittlewtf", "mylitt
 var chrome = navigator.userAgent.toLowerCase().indexOf('chrome') > -1;
 var useExtraCSS = true;
 var dispEmotePage = true;
-var version = "2.5.5";
+var version = "3.0.0";
 var daysBeforeUpdate = 3;
 //Do not change below this line
 
