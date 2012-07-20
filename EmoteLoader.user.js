@@ -95,7 +95,7 @@ function checkUpdate() //Returns true if needs to be updated
 
 	//Check subs
 
-	if(subs != JSON.parse(window.localStorage.getItem("RELSubs"))) return false;
+	if(subs != JSON.parse(window.localStorage.getItem("RELSubs"))) return true;
 
 
 	//Check time
@@ -479,7 +479,10 @@ function addRules(sub)
 	{
 		if(tempCodes.hasOwnProperty(rule))
 		{
-			eCodes[rule] = subs[subI];
+			if(!eCodes.hasOwnProperty(rule)) //Prevent overwrite
+			{
+				eCodes[rule] = subs[subI];
+			}
 		}
 	}
 
@@ -641,7 +644,7 @@ function saveCSS()
 	{
 		if(emoteRules.hasOwnProperty(rule))
 		{
-		    console.log(rule);
+		    //console.log(rule);
 			emoteSheet.insertRule(emoteRules[rule],0);
 			
 
@@ -653,7 +656,16 @@ function saveCSS()
 	{
 	    console.log("SaveCSS");
 		console.log(e);
+		error = true;
 	}
+	
+		if(error)
+	{
+		error = false;
+		alert("Update Failed");
+		return;
+	}
+	
 	var d = new Date();
 
 	window.localStorage.setItem("RELTime",d.getTime()); //Save update time
