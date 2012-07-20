@@ -285,7 +285,7 @@ function addSub(Sub)
 
 	var r = Math.floor(Math.random()*10000); //Get random number
 	var head = document.getElementsByTagName("head")[0];
-	var SubCss = "http://" + document.domain + "/r/" + Sub + '/stylesheet.css?v=' + t;
+	var SubCss = "http://" + document.domain + "/r/" + Sub + '/stylesheet.css?v=' + r;
 
 	var style;
 
