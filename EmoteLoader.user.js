@@ -20,7 +20,7 @@
 // For example with MLPLounge it should look like the following:
 // var subs=["mylittlepony","MLPlounge"];
 
-var subs= [ "mylittleandysonic1", "mlas1animotes", "mylittlewtf", "mylittlepony", "mlplounge", "idliketobeatree", "mylittlelivestream", "vinylscratch", "daylightemotes", "mylittlesquidward", "mylittlenopenopenope", "mylittlenanners", "mylittlenosleep", "mylittledamon", "thebestpony", "tbpimagedump", "roseluck", "applejack", "mylittlemusician", "mylittlecelestias", "mylittlechaos", "mylittlealcoholic", "mylittlelistentothis", "surprise", "pinkiepie", "twilightSparkle", "minuette", "lyra", "MyLittleSports", "mylittlefoodmanes", "futemotes"];
+var subs= [ "mylittleandysonic1", "mlas1animotes", "mylittlewtf", "mylittlepony", "mlplounge", "idliketobeatree", "mylittlelivestream", "vinylscratch", "daylightemotes", "mylittlesquidward", "mylittlenopenopenope", "mylittlenanners", "mylittlenosleep", "mylittledamon", "thebestpony", "tbpimagedump", "roseluck", "applejack", "mylittlemusician", "mylittlecelestias", "mylittlechaos", "mylittlealcoholic", "mylittlelistentothis", "surprise", "pinkiepie", "twilightSparkle", "minuette", "lyra", "MyLittleSports", "mylittlefoodmanes", "futemotes", "mylittlecombiners"];
 
 
 
