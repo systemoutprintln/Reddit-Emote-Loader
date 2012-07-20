@@ -517,6 +517,15 @@ function addRules(sub)
 function ExtraCSS() 
 {
     var ecssar = ExCss.split("\n");
+	
+	if(chrome)
+	{
+	   ecssar += ecssCH.split("\n");
+	}
+	else
+	{
+	    ecssar += ecssFF.split("\n");
+	}
 
 	for(i=0; i < ecssar.length; i++)
 	{
