@@ -8,10 +8,7 @@
 // ==/UserScript==
 
 /* To Do:
--Search Feature
--Fix duplicate manager - testing
--Close button - Testing
--Extra CSS - to do later
+-Progress bar at top for updating
 */
 
 //Options
@@ -28,7 +25,7 @@ var subs= [ "mylittleandysonic1", "mlas1animotes", "mylittlewtf",  "mlplounge", 
 var chrome = navigator.userAgent.toLowerCase().indexOf('chrome') > -1;
 var useExtraCSS = true;
 var dispEmotePage = true;
-var version = "3.2.6";
+var version = "3.2.7";
 var daysBeforeUpdate = 3;
 //Do not change below this line
 
@@ -640,14 +637,6 @@ function subsLoaded()
 function saveCSS()
 {
 
-    
-	if(error)
-	{
-		error = false;
-		alert("Update Failed");
-		return;
-	}
-
 	emotePageCSS();
 	if(useExtraCSS)
 	{
@@ -691,7 +680,7 @@ function saveCSS()
 	window.localStorage.setItem("RELTextCodes",JSON.stringify(textSubs));
 
 	console.log("All done");
-	alert("Update sucessful\nPlease refresh the page");
+	//alert("Update sucessful\nPlease refresh the page");
 	if(forced)
 	{
 
