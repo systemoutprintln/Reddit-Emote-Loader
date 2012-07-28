@@ -1025,8 +1025,8 @@ function showPB(nSteps)
     var css = document.createElement("style");
     css.type = "text/css";
     css.innerHTML = ".pbholder { position:fixed; height: 30px; width:100%; bottom: 0px; left: 0px; z-index: 99999; background-color:white; border-style:solid; border-width:2px;text-align:center;}\
-	.pbar { position:fixed; height: 30px; bottom: 2px; left: 2px; z-index: 999999; background-color:lightblue;}\
-	.pbtext { posistion: fixed; bottom: 10px; z-index: 9999999;}";
+	.pbar { position:fixed; height: 30px; bottom: 2px; left: 2px; background-color:lightblue;}\
+	.pbtext { posistion: fixed; bottom: 10px;}";
     document.body.appendChild(css);
 
     pbholder = document.createElement("div");
@@ -1043,7 +1043,7 @@ function showPB(nSteps)
 	var pbtext = document.createElement("div");
 	pbtext.innerHTML = "Loading Emotes";
 	pbtext.className = "pbtext";
-	pbholder.appendChild(pbtext);
+	progbar.appendChild(pbtext);
 	
 	
 	max = nSteps;
