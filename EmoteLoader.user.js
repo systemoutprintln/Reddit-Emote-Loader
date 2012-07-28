@@ -1013,14 +1013,23 @@ function showPB(nSteps)
 {
     var css = document.createElement("style");
     css.type = "text/css";
-    css.innerHTML = ".pbholder { position:fixed; height: 200px; width:100%; bottom: 0px; left: 0px; z-index: 99999; background-color:white; }";
+    css.innerHTML = ".pbholder { position:fixed; height: 5%; width:100%; bottom: 0px; left: 0px; z-index: 99999; background-color:white; border-style:solid; border-width:2px; }\
+	.pbar { position:fixed; height: 5%; bottom: 0px; left: 0px; z-index: 999999; background-color:blue;}";
     document.body.appendChild(css);
 
-    var progbar = document.createElement("div");
-	progbar.id = "ProgBar";
-	progbar.className = "pbholder";
-	progbar.innerhtml = "Please wait: Emotes loading";
-	document.body.appendChild(progbar);
+    var pbholder = document.createElement("div");
+	pbholder.id = "pbholder";
+	pbholder.className = "pbholder";
+	document.body.appendChild(pbholder);
+	
+	var progbar = document.createElement("div");
+	progbar.classname = "pbar";
+	pbholder.appendChild(progbar);
+	
+	//
+	progbar.style.width = "25%";
+	//
+	
 	
 	
 }
