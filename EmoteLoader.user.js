@@ -25,8 +25,8 @@ var subs= [ "mylittleandysonic1", "mlas1animotes", "mylittlewtf",  "mlplounge", 
 var chrome = navigator.userAgent.toLowerCase().indexOf('chrome') > -1;
 var useExtraCSS = true;
 var dispEmotePage = true;
-var version = "3.5.1";
-var daysBeforeUpdate = 3;
+var version = "3.5.2";
+var daysBeforeUpdate = 7;
 //Do not change below this line
 
 
@@ -51,19 +51,20 @@ var error = false;
 //Start main
 //
 console.log("Reddit Emote Loader, version: " + version);
-//Testing
-showPB(4);
+
 if(checkUpdate())
 {
+//Testing
+showPB(subs.length);
     //alert("Loading emotes...");
-	advancePB(1);
+	
 	loadSync(subs);
 	//subsLoaded();
 	if(dispEmotePage)
 	{
 		createLink();
 	}
-	advancePB(3);
+
 }
 else
 {
@@ -260,6 +261,7 @@ function waitForLoadSync(style, i)
 					addRules(style);
 					syncI++;
 					loadSyncI(syncI);
+					advancePB(1);
 					clearInterval(ch[i]);
 				}
 
@@ -274,6 +276,7 @@ function waitForLoadSync(style, i)
 			addRules(style);
 		    syncI++;
 			loadSyncI(syncI);
+			advancePB(1);
 			clearInterval(ff[i]);
 			} catch (e){}
 		}, 10); 
