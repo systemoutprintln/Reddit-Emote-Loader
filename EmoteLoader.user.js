@@ -51,7 +51,8 @@ var error = false;
 //Start main
 //
 console.log("Reddit Emote Loader, version: " + version);
-
+//Testing
+showPB(1);
 if(checkUpdate())
 {
     //alert("Loading emotes...");
