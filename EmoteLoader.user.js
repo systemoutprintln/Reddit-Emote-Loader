@@ -686,6 +686,7 @@ function saveCSS()
 	window.localStorage.setItem("RELTextCodes",JSON.stringify(textSubs));
 
 	console.log("All done");
+	hidePB();
 	//alert("Update sucessful\nPlease refresh the page");
 	if(forced)
 	{
@@ -1021,8 +1022,9 @@ function showPB(nSteps)
 {
     var css = document.createElement("style");
     css.type = "text/css";
-    css.innerHTML = ".pbholder { position:fixed; height: 50px; width:100%; bottom: 0px; left: 0px; z-index: 99999; background-color:white; border-style:solid; border-width:2px; }\
-	.pbar { position:fixed; height: 50px; bottom: 2px; left: 2px; z-index: 999999; background-color:lightblue;}";
+    css.innerHTML = ".pbholder { position:fixed; height: 30px; width:100%; bottom: 0px; left: 0px; z-index: 99999; background-color:white; border-style:solid; border-width:2px;text-align:center;}\
+	.pbar { position:fixed; height: 30px; bottom: 2px; left: 2px; z-index: 999999; background-color:lightblue;}\
+	.pbtext { posistion: fixed; bottom: 10px;}";
     document.body.appendChild(css);
 
     pbholder = document.createElement("div");
@@ -1035,6 +1037,12 @@ function showPB(nSteps)
 	progbar.className = "pbar";
 	pbholder.appendChild(progbar);
 	progbar.style.width = "0%";
+	
+	var pbtext = document.createElement("div");
+	pbtext.innerHTML = "Loading Emotes";
+	pbtext.className = "pbtext";
+	pbholder.appendChild(pbtext);
+	
 	
 	max = nSteps;
 	cur = 0;
