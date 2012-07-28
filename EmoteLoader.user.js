@@ -25,7 +25,7 @@ var subs= [ "mylittleandysonic1", "mlas1animotes", "mylittlewtf",  "mlplounge", 
 var chrome = navigator.userAgent.toLowerCase().indexOf('chrome') > -1;
 var useExtraCSS = true;
 var dispEmotePage = true;
-var version = "3.5.0";
+var version = "3.5.1";
 var daysBeforeUpdate = 3;
 //Do not change below this line
 
@@ -52,16 +52,18 @@ var error = false;
 //
 console.log("Reddit Emote Loader, version: " + version);
 //Testing
-showPB(1);
+showPB(4);
 if(checkUpdate())
 {
     //alert("Loading emotes...");
+	advancePB(1);
 	loadSync(subs);
 	//subsLoaded();
 	if(dispEmotePage)
 	{
 		createLink();
 	}
+	advancePB(3);
 }
 else
 {
@@ -1006,43 +1008,55 @@ function exitEmotePage()
 //				Progress Bar
 //
 //////////////////////////////////////////////////////////////////////////////
+
 var max;
 var cur;
+var progbar;
+var pbholder;
 
 function showPB(nSteps)
 {
     var css = document.createElement("style");
     css.type = "text/css";
     css.innerHTML = ".pbholder { position:fixed; height: 50px; width:100%; bottom: 0px; left: 0px; z-index: 99999; background-color:white; border-style:solid; border-width:2px; }\
-	.pbar { position:fixed; height: 50px; bottom: 2px; left: 2px; z-index: 999999; background-color:blue;}";
+	.pbar { position:fixed; height: 50px; bottom: 2px; left: 2px; z-index: 999999; background-color:lightblue;}";
     document.body.appendChild(css);
 
-    var pbholder = document.createElement("div");
+    pbholder = document.createElement("div");
 	pbholder.id = "pbholder";
 	pbholder.className = "pbholder";
 	document.body.appendChild(pbholder);
 	
-	var progbar = document.createElement("div");
+	progbar = document.createElement("div");
 	progbar.id = "pbar";
 	progbar.className = "pbar";
 	pbholder.appendChild(progbar);
+	progbar.style.width = "0%";
 	
-	//
-	progbar.style.width = "25%";
-	//
-	
-	
+	max = nSteps;
+	cur = 0;
 	
 }
 
-function advancePB()
+function advancePB(steps)
 {
+    cur += steps;
+	var res = cur / max;
+	res *= 100;
+	try{
+	progbar.style.width = res + "%";
+	}
+	catch(){}
+	
 
 }
 
 function hidePB()
 {
-
+    try{
+    document.body.removeChild(pbholder);
+	}
+	catch(){}
 }
 
 
