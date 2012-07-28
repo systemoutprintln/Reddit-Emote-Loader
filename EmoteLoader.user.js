@@ -25,7 +25,7 @@ var subs= [ "mylittleandysonic1", "mlas1animotes", "mylittlewtf",  "mlplounge", 
 var chrome = navigator.userAgent.toLowerCase().indexOf('chrome') > -1;
 var useExtraCSS = true;
 var dispEmotePage = true;
-var version = "3.5.2";
+var version = "3.5.3";
 var daysBeforeUpdate = 7;
 //Do not change below this line
 
@@ -1024,7 +1024,7 @@ function showPB(nSteps)
     css.type = "text/css";
     css.innerHTML = ".pbholder { position:fixed; height: 30px; width:100%; bottom: 0px; left: 0px; z-index: 99999; background-color:white; border-style:solid; border-width:2px;text-align:center;}\
 	.pbar { position:fixed; height: 30px; bottom: 2px; left: 2px; z-index: 999999; background-color:lightblue;}\
-	.pbtext { posistion: fixed; bottom: 10px;}";
+	.pbtext { posistion: fixed; bottom: 10px; z-index: 9999999;}";
     document.body.appendChild(css);
 
     pbholder = document.createElement("div");
