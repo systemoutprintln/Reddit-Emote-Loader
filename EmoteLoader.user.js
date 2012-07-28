@@ -1011,11 +1011,17 @@ var cur;
 
 function showPB(nSteps)
 {
+    var css = document.createElement("style");
+    css.type = "text/css";
+    css.innerHTML = ".pbholder { posistion: absolute; height: 5%; bottom: 0px; left: 0px; zindex: 99999; background-color:white; }";
+    document.body.appendChild(css);
+
     var progbar = document.createElement("div");
 	progbar.id = "ProgBar";
-	progbar.style = "posistion: absolute; height: 5%; bottom: 0px; left: 0px;";
+	progbar.className = "pbholder";
 	progbar.innerhtml = "Please wait: Emotes loading";
 	document.body.appendChild(progbar);
+	
 	
 }
 
