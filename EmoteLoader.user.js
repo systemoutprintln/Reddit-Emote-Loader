@@ -1006,8 +1006,8 @@ function exitEmotePage()
 //				Progress Bar
 //
 //////////////////////////////////////////////////////////////////////////////
-int max;
-int cur;
+var max;
+var cur;
 
 function showPB(nSteps)
 {
