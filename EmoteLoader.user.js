@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name           Reddit Emote Loader
 // @namespace      http://www.reddit.com/r/RedditEmoteLoader
-// @version        3.2
+// @version        3.5
 // @include        http://www.reddit.com/*
 // @include        http://reddit.com/*
 // @include        http://*.reddit.com/*
@@ -25,7 +25,7 @@ var subs= [ "mylittleandysonic1", "mlas1animotes", "mylittlewtf",  "mlplounge", 
 var chrome = navigator.userAgent.toLowerCase().indexOf('chrome') > -1;
 var useExtraCSS = true;
 var dispEmotePage = true;
-var version = "3.2.7";
+var version = "3.5.0";
 var daysBeforeUpdate = 3;
 //Do not change below this line
 
@@ -1000,7 +1000,33 @@ function exitEmotePage()
 }
 
 
+///////////////////////////////////////////////////////////////////////////////
+//
+//				Progress Bar
+//
+//////////////////////////////////////////////////////////////////////////////
+int max;
+int cur;
 
+function showPB(nSteps)
+{
+    var progbar = document.createElement("div");
+	progbar.id = "ProgBar";
+	progbar.style = "posistion: absolute; height: 5%; bottom: 0px; left: 0px;";
+	progbar.innerhtml = "Please wait: Emotes loading";
+	document.body.appendChild(progbar);
+	
+}
+
+function advancePB()
+{
+
+}
+
+function hidePB()
+{
+
+}
 
 
 ///////////////////////////////////////////////////////////////////////////////
