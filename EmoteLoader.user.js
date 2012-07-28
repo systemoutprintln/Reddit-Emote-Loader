@@ -1013,7 +1013,7 @@ function showPB(nSteps)
 {
     var css = document.createElement("style");
     css.type = "text/css";
-    css.innerHTML = ".pbholder { position:fixed; height: 200px; bottom: 0px; left: 0px; z-index: 99999; background-color:white; }";
+    css.innerHTML = ".pbholder { position:fixed; height: 200px; width:100%; bottom: 0px; left: 0px; z-index: 99999; background-color:white; }";
     document.body.appendChild(css);
 
     var progbar = document.createElement("div");
