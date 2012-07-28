@@ -54,7 +54,7 @@ console.log("Reddit Emote Loader, version: " + version);
 
 if(checkUpdate())
 {
-//Testing
+
 showPB(subs.length);
     //alert("Loading emotes...");
 	
@@ -982,6 +982,8 @@ function addSearchResults(results, parID)
 //Force update the script
 function forceUpdate()
 {
+showPB(subs.length);
+
 	loaded = 0;
 	forced = true;
 
