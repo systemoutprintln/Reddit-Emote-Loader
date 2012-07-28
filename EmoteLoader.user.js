@@ -1046,7 +1046,7 @@ function advancePB(steps)
 	try{
 	progbar.style.width = res + "%";
 	}
-	catch(){}
+	catch(e){}
 	
 
 }
@@ -1056,7 +1056,7 @@ function hidePB()
     try{
     document.body.removeChild(pbholder);
 	}
-	catch(){}
+	catch(e){}
 }
 
 
