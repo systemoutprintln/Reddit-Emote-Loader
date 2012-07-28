@@ -1014,7 +1014,7 @@ function showPB(nSteps)
     var css = document.createElement("style");
     css.type = "text/css";
     css.innerHTML = ".pbholder { position:fixed; height: 50px; width:100%; bottom: 0px; left: 0px; z-index: 99999; background-color:white; border-style:solid; border-width:2px; }\
-	.pbar { position:fixed; height: 50px; width:25%; bottom: 0px; left: 0px; z-index: 999999; background-color:blue;}";
+	.pbar { position:fixed; height: 50px; bottom: 0px; left: 0px; z-index: 999999; background-color:blue;}";
     document.body.appendChild(css);
 
     var pbholder = document.createElement("div");
@@ -1024,11 +1024,11 @@ function showPB(nSteps)
 	
 	var progbar = document.createElement("div");
 	progbar.id = "pbar";
-	progbar.classname = "pbar";
+	progbar.className = "pbar";
 	pbholder.appendChild(progbar);
 	
 	//
-	//progbar.style.width = "25%";
+	progbar.style.width = "25%";
 	//
 	
 	
