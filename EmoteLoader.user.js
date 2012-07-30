@@ -25,13 +25,13 @@ var subs= [ "mylittleandysonic1", "mlas1animotes", "mylittlewtf",  "mlplounge", 
 var chrome = navigator.userAgent.toLowerCase().indexOf('chrome') > -1;
 var useExtraCSS = true;
 var dispEmotePage = true;
-var version = "3.5.3";
+var version = "3.5.4";
 var daysBeforeUpdate = 7;
 //Do not change below this line
 
 
 var emoteStyle = document.createElement('style');
-document.getElementsByTagName('head')[0].appendChild(emoteStyle);
+document.body.appendChild(emoteStyle);
 var emoteSheet = document.styleSheets[document.styleSheets.length - 1];
 
 var ch = new Array();
@@ -70,6 +70,7 @@ else
 {
 	loadFromStorage();
 }
+
 
 //
 //End main
@@ -1024,9 +1025,9 @@ function showPB(nSteps)
 {
     var css = document.createElement("style");
     css.type = "text/css";
-    css.innerHTML = ".pbholder { position:fixed; height: 30px; width:100%; bottom: 0px; left: 0px; z-index: 99999; background-color:white; border-style:solid; border-width:2px;text-align:center;}\
-	.pbar { position:fixed; height: 30px; bottom: 2px; left: 2px; background-color:lightblue;}\
-	.pbtext { posistion: fixed; bottom: 10px;}";
+    css.innerHTML = ".pbholder { position:fixed; height: 25px; width:100%; bottom: 0px; left: 0px; z-index: 99999; background-color:white; border-style:solid; border-width:2px;text-align:center;}\
+	.pbar { position:fixed; height: 25px; bottom: 2px; left: 2px; background-color:lightblue;}\
+	.pbtext { posistion: fixed; bottom: 25px;}";
     document.body.appendChild(css);
 
     pbholder = document.createElement("div");
@@ -1043,7 +1044,7 @@ function showPB(nSteps)
 	var pbtext = document.createElement("div");
 	pbtext.innerHTML = "Loading Emotes";
 	pbtext.className = "pbtext";
-	progbar.appendChild(pbtext);
+	pbholder.appendChild(pbtext);
 	
 	
 	max = nSteps;
