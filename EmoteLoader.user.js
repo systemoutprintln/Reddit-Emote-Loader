@@ -245,7 +245,7 @@ function LoadRules(style, i)
 function addRules(rules, i)
 {
 
-	var ssheet 
+	//var ssheet 
 	var isCss;
 
 	try{
@@ -270,7 +270,7 @@ function addRules(rules, i)
 	for(i = 0; i < srules.length; i++)
 	{
 
-		srules = ssheet.cssRules;
+		srules = rules;
 
 		srule = srules[i];
 
