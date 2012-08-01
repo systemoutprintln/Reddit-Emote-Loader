@@ -26,7 +26,7 @@ var daysBeforeUpdate = 7;
 
 //Environ variables - only change if something goes wrong.
 var version = "3.6.2";
-//var chrome = navigator.userAgent.toLowerCase().indexOf('chrome') > -1;
+var chrome = navigator.userAgent.toLowerCase().indexOf('chrome') > -1;
 
 //Do not change below this line
 
