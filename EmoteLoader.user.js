@@ -206,7 +206,7 @@ function addSubStyle(Sub)
 	style.href = SubCss;
 	style.media = "print";
 
-	body.appendChild(style);
+	head.appendChild(style);
 
 	return style;
 }
