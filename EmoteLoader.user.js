@@ -174,11 +174,12 @@ function loadSubs(Subs)
 {
   loadSubsI(0);
 }
-function loadSubsI(i)
+function loadSubsI(index)
 {
     
-    if(i >= subs.length)
+    if(index >= subs.length)
 	{
+		console.log("Saving...");
 	    saveCSS();
 		return;
 	}
@@ -417,7 +418,9 @@ function addRules(rules, index)
 
 	advancePB(1);
 	index++;
+
 	loadSubsI(index);
+	
 
 	loaded++;
 
