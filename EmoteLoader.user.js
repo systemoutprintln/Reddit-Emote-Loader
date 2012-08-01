@@ -60,7 +60,7 @@ if(checkUpdate())
 showPB(subs.length);
     //alert("Loading emotes...");
 	
-	LoadSubs(subs);
+	loadSubs(subs);
 	//subsLoaded();
 	if(dispEmotePage)
 	{
@@ -172,7 +172,7 @@ function loadFromStorage()
 
 function loadSubs(Subs)
 {
-  loadSyncI(0);
+  loadSubsI(0);
 }
 function loadSubsI(i)
 {
@@ -415,6 +415,9 @@ function addRules(rules, i)
 
 	console.log("Done: " + sub.href);
 
+	advancePB(1);
+	i++;
+	loadSubsI(i);
 
 	loaded++;
 
@@ -747,7 +750,7 @@ function addEmotes(sub, parID)
 		e_div.appendChild(emote_lnk);
 
 		var emote_id = document.createElement("p");
-		emote_id.innerText = emoteSubs[sub][i] + "\n" + eCodes[emoteSubs[sub][i]];
+		emote_id.innerHTML = emoteSubs[sub][i] + "<br />" + eCodes[emoteSubs[sub][i]];
 		e_div.appendChild(emote_id);
 		/*
 		var sub_id = document.createElement("p");
@@ -861,7 +864,7 @@ function addSearchResults(results, parID)
 		e_div.appendChild(emote_lnk);
 
 		var emote_id = document.createElement("p");
-		emote_id.innerText = results[i] + "\n" + eCodes[results[i]];
+		emote_id.innerHTML = results[i] + "<br />" + eCodes[results[i]];
 		e_div.appendChild(emote_id);
 		/*
 		var sub_id = document.createElement("p");
@@ -888,7 +891,7 @@ textSubs = new Array(subs.length);
 emoteRules = new Object();
 eCodes = new Object();
 
-	loadSync(subs);
+	loadSubs(subs);
 	//subsLoaded();
 	exitEmotePage();
 
