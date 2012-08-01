@@ -541,15 +541,17 @@ function subsLoaded()
 
 function saveCSS()
 {
-
+	Console.log(1);
 	emotePageCSS();
 	if(useExtraCSS)
 	{
 		ExtraCSS();
 	}
+	Console.log(2);
     try{
 	for(var rule in emoteRules)
 	{
+	
 		if(emoteRules.hasOwnProperty(rule))
 		{
 		    //console.log(rule);
@@ -559,6 +561,7 @@ function saveCSS()
 		}	
 
 	}
+	Console.log(3);
 	}
 	catch(e)
 	{
