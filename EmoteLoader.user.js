@@ -25,7 +25,7 @@ var dispEmotePage = true;
 var daysBeforeUpdate = 7;
 
 //Environ variables - only change if something goes wrong.
-var version = "3.6.1";
+var version = "3.6.2";
 //var chrome = navigator.userAgent.toLowerCase().indexOf('chrome') > -1;
 
 //Do not change below this line
@@ -461,6 +461,8 @@ function ExtraCSS()
 
 function emotePageCSS()
 {
+
+console.log(1.1);
     var css = new Array();
 	//Emote link
 	css[0] = ".emotelink { color:blue; cursor:pointer; text-align:right; font-size:12px; position: fixed; bottom:20%; right: 10px; z-index: 1000; width:100px height:80px}";
@@ -504,15 +506,16 @@ function emotePageCSS()
 	css[14] = ".searchb:hover {background-color:yellow; cursor:pointer;}"
 
 	//Search box
-
+console.log(1.2);
 	css.push(".searchi {margin: 30px 10px 10px 10px;}");
 
 
-
+console.log(1.3);
 	for(i = 0; i < css.length; i++)
 	{
 		emoteRules["epageCSS" + i] = css[i];
 	}
+	console.log(1.4);
 }
 
 ///////////////////////////////////////////////////////////////////////////////
@@ -543,11 +546,12 @@ function saveCSS()
 {
 	console.log(1);
 	emotePageCSS();
+	console.log(2);
 	if(useExtraCSS)
 	{
 		ExtraCSS();
 	}
-	console.log(2);
+	console.log(3);
     try{
 	for(var rule in emoteRules)
 	{
@@ -561,7 +565,7 @@ function saveCSS()
 		}	
 
 	}
-	console.log(3);
+	console.log(4);
 	}
 	catch(e)
 	{
