@@ -412,11 +412,12 @@ function addRules(rules, i)
 	var del = document.getElementById(subs[subI])
 	del.parentNode.removeChild(del);
 
-
+	
 	console.log( "Done: " + subs[subI] );
 
 	advancePB(1);
 	i++;
+	console.log(i);
 	loadSubsI(i);
 
 	loaded++;
