@@ -413,7 +413,7 @@ function addRules(rules, i)
 	del.parentNode.removeChild(del);
 
 
-	console.log("Done: " + subs[i]);
+	console.log( "Done: " + subs[subI] );
 
 	advancePB(1);
 	i++;
@@ -423,11 +423,11 @@ function addRules(rules, i)
 
 }
 
-///////////////////////////////////////////////////////////////////////////////
-//
-//				Step 4: Setup extra CSS
-//				Go to step 5
-//
+//////////////////////////////////////////////////////////////////////////////
+//																			//
+//				Step 4: Setup extra CSS										//
+//				Go to step 5												//
+//																			//
 //////////////////////////////////////////////////////////////////////////////
 
 
