@@ -16,7 +16,6 @@
 
 // To add a sub add a comma then the sub name in quotes after the last entry
 // For example with MLPLounge it should look like the following:
-// var subs=["mylittlepony","MLPlounge"];
 
 var subs= [ "mylittleandysonic1", "mlas1animotes", "mylittlewtf",  "mlplounge", "mylittlepony", "idliketobeatree", "mylittlelivestream", "vinylscratch", "daylightemotes", "mylittlesquidward", "mylittlenopenopenope", "mylittlenanners", "mylittlenosleep", "mylittledamon", "thebestpony", "tbpimagedump", "roseluck", "applejack", "mylittlemusician", "mylittlecelestias", "mylittlechaos", "mylittlealcoholic", "mylittlelistentothis", "surprise", "pinkiepie", "twilightSparkle", "minuette", "lyra", "MyLittleSports", "mylittlefoodmanes", "futemotes", "mylittlecombiners", "MyLittleBannerTest"];
 
@@ -26,7 +25,7 @@ var dispEmotePage = true;
 var daysBeforeUpdate = 7;
 
 //Environ variables - only change if something goes wrong.
-var version = "3.6.0";
+var version = "3.6.1";
 //var chrome = navigator.userAgent.toLowerCase().indexOf('chrome') > -1;
 
 //Do not change below this line
@@ -183,11 +182,11 @@ function loadSubsI(index)
 	    saveCSS();
 		return;
 	}
-	console.log("Loading: " + subs[i]);
+	console.log("Loading: " + subs[index]);
 
-    emoteSubs[i] = new Array();
-	textSubs[i] = new Array();
-	LoadRules(addSubStyle(subs[i]), i);
+    emoteSubs[index] = new Array();
+	textSubs[index] = new Array();
+	LoadRules(addSubStyle(subs[index]), index);
 }
 
 function addSubStyle(Sub)
