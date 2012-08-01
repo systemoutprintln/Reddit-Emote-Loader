@@ -541,13 +541,13 @@ function subsLoaded()
 
 function saveCSS()
 {
-	Console.log(1);
+	console.log(1);
 	emotePageCSS();
 	if(useExtraCSS)
 	{
 		ExtraCSS();
 	}
-	Console.log(2);
+	console.log(2);
     try{
 	for(var rule in emoteRules)
 	{
@@ -561,7 +561,7 @@ function saveCSS()
 		}	
 
 	}
-	Console.log(3);
+	console.log(3);
 	}
 	catch(e)
 	{
@@ -574,6 +574,7 @@ function saveCSS()
 	{
 		error = false;
 		alert("Update Failed");
+		hidePB();
 		return;
 	}
 	
