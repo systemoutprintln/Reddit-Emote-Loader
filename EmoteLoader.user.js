@@ -242,7 +242,7 @@ function LoadRules(style, i)
 //
 //////////////////////////////////////////////////////////////////////////////
 
-function addRules(rules, i)
+function addRules(rules, index)
 {
 
 	//var ssheet 
@@ -250,7 +250,7 @@ function addRules(rules, i)
 
 	try{
 
-	var subI = i;
+	var subI = index;
 
 	var srule;
 
@@ -413,12 +413,11 @@ function addRules(rules, i)
 	del.parentNode.removeChild(del);
 
 	
-	console.log( "Done: " + subs[subI] );
+	console.log( "Done: " + subs[index] );
 
 	advancePB(1);
-	i++;
-	console.log(i);
-	loadSubsI(i);
+	index++;
+	loadSubsI(index);
 
 	loaded++;
 
