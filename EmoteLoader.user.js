@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name           Reddit Emote Loader
 // @namespace      http://www.reddit.com/r/RedditEmoteLoader
-// @version        3.5
+// @version        3.6
 // @include        http://www.reddit.com/*
 // @include        http://reddit.com/*
 // @include        http://*.reddit.com/*
@@ -26,7 +26,7 @@ var dispEmotePage = true;
 var daysBeforeUpdate = 7;
 
 //Environ variables - only change if something goes wrong.
-var version = "3.5.4";
+var version = "3.6.0";
 //var chrome = navigator.userAgent.toLowerCase().indexOf('chrome') > -1;
 
 //Do not change below this line
