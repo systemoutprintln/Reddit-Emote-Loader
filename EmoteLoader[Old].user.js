@@ -1,15 +1,14 @@
 // ==UserScript==
 // @name           Reddit Emote Loader
 // @namespace      http://www.reddit.com/r/RedditEmoteLoader
-// @version        3.5
+// @version        3.6
 // @include        http://www.reddit.com/*
 // @include        http://reddit.com/*
 // @include        http://*.reddit.com/*
 // ==/UserScript==
 
 /* To Do:
--Clean up code
--FF support
+-Progress bar at top for updating
 */
 
 //Options
@@ -19,15 +18,13 @@
 // var subs=["mylittlepony","MLPlounge"];
 
 var subs= [ "mylittleandysonic1", "mlas1animotes", "mylittlewtf",  "mlplounge", "mylittlepony", "idliketobeatree", "mylittlelivestream", "vinylscratch", "daylightemotes", "mylittlesquidward", "mylittlenopenopenope", "mylittlenanners", "mylittlenosleep", "mylittledamon", "thebestpony", "tbpimagedump", "roseluck", "applejack", "mylittlemusician", "mylittlecelestias", "mylittlechaos", "mylittlealcoholic", "mylittlelistentothis", "surprise", "pinkiepie", "twilightSparkle", "minuette", "lyra", "MyLittleSports", "mylittlefoodmanes", "futemotes", "mylittlecombiners", "MyLittleBannerTest"];
-
-
 var useExtraCSS = true;
 var dispEmotePage = true;
 var daysBeforeUpdate = 7;
 
 //Environ variables - only change if something goes wrong.
-var version = "3.5.4";
-//var chrome = navigator.userAgent.toLowerCase().indexOf('chrome') > -1;
+var chrome = navigator.userAgent.toLowerCase().indexOf('chrome') > -1;
+var version = "3.6.1";
 
 //Do not change below this line
 
@@ -60,7 +57,7 @@ if(checkUpdate())
 showPB(subs.length);
     //alert("Loading emotes...");
 	
-	LoadSubs(subs);
+	loadSync(subs);
 	//subsLoaded();
 	if(dispEmotePage)
 	{
@@ -139,11 +136,8 @@ function loadFromStorage()
 	try{
 	JSON.parse(emoteCSS, function (key, value) 
 	{
-		//console.log(key);
-		if(key.length > 0)
-		{
-			emoteSheet.insertRule(value,0);
-		}
+		//console.log(value);
+		emoteSheet.insertRule(value,0);
 	});
 	} catch(e)
 	{
@@ -170,11 +164,75 @@ function loadFromStorage()
 //
 //////////////////////////////////////////////////////////////////////////////
 
-function loadSubs(Subs)
+
+/////////////////////// Async ///////////////////////////////
+function loadAsync(Subs) //Just include sub name, i.e. /r/MLPlounge = MLPlounge
 {
-  loadSyncI(0);
+
+	var sID = new Array();
+
+
+	for(i = 0; i < Subs.length ; i++)
+	{
+
+
+
+
+		emoteSubs[i] = new Array();
+		textSubs[i] = new Array();
+
+
+
+		sID [i] = addSub(Subs[i]);
+
+
+
+		waitForLoadAsync(sID[i], i);	
+	}
+
+
+
 }
-function loadSubsI(i)
+function waitForLoadAsync(style, i)
+{
+	if(chrome)
+	{
+		var cssnum = document.styleSheets.length;
+		ch[i] = setInterval(function() {
+			var sheet;
+				sheet = getStyle(style);
+				if(sheet != -1)
+				{
+					addRules(style);
+
+					clearInterval(ch[i]);
+				}
+
+		}, 10);
+
+	}else{
+		ff[i] = setInterval(function() {
+			try {
+
+
+			style.sheet.cssRules;
+			addRules(style);
+
+			clearInterval(ff[i]);
+			} catch (e){}
+		}, 10); 
+	}
+}
+/////////////////// Sync /////////////////////
+var syncI;
+
+function loadSync(Subs)
+{
+  syncI = 0;
+  loadSyncI(0);
+  
+}
+function loadSyncI(i)
 {
     
     if(i >= subs.length)
@@ -186,10 +244,47 @@ function loadSubsI(i)
 
     emoteSubs[i] = new Array();
 	textSubs[i] = new Array();
-	LoadRules(addSubStyle(subs[i]), i);
-}
+	waitForLoadSync(addSub(subs[i]), i);
 
-function addSubStyle(Sub)
+}
+function waitForLoadSync(style, i)
+{
+	if(chrome)
+	{
+		var cssnum = document.styleSheets.length;
+		ch[i] = setInterval(function() {
+			var sheet;
+				sheet = getStyle(style);
+				if(sheet != -1)
+				{
+
+					addRules(style);
+					syncI++;
+					loadSyncI(syncI);
+					advancePB(1);
+					clearInterval(ch[i]);
+				}
+
+		}, 10);
+
+	}else{
+		ff[i] = setInterval(function() {
+			try {
+
+
+			style.sheet.cssRules;
+			addRules(style);
+		    syncI++;
+			loadSyncI(syncI);
+			advancePB(1);
+			clearInterval(ff[i]);
+			} catch (e){}
+		}, 10); 
+	}
+}
+//////////////// Both ///////////////////////////
+
+function addSub(Sub)
 {
 
 	var r = Math.floor(Math.random()*10000); //Get random number
@@ -198,42 +293,34 @@ function addSubStyle(Sub)
 
 	var style;
 
-	style =	document.createElement('link');
-	style.type = 'text/css'
-	style.rel = 'stylesheet';
-	style.id = Sub;
+	if(chrome)
+	{
 
-	style.href = SubCss;
-	style.media = "print";
+		style =	document.createElement('link');
+		style.type = 'text/css'
+		style.rel = 'stylesheet';
+		style.id = Sub;
 
-	body.appendChild(style);
-
-	return style;
-}
-
-function LoadRules(style, i)
-{
-
-	ch[i] = setInterval(function() {
-		var sheet;
-			sheet = getStyle(style);
-			if(sheet != -1)
-			{
-			
-				try
-				{
-					var rules = sheet.cssRules;
-					addRules(rules, i);
-					clearInterval(ch[i]);
-				}
-				catch(e)
-				{
-				
-				}
-			}
-		}, 10);
+		style.href = SubCss;
+		style.media = "print";
 
 	}
+	else
+	{
+		style = document.createElement('style');
+		style.textContent = '@import "' + SubCss + '"';
+		//console.log(SubCss);
+		style.sheet.disabled = true;	
+	}
+
+
+	head.appendChild(style);
+
+	//console.log("Added: " + style.href);
+
+	return style;
+
+
 }
 
 ///////////////////////////////////////////////////////////////////////////////
@@ -243,22 +330,40 @@ function LoadRules(style, i)
 //
 //////////////////////////////////////////////////////////////////////////////
 
-function addRules(rules, i)
+function addRules(sub)
 {
 
 	var ssheet 
 	var isCss;
-
 	try{
+	if(chrome)
+	{
+		sub.media = "all";
+		ssheet = getStyle(sub);
+		if(ssheet == -1)
+		{
+			console.log("addRules: " + sub.href);
+			error = true;
+			return;
 
-	var subI = i;
+		}
+
+	}
+	else
+	{
+	    ssheet = sub.sheet.cssRules[0].styleSheet;
+	}
+
+	var subI = getSub(ssheet);
+
+
 
 	var srule;
 
 	var emote = /a\[href\|?="\/[A-Za-z0-9!#]+"]/
 	var emcss = /[href\*="[A-Za-z0-9!#]+\-combine"]/ //For combined emotes
 
-    var srules = rules;
+    var srules = ssheet.cssRules;
 
 	var erules = emoteSheet.cssRules;
 
