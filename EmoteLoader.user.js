@@ -413,7 +413,7 @@ function addRules(rules, i)
 	del.parentNode.removeChild(del);
 
 
-	console.log("Done: " + sub.href);
+	console.log("Done: " + subs[i]);
 
 	advancePB(1);
 	i++;
