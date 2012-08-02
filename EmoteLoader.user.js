@@ -25,7 +25,7 @@ var dispEmotePage = true;
 var daysBeforeUpdate = 7;
 
 //Environ variables - only change if something goes wrong.
-var version = "3.6.3";
+var version = "3.6.4";
 var chrome = navigator.userAgent.toLowerCase().indexOf('chrome') > -1;
 
 //Do not change below this line
@@ -127,7 +127,7 @@ function checkUpdate() //Returns true if needs to be updated
 ///////////////////////////////////////////////////////////////////////////////
 //
 //				Step 2A: Load from Storage
-//				Skip to step 6
+//				Done
 //
 //////////////////////////////////////////////////////////////////////////////
 
@@ -607,8 +607,7 @@ function saveCSS()
 
 ///////////////////////////////////////////////////////////////////////////////
 //
-//				Step 6: Setup emote page
-//				Done
+//				Emote Page
 //
 //////////////////////////////////////////////////////////////////////////////
 
@@ -933,7 +932,7 @@ function showPB(nSteps)
     css.type = "text/css";
     css.innerHTML = ".pbholder { position:fixed; height: 25px; width:100%; bottom: 0px; left: 0px; z-index: 99999; background-color:white; border-style:solid; border-width:2px;text-align:center;}\
 	.pbar { position:fixed; height: 25px; bottom: 2px; left: 2px; background-color:lightblue;}\
-	.pbtext { posistion: fixed; bottom: 25px;}";
+	.pbtext { posistion: fixed; top: -10px; margin-top:-10px}";
     document.body.appendChild(css);
 
     pbholder = document.createElement("div");
