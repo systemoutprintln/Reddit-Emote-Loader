@@ -56,7 +56,7 @@ console.log("Reddit Emote Loader, version: " + version);
 emoteStyle  = document.createElement('style');
 var topHead = document.head.getChildNodes()[0];
 document.head.insertBefore(emoteStyle);
-emoteSheet = = document.styleSheets[0];
+emoteSheet = document.styleSheets[0];
 if(checkUpdate())
 {
 
