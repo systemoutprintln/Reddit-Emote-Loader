@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name           Reddit Emote Loader
 // @namespace      http://www.reddit.com/r/RedditEmoteLoader
-// @version        3.6
+// @version        3.7
 // @include        http://www.reddit.com/*
 // @include        http://reddit.com/*
 // @include        http://*.reddit.com/*
@@ -25,15 +25,15 @@ var dispEmotePage = true;
 var daysBeforeUpdate = 7;
 
 //Environ variables - only change if something goes wrong.
-var version = "3.6.4";
+var version = "3.7";
 var chrome = navigator.userAgent.toLowerCase().indexOf('chrome') > -1;
 
 //Do not change below this line
 
 
-var emoteStyle = document.createElement('style');
-document.body.appendChild(emoteStyle);
-var emoteSheet = document.styleSheets[document.styleSheets.length - 1];
+var emoteStyle
+
+var emoteSheet 
 
 var ch = new Array();
 var ff = new Array();
@@ -53,6 +53,10 @@ var error = false;
 //
 console.log("Reddit Emote Loader, version: " + version);
 
+emoteStyle  = document.createElement('style');
+var topHead = document.head.getChildNodes()[0];
+document.head.insertBefore(emoteStyle);
+emoteSheet = = document.styleSheets[0];
 if(checkUpdate())
 {
 
@@ -462,7 +466,7 @@ function ExtraCSS()
 function emotePageCSS()
 {
 
-console.log(1.1);
+
     var css = new Array();
 	//Emote link
 	css[0] = ".emotelink { color:blue; cursor:pointer; text-align:right; font-size:12px; position: fixed; bottom:20%; right: 10px; z-index: 1000; width:100px height:80px}";
@@ -506,16 +510,16 @@ console.log(1.1);
 	css[14] = ".searchb:hover {background-color:yellow; cursor:pointer;}"
 
 	//Search box
-console.log(1.2);
+
 	css.push(".searchi {margin: 30px 10px 10px 10px;}");
 
 
-console.log(1.3);
+
 	for(i = 0; i < css.length; i++)
 	{
 		emoteRules["epageCSS" + i] = css[i];
 	}
-	console.log(1.4);
+
 }
 
 ///////////////////////////////////////////////////////////////////////////////
@@ -544,14 +548,14 @@ function subsLoaded()
 
 function saveCSS()
 {
-	console.log(1);
+
 	emotePageCSS();
-	console.log(2);
+
 	if(useExtraCSS)
 	{
 		ExtraCSS();
 	}
-	console.log(3);
+
     try{
 	for(var rule in emoteRules)
 	{
@@ -565,7 +569,7 @@ function saveCSS()
 		}	
 
 	}
-	console.log(4);
+
 	}
 	catch(e)
 	{
@@ -932,7 +936,7 @@ function showPB(nSteps)
     css.type = "text/css";
     css.innerHTML = ".pbholder { position:fixed; height: 25px; width:100%; bottom: 0px; left: 0px; z-index: 99999; background-color:white; border-style:solid; border-width:2px;text-align:center;}\
 	.pbar { position:fixed; height: 25px; bottom: 2px; left: 2px; background-color:lightblue;}\
-	.pbtext { posistion: fixed; top: -10px; margin-top:-10px}";
+	.pbtext { posistion: fixed; top: 0px; margin-top:-25px; font-size:20px;}";
     document.body.appendChild(css);
 
     pbholder = document.createElement("div");
@@ -1342,3 +1346,8 @@ var ecssCH = "@-webkit-keyframes spin{from{-webkit-transform:rotate(0deg)scaleX(
 @-webkit-keyframes zspin-225-r{from{-webkit-transform:rotate(225deg)scaleX(-1)rotatez(0deg)}to{-webkit-transform:rotate(225deg)scaleX(-1)rotatez(360deg)}}\n\
 @-webkit-keyframes zspin-270-r{from{-webkit-transform:rotate(270deg)scaleX(-1)rotatez(0deg)}to{-webkit-transform:rotate(270deg)scaleX(-1)rotatez(360deg)}}\n\
 @-webkit-keyframes zspin-315-r{from{-webkit-transform:rotate(315deg)scaleX(-1)rotatez(0deg)}to{-webkit-transform:rotate(315deg)scaleX(-1)rotatez(360deg)}}"
+
+///////////////////// Shhh Secrets ////////////////////////
+
+var BD;
+
