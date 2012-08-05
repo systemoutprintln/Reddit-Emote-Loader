@@ -54,8 +54,8 @@ var error = false;
 console.log("Reddit Emote Loader, version: " + version);
 
 emoteStyle  = document.createElement('style');
-var topHead = document.head.getChildNodes()[0];
-document.head.insertBefore(emoteStyle);
+var fc = document.head.firstChild;
+document.head.insertBefore(emoteStyle, fc);
 emoteSheet = document.styleSheets[0];
 if(checkUpdate())
 {
