@@ -1,15 +1,14 @@
 // ==UserScript==
 // @name           Reddit Emote Loader
 // @namespace      http://www.reddit.com/r/RedditEmoteLoader
-// @version        3.7
+// @version        4.0
 // @include        http://www.reddit.com/*
 // @include        http://reddit.com/*
 // @include        http://*.reddit.com/*
 // ==/UserScript==
 
 /* To Do:
--Clean up code
--FF support
+-Add sub
 */
 
 //Options
@@ -17,15 +16,16 @@
 // To add a sub add a comma then the sub name in quotes after the last entry
 // For example with MLPLounge it should look like the following:
 
-var subs= [ "mylittleandysonic1", "mlas1animotes", "mylittlewtf",  "mlplounge", "mylittlepony", "idliketobeatree", "mylittlelivestream", "vinylscratch", "daylightemotes", "seriouslyluna", "mylittlesquidward", "mylittlenopenopenope", "mylittlenanners", "mylittlenosleep", "mylittledamon", "thebestpony", "tbpimagedump", "roseluck", "applejack", "mylittlemusician", "mylittlecelestias", "mylittlechaos", "mylittlealcoholic", "mylittlelistentothis", "surprise", "pinkiepie", "twilightSparkle", "minuette", "lyra", "MyLittleSports", "mylittlefoodmanes", "futemotes", "mylittlecombiners", "MyLittleBannerTest"];
+var def_subs= [ "mylittleandysonic1", "mlas1animotes", "mylittlewtf",  "mlplounge", "mylittlepony", "idliketobeatree", "mylittlelivestream", "vinylscratch", "daylightemotes", "seriouslyluna", "mylittlesquidward", "mylittlenopenopenope", "mylittlenanners", "mylittlenosleep", "mylittledamon", "thebestpony", "tbpimagedump", "roseluck", "applejack", "mylittlemusician", "mylittlecelestias", "mylittlechaos", "mylittlealcoholic", "mylittlelistentothis", "surprise", "pinkiepie", "twilightSparkle", "minuette", "lyra", "MyLittleSports", "mylittlefoodmanes", "futemotes", "mylittlecombiners", "MyLittleBannerTest"];
 
+var subs;
 
 var useExtraCSS = true;
 var dispEmotePage = true;
 var daysBeforeUpdate = 7;
 
-//Environ variables - only change if something goes wrong.
-var version = "3.7";
+//Environment variables - only change if something goes wrong.
+var version = "4.0.0";
 var chrome = navigator.userAgent.toLowerCase().indexOf('chrome') > -1;
 
 //Do not change below this line
@@ -92,6 +92,7 @@ function checkUpdate() //Returns true if needs to be updated
 {
     try
 	{
+	subs = def_subs; 
 
 	//Check version
 	var s_vers = window.localStorage.getItem("RELVersion");
@@ -102,9 +103,15 @@ function checkUpdate() //Returns true if needs to be updated
 
 	//Check subs
 
-	if(JSON.stringify(subs) != window.localStorage.getItem("RELSubs")) return true;
-
-
+	if(JSON.stringify(def_subs) != window.localStorage.getItem("RELDSubs")) 
+	{
+		
+		return true;
+	
+	}	
+	
+	subs = JSON.parse(window.localStorage.getItem("RELSubs"));
+	
 	//Check time
 	var s_time = parseInt(window.localStorage.getItem("RELTime"));
 
@@ -159,6 +166,7 @@ function loadFromStorage()
 		emoteSubs = JSON.parse(window.localStorage.getItem("RELEmoteCodes"));
 		textSubs = JSON.parse(window.localStorage.getItem("RELTextCodes"));
 		eCodes = JSON.parse(window.localStorage.getItem("RELEmoteSub"));
+		
 		createLink();
 	}
 
@@ -590,7 +598,8 @@ function saveCSS()
 
 	window.localStorage.setItem("RELTime",d.getTime()); //Save update time
 	window.localStorage.setItem("RELVersion",version); //Version
-	window.localStorage.setItem("RELSubs",JSON.stringify(subs)); //Saves subs that are chosen
+	window.localStorage.setItem("RELDSubs",JSON.stringify(def_subs)); //Saves subs that are chosen initially
+	window.localStorage.setItem("RELSubs",JSON.stringify(subs)); //Saves subs that are added
 	window.localStorage.setItem("RELEmoteCSS",JSON.stringify(emoteRules)); //Save emotes in storage
 	window.localStorage.setItem("RELEmoteCodes",JSON.stringify(emoteSubs));
 	window.localStorage.setItem("RELEmoteSub",JSON.stringify(eCodes));
@@ -690,6 +699,12 @@ function openEmotePage()
 		sub_hold.appendChild(sub_lnk);
 		i++;
 	}
+	
+	var inc_sub = document.createElement("button");
+		inc_sub.innerHTML = "Add Sub...";
+		inc_sub.className = "forup";
+		inc_sub.onclick = includeSub;
+	sub_hold.appendChild(inc_sub);
 
 	var force_up = document.createElement("button");
 		force_up.innerHTML = "Force Update";
@@ -785,7 +800,7 @@ function emoteClick(ecode)
     var pb = prompt("Copy and paste the following emote code:","[](" + ecode +")");
 }
 
-//Create search page
+///// Search Page ////////
 function searchPage(parID)
 {
     var par = document.getElementById(parID);
@@ -799,7 +814,7 @@ function searchPage(parID)
 	}
 
     var s_title = document.createElement("div");
-	s_title.className = "searchHeader";
+	s_title.className = "subHeader";
 
 	par.appendChild(s_title);
 
@@ -889,26 +904,15 @@ function addSearchResults(results, parID)
 
 }
 
-//Force update the script
-function forceUpdate()
+function includeSub()
 {
-showPB(subs.length);
-
-	loaded = 0;
-	forced = true;
-
-	//Reset globals
-emoteSubs = new Array(subs.length);
-textSubs = new Array(subs.length);
-
-emoteRules = new Object();
-eCodes = new Object();
-
-	loadSubs(subs);
-	//subsLoaded();
-	exitEmotePage();
-
+	var nSub = prompt("Sub to include (do not include /r/):");
+	subs.push(nSub);
+	forceUpdate();
+	
 }
+
+
 
 //Exit the page
 function exitEmotePage()
@@ -1042,6 +1046,27 @@ function ruleFilter(sel_text)
 	}
 
 	return good;
+
+}
+
+//Force update the script
+function forceUpdate()
+{
+showPB(subs.length);
+
+	loaded = 0;
+	forced = true;
+
+	//Reset globals
+emoteSubs = new Array(subs.length);
+textSubs = new Array(subs.length);
+
+emoteRules = new Object();
+eCodes = new Object();
+
+	loadSubs(subs);
+	//subsLoaded();
+	exitEmotePage();
 
 }
 
