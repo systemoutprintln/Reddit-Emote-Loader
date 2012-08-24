@@ -272,7 +272,7 @@ function addRules(rules, index)
 
 	var srule;
 
-	var emote = /a\[href\|?="\/[A-Za-z0-9!#]+"]/
+	var emote = /a\[href[\|^]?="\/[A-Za-z0-9!#]+"]/
 	var emcss = /[href\*="[A-Za-z0-9!#]+\-combine"]/ //For combined emotes
 
     var srules = rules;
