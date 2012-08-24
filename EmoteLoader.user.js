@@ -38,8 +38,8 @@ var emoteSheet
 var ch = new Array();
 var ff = new Array();
 
-var emoteSubs = new Array(subs.length);
-var textSubs = new Array(subs.length);
+var emoteSubs //= new Array(subs.length);
+var textSubs //= new Array(subs.length);
 
 var emoteRules = new Object();
 var eCodes = new Object();
@@ -57,8 +57,14 @@ emoteStyle  = document.createElement('style');
 var fc = document.head.firstChild;
 document.head.insertBefore(emoteStyle, fc);
 emoteSheet = document.styleSheets[0];
-if(checkUpdate())
+
+var up = checkUpdate();
+
+if(up)
 {
+
+emoteSubs = new Array(subs.length);
+textSubs = new Array(subs.length);
 
 showPB(subs.length);
     //alert("Loading emotes...");
