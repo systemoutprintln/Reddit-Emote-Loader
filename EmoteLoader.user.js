@@ -7,9 +7,6 @@
 // @include        http://*.reddit.com/*
 // ==/UserScript==
 
-/* To Do:
--Add sub
-*/
 
 //Options
 
@@ -25,7 +22,7 @@ var dispEmotePage = true;
 var daysBeforeUpdate = 7;
 
 //Environment variables - only change if something goes wrong.
-var version = "4.0.0";
+var version = "4.0.1";
 var chrome = navigator.userAgent.toLowerCase().indexOf('chrome') > -1;
 
 //Do not change below this line
