@@ -22,7 +22,7 @@ var dispEmotePage = true;
 var daysBeforeUpdate = 7;
 
 //Environment variables - only change if something goes wrong.
-var version = "4.0.3";
+var version = "4.0.4";
 var chrome = navigator.userAgent.toLowerCase().indexOf('chrome') > -1;
 
 //Do not change below this line
@@ -289,7 +289,7 @@ function addRules(rules, index)
 
 		srule = srules[i];
 
-
+		console.log("addRules S: " + i);
 		//Test if it is an emote
 		if(emote.test(srule.selectorText))
 		{
@@ -389,7 +389,7 @@ function addRules(rules, index)
 
 
 	}
-
+	
 	//console.log(ssheet);
 
 	//Merge rules / codes
@@ -400,6 +400,8 @@ function addRules(rules, index)
 			emoteRules[rule] = tempRules[rule];
 		}
 	}
+	
+	console.log("addRules F ");
 
 		for(var rule in tempCodes)
 	{
@@ -419,7 +421,7 @@ function addRules(rules, index)
 	catch(e)
 	{
 		error = true;
-		console.log("addRules1: ")
+		console.log("addRules1: ");
 		console.log(e);
 	}
 	*/
