@@ -257,7 +257,7 @@ function LoadRules(style, i)
 	
 
 						loaded++;
-						clearInterval(ch[i]);
+						clearInterval(ch[i-1]);
 						
 					}
 				}
