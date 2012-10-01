@@ -237,8 +237,11 @@ function LoadRules(style, i)
 			
 				try
 				{
+					int res
+					do{
 					var rules = sheet.cssRules;
-					addRules(rules, i);
+					 res = addRules(rules, i);
+					} while (res < 0);
 					clearInterval(ch[i]);
 				}
 				catch(e)
@@ -281,7 +284,7 @@ console.log("addRules A: 2");
 
 	var addRule = true;
 console.log("addRules A: 3");
-
+	if(srules == null) return -1;
 	for(i = 0; i < srules.length; i++)
 	{
 
@@ -440,7 +443,7 @@ console.log("addRules A: 3");
 	
 
 	loaded++;
-
+	return 0;
 }
 
 //////////////////////////////////////////////////////////////////////////////
