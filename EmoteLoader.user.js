@@ -22,7 +22,7 @@ var dispEmotePage = true;
 var daysBeforeUpdate = 7;
 
 //Environment variables - only change if something goes wrong.
-var version = "4.0.2";
+var version = "4.0.3";
 var chrome = navigator.userAgent.toLowerCase().indexOf('chrome') > -1;
 
 //Do not change below this line
@@ -263,7 +263,7 @@ function addRules(rules, index)
 	//var ssheet 
 	var isCss;
 
-	try{
+	//try{
 
 	var subI = index;
 
@@ -415,13 +415,14 @@ function addRules(rules, index)
 
 
 
-	}
+	/*}
 	catch(e)
 	{
 		error = true;
 		console.log("addRules1: ")
 		console.log(e);
 	}
+	*/
 
 	//Delete the style
 	var del = document.getElementById(subs[subI])
