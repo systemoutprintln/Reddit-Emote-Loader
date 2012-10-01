@@ -249,6 +249,14 @@ function LoadRules(style, i)
 					if(attempts >= 100)
 					{
 						console.log("Could not load sub");
+						
+						advancePB(1);
+						i++;
+
+						loadSubsI(i);
+	
+
+						loaded++;
 						clearInterval(ch[i]);
 						
 					}
