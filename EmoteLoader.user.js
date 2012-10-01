@@ -421,7 +421,7 @@ console.log("addRules A: 3");
 	catch(e)
 	{
 		error = true;
-		console.log("addRules1: ");
+		console.log("addRules1: " + e);
 		console.log(e);
 	}
 	
