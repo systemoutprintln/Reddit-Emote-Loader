@@ -268,19 +268,19 @@ function addRules(rules, index)
 	var subI = index;
 
 	var srule;
-
+    console.log("addRules A: 1");
 	var emote = /a\[href[\|^]?="\/[A-Za-z0-9!#]+"]/
 	var emcss = /[href\*="[A-Za-z0-9!#]+\-combine"]/ //For combined emotes
 
     var srules = rules;
-
+console.log("addRules A: 2");
 	var erules = emoteSheet.cssRules;
 
 	var tempRules = new Object();
 	var tempCodes = new Object();
 
 	var addRule = true;
-
+console.log("addRules A: 3");
 
 	for(i = 0; i < srules.length; i++)
 	{
