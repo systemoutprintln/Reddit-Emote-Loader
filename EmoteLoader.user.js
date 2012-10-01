@@ -263,7 +263,7 @@ function addRules(rules, index)
 	//var ssheet 
 	var isCss;
 
-	//try{
+	try{
 
 	var subI = index;
 
@@ -417,14 +417,14 @@ function addRules(rules, index)
 
 
 
-	/*}
+	}
 	catch(e)
 	{
 		error = true;
 		console.log("addRules1: ");
 		console.log(e);
 	}
-	*/
+	
 
 	//Delete the style
 	var del = document.getElementById(subs[subI])
