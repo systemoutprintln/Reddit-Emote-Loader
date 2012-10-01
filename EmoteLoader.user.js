@@ -237,7 +237,7 @@ function LoadRules(style, i)
 			
 				try
 				{
-					int res
+					int res = -1;
 					do{
 					var rules = sheet.cssRules;
 					 res = addRules(rules, i);
