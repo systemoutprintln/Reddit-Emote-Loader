@@ -259,7 +259,7 @@ function LoadRules(style, i)
 
 function addRules(rules, index)
 {
-
+	console.log("addRules S ");
 	//var ssheet 
 	var isCss;
 
@@ -289,7 +289,7 @@ function addRules(rules, index)
 
 		srule = srules[i];
 
-		console.log("addRules S: " + i);
+		console.log("addRules I: " + i);
 		//Test if it is an emote
 		if(emote.test(srule.selectorText))
 		{
