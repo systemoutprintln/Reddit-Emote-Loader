@@ -228,7 +228,7 @@ function addSubStyle(Sub)
 
 function LoadRules(style, i)
 {
-
+	var attempts = 0;
 	ch[i] = setInterval(function() {
 		var sheet;
 			sheet = getStyle(style);
@@ -237,12 +237,21 @@ function LoadRules(style, i)
 			
 				try
 				{
-					var res = -1;
-					do{
+					var res = 0;
+					attempts++;
+					
 					var rules = sheet.cssRules;
 					 res = addRules(rules, i);
-					} while (res < 0);
-					clearInterval(ch[i]);
+					if (res == 0)
+					{
+						clearInterval(ch[i]);
+					}
+					if(attempts >= 100)
+					{
+						console.log("Could not load sub");
+						clearInterval(ch[i]);
+						
+					}
 				}
 				catch(e)
 				{
@@ -426,6 +435,7 @@ console.log("addRules A: 3");
 		error = true;
 		console.log("addRules1: " + e);
 		console.log(e);
+		return -2;
 	}
 	
 
